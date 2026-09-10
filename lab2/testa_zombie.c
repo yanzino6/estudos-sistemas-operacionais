@@ -17,16 +17,16 @@ int main()
   else if(pid == 0) /* filho */
   {
      printf("Eu sou o filho, PID = %d. Estou vivo mas vou dormir um pouco. Use o comando ps -lt para conferir o meu estado e o do meu pai. Daqui a pouco eu acordo.\n",getpid()) ;
-     sleep(10) ;
+     //sleep(10) ;
      printf("Sou eu de novo, o filho. Acordei mas vou terminar agora. Use ps -lt novamente.\n") ;
      exit(0) ;
   }
   else /* pai */
   {
      printf("Bem, agora eu vou bloquear e esperar pelo término do meu filho.\n") ;
-     wait(NULL);  /* pai esperando pelo término do filho */
+     //wait(NULL);  /* pai esperando pelo término do filho */
      printf("Pronto... meu filho terminou... agora vou terminar também! Tchau!\n") ;
-     //for(;;) ; /* pai bloqueado em loop infinito */
+     for(;;) ; /* pai bloqueado em loop infinito */
 
   }
 }

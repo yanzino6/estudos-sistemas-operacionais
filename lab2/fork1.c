@@ -8,15 +8,19 @@ int main() {
         fprintf(stderr, "Fork failed!\n");
         return 1;
     } else if (pid == 0) { // Child process.
-        printf("[CHILD]: I'm finished.\n");
-        return 42;
+        printf("[CHILD]: I'm waiting to be signaled. PID: %d\n", getpid());
+        for(;;);
     } else { // Parent process.
         printf("[PARENT]: Waiting on child.\n");
         int wstatus;
-        wait(&wstatus);
-        if (WIFEXITED(wstatus)) {
-            printf("[PARENT]: Child returned with code %d.\n",
-                   WEXITSTATUS(wstatus));
+        waitpid(pid,&wstatus,WUNTRACED);
+        if (WIFSIGNALED(wstatus)) {
+            printf("[PARENT]: Child SIGNALED with code %d.\n",
+                   WTERMSIG(wstatus));
+        }
+        if (WIFSTOPPED(wstatus)) {
+            printf("[PARENT]: Child STOPPED with code %d.\n",
+                   WSTOPSIG(wstatus));
         }
     }
     return 0;

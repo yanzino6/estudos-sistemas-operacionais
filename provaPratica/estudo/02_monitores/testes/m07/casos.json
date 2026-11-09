@@ -1,0 +1,22 @@
+{
+  "tipo": "programa",
+  "casos": [
+    {
+      "nome": "vazio",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
+    },
+    {
+      "nome": "capacidade_um",
+      "repeticoes": 5,
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
+    },
+    {
+      "nome": "volta_circular",
+      "repeticoes": 5,
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
+    }
+  ]
+}

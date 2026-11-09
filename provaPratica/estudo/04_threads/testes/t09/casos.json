@@ -1,0 +1,21 @@
+{
+  "tipo": "programa",
+  "casos": [
+    {
+      "nome": "primos",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
+    },
+    {
+      "nome": "cancelamento",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
+    },
+    {
+      "nome": "overflow_int",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
+    }
+  ],
+  "repeticoes": 3
+}

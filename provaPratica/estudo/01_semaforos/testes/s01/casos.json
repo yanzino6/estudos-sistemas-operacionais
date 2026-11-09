@@ -1,0 +1,23 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "Quantas notificações entre blocos são necessárias?",
+      "esperado": 4,
+      "explicacao": "Há quatro transições entre cinco blocos."
+    },
+    {
+      "id": "b",
+      "pergunta": "Qual o valor inicial de cada semáforo de precedência?",
+      "esperado": 0,
+      "explicacao": "O próximo bloco deve aguardar."
+    },
+    {
+      "id": "c",
+      "pergunta": "P4 chegar primeiro permite imprimir 801 antes de 1? Responda booleano.",
+      "esperado": false,
+      "explicacao": "P4 bloqueia na dependência do bloco anterior."
+    }
+  ]
+}

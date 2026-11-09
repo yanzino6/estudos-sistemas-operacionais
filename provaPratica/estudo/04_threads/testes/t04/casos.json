@@ -1,0 +1,23 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "Todos recebem &i; i chega a 10 antes das leituras. Há risco de acesso fora do vetor de 10? Booleano.",
+      "esperado": true,
+      "explicacao": "Último índice válido é 9."
+    },
+    {
+      "id": "b",
+      "pergunta": "Um único malloc reutilizado e sobrescrito a cada create resolve? Booleano.",
+      "esperado": false,
+      "explicacao": "Continua compartilhando o mesmo objeto mutável."
+    },
+    {
+      "id": "c",
+      "pergunta": "Um vetor estável com dez argumentos independentes pode substituir dez mallocs? Booleano.",
+      "esperado": true,
+      "explicacao": "O requisito de correção é estabilidade e vida útil."
+    }
+  ]
+}

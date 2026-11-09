@@ -1,0 +1,29 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "Trylock retornou ocupado: thread pode acessar seção crítica como proprietária? Booleano.",
+      "esperado": false,
+      "explicacao": "Não adquiriu mutex."
+    },
+    {
+      "id": "b",
+      "pergunta": "Trabalho 25% serial: limite ideal com infinitos trabalhadores, em vezes?",
+      "esperado": 4,
+      "explicacao": "O tempo serial mínimo é um quarto do original."
+    },
+    {
+      "id": "c",
+      "pergunta": "Oito threads garantem tempo menor que uma para mil somas? Booleano.",
+      "esperado": false,
+      "explicacao": "Overhead pode dominar."
+    },
+    {
+      "id": "d",
+      "pergunta": "Escritas em variáveis distintas na mesma linha de cache podem causar false sharing sem data race entre elas? Booleano.",
+      "esperado": true,
+      "explicacao": "Coerência atua por linha de cache."
+    }
+  ]
+}

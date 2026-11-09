@@ -1,0 +1,23 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "Retornar endereço de int local automático é válido após terminar a thread? Booleano.",
+      "esperado": false,
+      "explicacao": "O objeto local perdeu vida útil."
+    },
+    {
+      "id": "b",
+      "pergunta": "Quem recebe resultado no heap pode lê-lo depois de free? Booleano.",
+      "esperado": false,
+      "explicacao": "É uso após liberação."
+    },
+    {
+      "id": "c",
+      "pergunta": "Dado correto de seis faces pode produzir zero? Booleano.",
+      "esperado": false,
+      "explicacao": "Contrato é de 1 a 6."
+    }
+  ]
+}

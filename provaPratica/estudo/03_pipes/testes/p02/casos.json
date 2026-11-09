@@ -1,0 +1,23 @@
+{
+  "tipo": "programa",
+  "casos": [
+    {
+      "nome": "resumo_linux",
+      "ping": "PING google.com\n64 bytes reply\nrtt min/avg/max/mdev = 1/2/3/0.1 ms\n",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
+    },
+    {
+      "nome": "sem_resumo",
+      "ping": "PING google.com\n100% packet loss\n",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
+    },
+    {
+      "nome": "duas_linhas",
+      "ping": "ignorar\nrtt primeira\nignorar tambem\nrtt segunda\n",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
+    }
+  ]
+}

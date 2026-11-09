@@ -1,0 +1,23 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "F5 pode ocorrer depois de F2 mas antes de F3? Booleano.",
+      "esperado": false,
+      "explicacao": "Tem duas dependências."
+    },
+    {
+      "id": "b",
+      "pergunta": "F4 precisa esperar F3? Booleano.",
+      "esperado": false,
+      "explicacao": "Ambos dependem de F1, mas não um do outro."
+    },
+    {
+      "id": "c",
+      "pergunta": "F7 pode ocorrer antes de F6, já tendo F5 terminado? Booleano.",
+      "esperado": false,
+      "explicacao": "A junção final exige os dois ramos."
+    }
+  ]
+}

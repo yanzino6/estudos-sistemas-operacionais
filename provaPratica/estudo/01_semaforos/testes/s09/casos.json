@@ -1,0 +1,23 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "Um em corte e cinco esperando: um novo cliente pode ser admitido? Booleano.",
+      "esperado": false,
+      "explicacao": "As cinco cadeiras de espera já estão ocupadas."
+    },
+    {
+      "id": "b",
+      "pergunta": "Nessa situação, qual o total de clientes no estabelecimento?",
+      "esperado": 6,
+      "explicacao": "Cinco esperando e um atendido."
+    },
+    {
+      "id": "c",
+      "pergunta": "Sem clientes, barbeiro deve fazer busy wait? Booleano.",
+      "esperado": false,
+      "explicacao": "Bloqueia em customers."
+    }
+  ]
+}

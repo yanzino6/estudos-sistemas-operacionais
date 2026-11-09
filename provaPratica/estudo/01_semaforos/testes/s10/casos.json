@@ -1,0 +1,29 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "Cinco pegam seu esquerdo simultaneamente e aguardam direito: há deadlock? Booleano.",
+      "esperado": true,
+      "explicacao": "Cada recurso necessário está com o vizinho."
+    },
+    {
+      "id": "b",
+      "pergunta": "Filósofos 0 e 4 podem comer simultaneamente? Booleano.",
+      "esperado": false,
+      "explicacao": "São vizinhos no ciclo."
+    },
+    {
+      "id": "c",
+      "pergunta": "Filósofos 0 e 2 podem comer simultaneamente? Booleano.",
+      "esperado": true,
+      "explicacao": "Não compartilham garfo."
+    },
+    {
+      "id": "d",
+      "pergunta": "Apenas testar vizinhos prova atendimento justo a todo faminto? Booleano.",
+      "esperado": false,
+      "explicacao": "É preciso política de justiça adicional."
+    }
+  ]
+}

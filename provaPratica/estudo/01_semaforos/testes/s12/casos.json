@@ -1,0 +1,35 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "Contadores [1,0], pedido [1,1]: sucesso? Booleano.",
+      "esperado": false,
+      "explicacao": "Não há segunda permissão."
+    },
+    {
+      "id": "b",
+      "pergunta": "Após essa falha, informe os contadores como array JSON.",
+      "esperado": [
+        1,
+        0
+      ],
+      "explicacao": "Tudo ou nada preserva o primeiro recurso."
+    },
+    {
+      "id": "c",
+      "pergunta": "Contadores [2,1], pedido [1,1]: estado após sucesso?",
+      "esperado": [
+        1,
+        0
+      ],
+      "explicacao": "Consome uma permissão de cada."
+    },
+    {
+      "id": "d",
+      "pergunta": "Um único recurso com contador 1 aparece duas vezes no pedido: pode adquirir? Booleano.",
+      "esperado": false,
+      "explicacao": "A demanda agregada é dois."
+    }
+  ]
+}

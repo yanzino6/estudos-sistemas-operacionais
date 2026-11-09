@@ -1,0 +1,23 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "Pthread_create copia automaticamente o conteúdo inteiro da estrutura apontada? Booleano.",
+      "esperado": false,
+      "explicacao": "Passa o valor do ponteiro."
+    },
+    {
+      "id": "b",
+      "pergunta": "É válido ler um argumento de pilha depois que seu escopo terminou? Booleano.",
+      "esperado": false,
+      "explicacao": "O objeto deixou de existir."
+    },
+    {
+      "id": "c",
+      "pergunta": "A thread pode iniciar antes de pthread_create retornar para a main? Booleano.",
+      "esperado": true,
+      "explicacao": "Não há ordem garantida de início após criação."
+    }
+  ]
+}

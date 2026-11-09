@@ -1,0 +1,23 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "Com 19 mensagens e nenhum novo usuário, quantas viagens podem começar?",
+      "esperado": 0,
+      "explicacao": "Lote incompleto aguarda."
+    },
+    {
+      "id": "b",
+      "pergunta": "Durante a viagem, pode ocorrer nova colagem? Booleano.",
+      "esperado": false,
+      "explicacao": "Vagas só são repostas na volta."
+    },
+    {
+      "id": "c",
+      "pergunta": "Após entregar 40 mensagens em lotes completos, quantas viagens ocorreram?",
+      "esperado": 2,
+      "explicacao": "Cada viagem transporta 20."
+    }
+  ]
+}

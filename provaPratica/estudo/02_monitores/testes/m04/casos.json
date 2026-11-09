@@ -1,0 +1,23 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "Barbeiro dormindo e sala vazia: primeiro cliente deve ir embora? Booleano.",
+      "esperado": false,
+      "explicacao": "Ele acorda o barbeiro e recebe atendimento."
+    },
+    {
+      "id": "b",
+      "pergunta": "Um em corte e quatro esperando: quantos lugares de espera restam?",
+      "esperado": 1,
+      "explicacao": "Limite de espera é cinco."
+    },
+    {
+      "id": "c",
+      "pergunta": "Sinal de que foi chamado equivale a corte concluído? Booleano.",
+      "esperado": false,
+      "explicacao": "São eventos diferentes."
+    }
+  ]
+}

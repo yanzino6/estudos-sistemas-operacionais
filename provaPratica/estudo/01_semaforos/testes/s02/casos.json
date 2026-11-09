@@ -1,0 +1,23 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "F7 pode começar quando F6 terminou mas F9 não? Booleano.",
+      "esperado": false,
+      "explicacao": "F7 depende das duas conclusões."
+    },
+    {
+      "id": "b",
+      "pergunta": "Se C executa dois P(s1) e A faz somente um V(s1), C termina? Booleano.",
+      "esperado": false,
+      "explicacao": "A segunda espera fica sem permissão."
+    },
+    {
+      "id": "c",
+      "pergunta": "Quantas conclusões (F6,F9) B deve recolher antes de F7, além de sua ordem local?",
+      "esperado": 2,
+      "explicacao": "Um único V não representa as duas conclusões."
+    }
+  ]
+}

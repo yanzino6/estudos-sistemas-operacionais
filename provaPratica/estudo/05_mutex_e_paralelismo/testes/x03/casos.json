@@ -1,0 +1,48 @@
+{
+  "tipo": "programa",
+  "casos": [
+    {
+      "nome": "uma_thread",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
+    },
+    {
+      "nome": "duas",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
+    },
+    {
+      "nome": "quatro",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
+    },
+    {
+      "nome": "oito",
+      "entrada_arquivo": "04.in",
+      "saida_arquivo": "04.out"
+    },
+    {
+      "nome": "resto",
+      "entrada_arquivo": "05.in",
+      "saida_arquivo": "05.out"
+    },
+    {
+      "nome": "mais_partes",
+      "entrada_arquivo": "06.in",
+      "saida_arquivo": "06.out"
+    },
+    {
+      "nome": "zero_threads",
+      "retorno": 1,
+      "entrada_arquivo": "07.in",
+      "saida_arquivo": "07.out"
+    },
+    {
+      "nome": "negativo",
+      "retorno": 1,
+      "entrada_arquivo": "08.in",
+      "saida_arquivo": "08.out"
+    }
+  ],
+  "timeout": 10
+}

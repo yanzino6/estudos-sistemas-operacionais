@@ -1,0 +1,23 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "A e B leem proximo=3 antes de incrementá-lo: podem processar o mesmo elemento? Booleano.",
+      "esperado": true,
+      "explicacao": "Ambas reservaram a posição 3."
+    },
+    {
+      "id": "b",
+      "pergunta": "Cada thread escreve só em parcial[id], main lê após joins: esse vetor por si exige mutex? Booleano.",
+      "esperado": false,
+      "explicacao": "Posições exclusivas e leitura ordenada por join."
+    },
+    {
+      "id": "c",
+      "pergunta": "Cem execuções corretas provam ausência de corrida? Booleano.",
+      "esperado": false,
+      "explicacao": "Não cobrem todos os escalonamentos nem comportamento indefinido."
+    }
+  ]
+}

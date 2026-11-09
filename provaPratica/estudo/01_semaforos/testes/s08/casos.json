@@ -1,0 +1,29 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "Na preferência dos leitores, chegadas contínuas podem manter um escritor esperando? Booleano.",
+      "esperado": true,
+      "explicacao": "rc pode nunca chegar a zero."
+    },
+    {
+      "id": "b",
+      "pergunta": "Escritor já possui R e espera W: novo leitor consegue passar da linha 2? Booleano.",
+      "esperado": false,
+      "explicacao": "R está retido pelo escritor."
+    },
+    {
+      "id": "c",
+      "pergunta": "Retirar M é seguro porque R protege todas as alterações de rc? Booleano.",
+      "esperado": false,
+      "explicacao": "A saída nas linhas 9–12 não adquire R."
+    },
+    {
+      "id": "d",
+      "pergunta": "Sem hipótese de justiça de R, a solução prova ausência absoluta de starvation antes de adquiri-lo? Booleano.",
+      "esperado": false,
+      "explicacao": "Uma primitiva não justa pode preterir um participante."
+    }
+  ]
+}

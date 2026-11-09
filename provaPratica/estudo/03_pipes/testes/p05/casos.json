@@ -1,0 +1,23 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "B pode aparecer antes de A? Booleano.",
+      "esperado": true,
+      "explicacao": "Criação não determina a ordem de escrita."
+    },
+    {
+      "id": "b",
+      "pergunta": "Read pedindo 11 bytes é obrigada a retornar 11? Booleano.",
+      "esperado": false,
+      "explicacao": "Pode retornar menos bytes."
+    },
+    {
+      "id": "c",
+      "pergunta": "Um número de descritor enviado por argumento substitui a necessidade de herdá-lo aberto? Booleano.",
+      "esperado": false,
+      "explicacao": "O número só faz sentido na tabela que possui a referência."
+    }
+  ]
+}

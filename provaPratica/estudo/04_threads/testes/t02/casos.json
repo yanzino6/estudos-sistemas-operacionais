@@ -1,0 +1,23 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "Return da main encerra só a thread principal, mantendo obrigatoriamente as outras? Booleano.",
+      "esperado": false,
+      "explicacao": "Encerra o processo."
+    },
+    {
+      "id": "b",
+      "pergunta": "Retirar join garante que a thread nunca imprimirá nada? Booleano.",
+      "esperado": false,
+      "explicacao": "Ela pode executar antes do encerramento."
+    },
+    {
+      "id": "c",
+      "pergunta": "pthread_exit chamado na main tem o mesmo efeito de exit sobre as demais threads? Booleano.",
+      "esperado": false,
+      "explicacao": "Encerra a chamadora, não o processo inteiro imediatamente."
+    }
+  ]
+}

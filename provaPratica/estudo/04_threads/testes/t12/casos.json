@@ -1,0 +1,15 @@
+{
+  "tipo": "programa",
+  "casos": [
+    {
+      "nome": "sinais",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
+    },
+    {
+      "nome": "limites",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
+    }
+  ]
+}

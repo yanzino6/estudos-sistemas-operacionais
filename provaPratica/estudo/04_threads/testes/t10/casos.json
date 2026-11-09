@@ -1,0 +1,12 @@
+{
+  "tipo": "programa",
+  "casos": [
+    {
+      "nome": "dez_primos",
+      "repeticoes": 5,
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
+    }
+  ],
+  "comparacao": "linhas_ordenadas"
+}

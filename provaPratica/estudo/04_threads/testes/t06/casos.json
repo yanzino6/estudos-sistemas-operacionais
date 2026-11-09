@@ -1,0 +1,11 @@
+{
+  "tipo": "programa",
+  "casos": [
+    {
+      "nome": "primos",
+      "repeticoes": 3,
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
+    }
+  ]
+}

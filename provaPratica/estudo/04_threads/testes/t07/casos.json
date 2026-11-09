@@ -1,0 +1,22 @@
+{
+  "tipo": "programa",
+  "casos": [
+    {
+      "nome": "sequencia",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
+    },
+    {
+      "nome": "repetidos",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
+    },
+    {
+      "nome": "mistos",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
+    }
+  ],
+  "comparacao": "linhas_ordenadas",
+  "repeticoes": 3
+}

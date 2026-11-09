@@ -1,0 +1,23 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "Mesa tem tabaco e papel: qual ingrediente possui o fumante autorizado? Use \"fosforo\".",
+      "esperado": "fosforo",
+      "explicacao": "Ele completa o conjunto."
+    },
+    {
+      "id": "b",
+      "pergunta": "Mesa tem papel e fósforo: ingrediente do autorizado? Use \"tabaco\".",
+      "esperado": "tabaco",
+      "explicacao": "É o ingrediente ausente."
+    },
+    {
+      "id": "c",
+      "pergunta": "Agente pode substituir o par antes da confirmação de término? Booleano.",
+      "esperado": false,
+      "explicacao": "A rodada anterior precisa concluir."
+    }
+  ]
+}

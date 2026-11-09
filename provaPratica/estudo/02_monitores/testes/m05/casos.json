@@ -1,0 +1,23 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "Quantos garfos existem no ciclo clássico com cinco filósofos?",
+      "esperado": 5,
+      "explicacao": "Há um entre cada par adjacente."
+    },
+    {
+      "id": "b",
+      "pergunta": "Vizinho já COMENDO: test pode conceder imediatamente? Booleano.",
+      "esperado": false,
+      "explicacao": "Compartilham um garfo."
+    },
+    {
+      "id": "c",
+      "pergunta": "Um signal POSIX garante que o predicado estará verdadeiro ao retomar? Booleano.",
+      "esperado": false,
+      "explicacao": "É necessário reavaliar."
+    }
+  ]
+}

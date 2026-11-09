@@ -1,0 +1,26 @@
+{
+  "tipo": "programa",
+  "casos": [
+    {
+      "nome": "vazio",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
+    },
+    {
+      "nome": "resto",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
+    },
+    {
+      "nome": "threads_a_mais",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
+    },
+    {
+      "nome": "invalido",
+      "retorno": 1,
+      "entrada_arquivo": "04.in",
+      "saida_arquivo": "04.out"
+    }
+  ]
+}

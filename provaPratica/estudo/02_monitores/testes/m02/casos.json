@@ -1,0 +1,29 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "N=2, ocupação reservada=2 e canal livre: pode autorizar outra entrada? Booleano.",
+      "esperado": false,
+      "explicacao": "Capacidade esgotada."
+    },
+    {
+      "id": "b",
+      "pergunta": "Canal livre, ocupação=1<N=2 e uma saída esperando: uma nova entrada tem prioridade? Booleano.",
+      "esperado": false,
+      "explicacao": "Saída deve ser favorecida."
+    },
+    {
+      "id": "c",
+      "pergunta": "Uma entrada já autorizada deve ser interrompida se surgir pedido de saída? Booleano.",
+      "esperado": false,
+      "explicacao": "Prioridade se aplica à próxima concessão."
+    },
+    {
+      "id": "d",
+      "pergunta": "N=2, ocupação=2 e um navio confirma saída: nova ocupação?",
+      "esperado": 1,
+      "explicacao": "A saída libera uma vaga."
+    }
+  ]
+}

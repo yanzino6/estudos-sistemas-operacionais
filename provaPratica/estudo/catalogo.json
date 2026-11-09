@@ -1,0 +1,345 @@
+[
+  {
+    "parte": "01_semaforos",
+    "id": "s01",
+    "titulo": "Impressão ordenada de cinco blocos",
+    "origem": "Professor — Aula 11.2, pp. 3–4",
+    "tipo": "analise"
+  },
+  {
+    "parte": "01_semaforos",
+    "id": "s02",
+    "titulo": "Grafo de nove funções",
+    "origem": "Professor — Aula 11.2, pp. 5–6",
+    "tipo": "analise"
+  },
+  {
+    "parte": "01_semaforos",
+    "id": "s03",
+    "titulo": "Junção A/B e bifurcação D/E",
+    "origem": "Professor — Aula 11.2, pp. 7–9",
+    "tipo": "analise"
+  },
+  {
+    "parte": "01_semaforos",
+    "id": "s04",
+    "titulo": "Pombo correio",
+    "origem": "Professor — Aula 11.2, pp. 10–12",
+    "tipo": "analise"
+  },
+  {
+    "parte": "01_semaforos",
+    "id": "s05",
+    "titulo": "Montanha-russa",
+    "origem": "Professor — Aula 11.2, pp. 13–14",
+    "tipo": "analise"
+  },
+  {
+    "parte": "01_semaforos",
+    "id": "s06",
+    "titulo": "Canibais e cozinheiro",
+    "origem": "Professor — Aula 11.2, pp. 15–17",
+    "tipo": "analise"
+  },
+  {
+    "parte": "01_semaforos",
+    "id": "s07",
+    "titulo": "Filme sobre a vida de Hoare",
+    "origem": "Professor — Aula 11.2, pp. 18–20",
+    "tipo": "analise"
+  },
+  {
+    "parte": "01_semaforos",
+    "id": "s08",
+    "titulo": "Leitores e escritores: três políticas",
+    "origem": "Professor — Aula 11.2, pp. 21–33; Lista 6, questão 2",
+    "tipo": "analise"
+  },
+  {
+    "parte": "01_semaforos",
+    "id": "s09",
+    "titulo": "Barbeiro dorminhoco com semáforos",
+    "origem": "Professor — Aula 11.2, pp. 34–35",
+    "tipo": "analise"
+  },
+  {
+    "parte": "01_semaforos",
+    "id": "s10",
+    "titulo": "Filósofos e deadlock",
+    "origem": "Professor — Aula 11.2, pp. 36–38",
+    "tipo": "analise"
+  },
+  {
+    "parte": "01_semaforos",
+    "id": "s11",
+    "titulo": "Grafo da Lista 6",
+    "origem": "Professor — Lista 6, questão 1",
+    "tipo": "analise"
+  },
+  {
+    "parte": "01_semaforos",
+    "id": "s12",
+    "titulo": "Semáforo múltiplo",
+    "origem": "Professor — Lista 6, questão 3",
+    "tipo": "analise"
+  },
+  {
+    "parte": "01_semaforos",
+    "id": "s13",
+    "titulo": "Três fumantes",
+    "origem": "Professor — Lista 6, questão 4",
+    "tipo": "analise"
+  },
+  {
+    "parte": "01_semaforos",
+    "id": "s14",
+    "titulo": "Buffer sem mutex e publicação fora de ordem",
+    "origem": "Professor — Aula 11, pp. 14–22; casos de análise criados para o treino",
+    "tipo": "analise"
+  },
+  {
+    "parte": "01_semaforos",
+    "id": "s15",
+    "titulo": "Semáforos: diagnóstico de recursos",
+    "origem": "Criado para este estudo",
+    "tipo": "analise"
+  },
+  {
+    "parte": "01_semaforos",
+    "id": "s16",
+    "titulo": "Contador protegido por semáforo",
+    "origem": "Criado para este estudo — implementação prática",
+    "tipo": "programa"
+  },
+  {
+    "parte": "02_monitores",
+    "id": "m01",
+    "titulo": "Buffer com if e sinaliza-e-continua",
+    "origem": "Professor — Lista 7, questão 1; Aula 12, p.13",
+    "tipo": "analise"
+  },
+  {
+    "parte": "02_monitores",
+    "id": "m02",
+    "titulo": "Porto com prioridade de saída",
+    "origem": "Professor — Lista 7, questão 2",
+    "tipo": "analise"
+  },
+  {
+    "parte": "02_monitores",
+    "id": "m03",
+    "titulo": "Implementar Hoare e Hansen com semáforos",
+    "origem": "Professor — Lista 7, questão 3; Aula 12, pp.24–26",
+    "tipo": "analise"
+  },
+  {
+    "parte": "02_monitores",
+    "id": "m04",
+    "titulo": "Barbeiro com monitor",
+    "origem": "Professor — Lista 7, questão 4",
+    "tipo": "analise"
+  },
+  {
+    "parte": "02_monitores",
+    "id": "m05",
+    "titulo": "Filósofos no monitor",
+    "origem": "Professor — Aula 12, pp.20–23",
+    "tipo": "analise"
+  },
+  {
+    "parte": "02_monitores",
+    "id": "m06",
+    "titulo": "Notificação perdida e despertar espúrio",
+    "origem": "Criado para este estudo",
+    "tipo": "analise"
+  },
+  {
+    "parte": "02_monitores",
+    "id": "m07",
+    "titulo": "Buffer limitado em C",
+    "origem": "Criado para este estudo — implementação de monitor com Pthreads",
+    "tipo": "programa"
+  },
+  {
+    "parte": "03_pipes",
+    "id": "p01",
+    "titulo": "Comunicação circular entre três processos",
+    "origem": "Professor — roteiro_lab03, exercício 1, p.1",
+    "tipo": "programa"
+  },
+  {
+    "parte": "03_pipes",
+    "id": "p02",
+    "titulo": "Pipeline ping | grep",
+    "origem": "Professor — roteiro_lab03, exercício 2, pp.2–3",
+    "tipo": "programa"
+  },
+  {
+    "parte": "03_pipes",
+    "id": "p03",
+    "titulo": "Avô, pai e neto",
+    "origem": "Professor — roteiro_lab03, exercício 3, pp.3–4",
+    "tipo": "programa"
+  },
+  {
+    "parte": "03_pipes",
+    "id": "p04",
+    "titulo": "Experimento pipe1.c e EOF",
+    "origem": "Professor — Aula 14, pp.24–27; cenários controlados de treino",
+    "tipo": "analise"
+  },
+  {
+    "parte": "03_pipes",
+    "id": "p05",
+    "titulo": "Dois filhos escrevendo para o pai",
+    "origem": "Professor — Aula 14, exemplo double.c/son.c, pp.33–36",
+    "tipo": "analise"
+  },
+  {
+    "parte": "03_pipes",
+    "id": "p06",
+    "titulo": "Explicar ls | wc e dup2",
+    "origem": "Professor — Aula 14, exemplo 3, pp.37–41",
+    "tipo": "analise"
+  },
+  {
+    "parte": "03_pipes",
+    "id": "p07",
+    "titulo": "Capacidade do pipe e alarm",
+    "origem": "Professor — Aula 14, exemplo 4, p.42",
+    "tipo": "analise"
+  },
+  {
+    "parte": "03_pipes",
+    "id": "p08",
+    "titulo": "FIFO com dois escritores",
+    "origem": "Professor — Aula 14, pp.43–55, exemplos reader/writer e comunicação bidirecional",
+    "tipo": "analise"
+  },
+  {
+    "parte": "03_pipes",
+    "id": "p09",
+    "titulo": "Filtro de soma por pipe",
+    "origem": "Criado para este estudo",
+    "tipo": "programa"
+  },
+  {
+    "parte": "04_threads",
+    "id": "t01",
+    "titulo": "Criando threads e interpretando a saída",
+    "origem": "Professor — roteiro 4.1, A.1; Aula 17, exemplos 1–5",
+    "tipo": "analise"
+  },
+  {
+    "parte": "04_threads",
+    "id": "t02",
+    "titulo": "Joining threads e saída da main",
+    "origem": "Professor — roteiro 4.1, A.2",
+    "tipo": "analise"
+  },
+  {
+    "parte": "04_threads",
+    "id": "t03",
+    "titulo": "Passagem de parâmetros",
+    "origem": "Professor — roteiro 4.1, B1",
+    "tipo": "analise"
+  },
+  {
+    "parte": "04_threads",
+    "id": "t04",
+    "titulo": "Primos: &i versus malloc",
+    "origem": "Professor — roteiro 4.1, B2 (a–g); roteiro 4.2, exercício 6, parte 2",
+    "tipo": "analise"
+  },
+  {
+    "parte": "04_threads",
+    "id": "t05",
+    "titulo": "Receber valores e exemplo do dado",
+    "origem": "Professor — roteiro 4.1, B3 (a–d); Aula 17, exemplo 6",
+    "tipo": "analise"
+  },
+  {
+    "parte": "04_threads",
+    "id": "t06",
+    "titulo": "Soma dos dez primos em duas threads",
+    "origem": "Professor — roteiro 4.1, exercício final",
+    "tipo": "programa"
+  },
+  {
+    "parte": "04_threads",
+    "id": "t07",
+    "titulo": "Criação e identificação de dez threads",
+    "origem": "Professor — roteiro 4.2, exercício 1 (a–c)",
+    "tipo": "programa"
+  },
+  {
+    "parte": "04_threads",
+    "id": "t08",
+    "titulo": "Posição de pthread_join",
+    "origem": "Professor — roteiro 4.2, exercício 2 (d–f)",
+    "tipo": "analise"
+  },
+  {
+    "parte": "04_threads",
+    "id": "t09",
+    "titulo": "Soma paralela de dez inteiros",
+    "origem": "Professor — roteiro 4.2, exercício 3 (g–i)",
+    "tipo": "programa"
+  },
+  {
+    "parte": "04_threads",
+    "id": "t10",
+    "titulo": "Impressão concorrente de primos",
+    "origem": "Professor — roteiro 4.2, exercício 6, parte 1",
+    "tipo": "programa"
+  },
+  {
+    "parte": "04_threads",
+    "id": "t11",
+    "titulo": "ULT, KLT e recursos compartilhados",
+    "origem": "Criado para este estudo — revisão integral da Aula 16",
+    "tipo": "analise"
+  },
+  {
+    "parte": "04_threads",
+    "id": "t12",
+    "titulo": "Quadrados retornados por threads",
+    "origem": "Criado para este estudo",
+    "tipo": "programa"
+  },
+  {
+    "parte": "05_mutex_e_paralelismo",
+    "id": "x01",
+    "titulo": "Investigar índice global sem proteção",
+    "origem": "Professor — roteiro 4.2, exercício 4 (j–l); Aula 17, pp.21–23",
+    "tipo": "analise"
+  },
+  {
+    "parte": "05_mutex_e_paralelismo",
+    "id": "x02",
+    "titulo": "Corrigir índice global com mutex",
+    "origem": "Professor — roteiro 4.2, exercício 5 (m–o)",
+    "tipo": "programa"
+  },
+  {
+    "parte": "05_mutex_e_paralelismo",
+    "id": "x03",
+    "titulo": "Soma de 1000 elementos com N threads",
+    "origem": "Professor — roteiro 4.2, exercício 7; Aula 17, exercício de soma, pp.21–23",
+    "tipo": "programa"
+  },
+  {
+    "parte": "05_mutex_e_paralelismo",
+    "id": "x04",
+    "titulo": "Partição variável e casos de fronteira",
+    "origem": "Criado para este estudo",
+    "tipo": "programa"
+  },
+  {
+    "parte": "05_mutex_e_paralelismo",
+    "id": "x05",
+    "titulo": "Desempenho, atributos e revisão de mutex",
+    "origem": "Criado para este estudo — revisão da Aula 17",
+    "tipo": "analise"
+  }
+]

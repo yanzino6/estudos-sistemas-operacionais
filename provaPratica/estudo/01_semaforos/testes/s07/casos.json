@@ -1,0 +1,23 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "Nove fãs bastam para começar a sessão? Booleano.",
+      "esperado": false,
+      "explicacao": "Capacidade exigida é dez."
+    },
+    {
+      "id": "b",
+      "pergunta": "Autorização de entrada é suficiente para liberar o telefonema? Booleano.",
+      "esperado": false,
+      "explicacao": "É necessária a conclusão do filme."
+    },
+    {
+      "id": "c",
+      "pergunta": "Leitura de nFans fora da proteção é automaticamente segura porque escritas têm mutex? Booleano.",
+      "esperado": false,
+      "explicacao": "Todas as operações conflitantes precisam de sincronização."
+    }
+  ]
+}

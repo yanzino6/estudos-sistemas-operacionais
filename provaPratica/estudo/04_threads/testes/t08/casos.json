@@ -1,0 +1,23 @@
+{
+  "tipo": "analise",
+  "casos": [
+    {
+      "id": "a",
+      "pergunta": "Dez create/join em sequência: máximo de trabalhadores desse laço vivos simultaneamente?",
+      "esperado": 1,
+      "explicacao": "Cada join termina antes da próxima criação."
+    },
+    {
+      "id": "b",
+      "pergunta": "Dez creates antes dos joins: máximo potencial de trabalhadores vivos?",
+      "esperado": 10,
+      "explicacao": "Podem coexistir antes de concluir."
+    },
+    {
+      "id": "c",
+      "pergunta": "Essa versão garante dez CPUs executando simultaneamente? Booleano.",
+      "esperado": false,
+      "explicacao": "Depende do hardware e escalonamento."
+    }
+  ]
+}

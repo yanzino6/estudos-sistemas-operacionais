@@ -1,5 +1,5 @@
-# Revisão manual — Três fumantes
+# Requisitos de implementação — s13
 
-Três semáforos de fumantes começam zero. Agente espera confirmação antes de publicar próximo par. Proteja a mesa por protocolo de transferência; não permita dois consumidores para o mesmo par. Diga quem inicia a primeira rodada.
+Semáforo individual por fumante e confirmação ao agente; publicar somente para o correto. Main não calcula nem imprime as linhas no lugar das threads.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

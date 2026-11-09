@@ -1,5 +1,5 @@
-# Revisão manual — Buffer limitado em C
+# Requisitos de implementação — m07
 
-Estado encapsulado, while para vazio/cheio, atualizações sob mutex, signal para condição correspondente. Consumidora realmente passa pelo buffer; não somar diretamente na main. Ambas threads terminam; destruir condições/mutex após joins.
+Mutex e duas condições, waits em while, k=0 termina sem bloqueio.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

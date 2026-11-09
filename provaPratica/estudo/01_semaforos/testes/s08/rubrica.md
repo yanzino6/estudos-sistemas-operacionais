@@ -1,5 +1,5 @@
-# Revisão manual — Leitores e escritores: três políticas
+# Requisitos de implementação — s08
 
-Diferencie proteção de rc de exclusão da base. Mostre que escritor de posse de R bloqueia novas entradas de leitores, mas leitores antigos saem sem R. Declare a hipótese de justiça para aquisição de R; não conclua FIFO só pela presença de semáforo. Sem M, entrada e saída podem perder atualização.
+Implemente a catraca R e proteção M/W da Lista 6 usando semáforos. Permitir múltiplos leitores; nenhum escritor junto com qualquer outro acesso. Todas as threads terminam. Mutex de log não deve manter a base serializada durante toda a leitura.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

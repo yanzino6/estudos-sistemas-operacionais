@@ -1,5 +1,5 @@
-# Revisão manual — Filtro de soma por pipe
+# Requisitos de implementação — p09
 
-Exigir dois pipes, soma somente no filho, transferência completa, fechamento e waitpid. Caso n=0 deve retornar zero sem aguardar dado inexistente.
+Transferências completas, n=0, fechamento e waitpid; soma no filho.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

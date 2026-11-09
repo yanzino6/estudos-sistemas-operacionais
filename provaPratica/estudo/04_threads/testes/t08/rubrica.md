@@ -1,5 +1,5 @@
-# Revisão manual — Posição de pthread_join
+# Requisitos de implementação — t08
 
-Até dez trabalhadores vivos no primeiro desenho; no máximo um trabalhador do laço no segundo. Main continua sendo uma thread, mas espera no join. Hardware pode limitar execução simultânea; não aferir paralelismo apenas por ordem dos prints.
+No modo 0 no máximo um trabalhador do laço vivo. No modo 1 use mutex/condição para barreira; não faça join antes de criar todos.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

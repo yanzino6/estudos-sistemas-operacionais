@@ -1,80 +1,72 @@
-# Estudo direcionado — Sistemas Operacionais
+# Estudo direcionado para prova prática de Sistemas Operacionais
 
-Material organizado a partir dos **11 PDFs de `../materiais` (248 páginas)**, em cinco partes. Inclui **49 atividades**, sendo **14 com testes de programas C** e **35 com cenários objetivos de análise mais revisão manual**. Exercícios criados para complementar a preparação estão identificados; os exercícios do professor mantêm sua origem e requisitos.
+**Todas as 49 questões agora são de escrita de código C.** Cada uma tem arquivo inicial para preencher, entradas de teste, saída esperada ou validação de eventos, e script de correção que compila e executa o programa. O conteúdo didático dos 11 PDFs permanece nas cinco partes.
 
-## Por onde começar
+## Onde escrever as respostas
 
-| Ordem | Conteúdo e exercícios | Ao terminar, você deve conseguir |
-|---|---|---|
-| 1 | [Semáforos](01_semaforos/conteudo.md) · [exercícios](01_semaforos/exercicios.md) | Transformar dependências e invariantes em P/V |
-| 2 | [Monitores](02_monitores/conteudo.md) · [exercícios](02_monitores/exercicios.md) | Escolher predicados e explicar wait/signal |
-| 3 | [Pipes](03_pipes/conteudo.md) · [exercícios](03_pipes/exercicios.md) | Criar processos, fechar descritores e montar pipelines |
-| 4 | [Threads](04_threads/conteudo.md) · [exercícios](04_threads/exercicios.md) | Criar, passar argumentos e recolher retornos |
-| 5 | [Mutex e paralelismo](05_mutex_e_paralelismo/conteudo.md) · [exercícios](05_mutex_e_paralelismo/exercicios.md) | Corrigir corridas e dividir trabalho sem perder elementos |
+Os modelos ficam em **`estudo/<parte>/respostas/<id>.c`**. Eles contêm o enunciado resumido, interfaces sugeridas e TODOs. São esqueletos compiláveis, não gabaritos prontos. Inicialmente reprovam porque ainda não implementam a atividade.
 
-Se a prova prática estiver próxima, faça **3 → 4 → 5** primeiro; depois 1 → 2 para consolidar sincronização. Esse foco foi inferido dos roteiros de laboratório, não é uma previsão do que o professor cobrará.
+**[Abrir o índice dos 49 modelos e comandos de correção](MODELOS_DE_RESPOSTA.md).**
 
-## Rotina sugerida de estudo
+| Parte | Conteúdo | Exercícios | Modelos C |
+|---|---|---|---|
+| Semáforos | [conteudo.md](01_semaforos/conteudo.md) | [s01–s16](01_semaforos/exercicios.md) | [respostas](01_semaforos/respostas/README.md) |
+| Monitores | [conteudo.md](02_monitores/conteudo.md) | [m01–m07](02_monitores/exercicios.md) | [respostas](02_monitores/respostas/README.md) |
+| Pipes | [conteudo.md](03_pipes/conteudo.md) | [p01–p09](03_pipes/exercicios.md) | [respostas](03_pipes/respostas/README.md) |
+| Threads | [conteudo.md](04_threads/conteudo.md) | [t01–t12](04_threads/exercicios.md) | [respostas](04_threads/respostas/README.md) |
+| Mutex e paralelismo | [conteudo.md](05_mutex_e_paralelismo/conteudo.md) | [x01–x05](05_mutex_e_paralelismo/exercicios.md) | [respostas](05_mutex_e_paralelismo/respostas/README.md) |
 
-Em cada parte, leia o conteúdo, feche o texto e explique o mecanismo com suas palavras. Resolva os exercícios sem abrir gabaritos. Execute os testes e use a mensagem de falha para localizar o problema. Por último, faça a revisão estrutural da rubrica: acertar saída não demonstra que você usou os processos, threads ou primitivas solicitados.
+## Primeiro exercício: abrir, implementar, corrigir
 
-Sugestão de seis sessões, ajustáveis ao seu ritmo:
+Da raiz `provaPratica`:
 
-1. Pipes: desenhar descritores e fazer p01/p03; depois p02 e análise de EOF.
-2. Threads: argumentos, join e retorno; fazer t04, t06, t07 e t09.
-3. Mutex: reproduzir um intercalamento ruim no papel, corrigir x02 e fazer x03.
-4. Semáforos: precedência, buffer e recursos; depois problemas de lotes.
-5. Monitores: if/while, porto, barbeiro e implementação das disciplinas.
-6. Simulado: p03, t09, x03, s11 e m01 sem consultar conteúdo; corrija tanto os casos quanto as rubricas. Sugestão: 90–120 minutos, sem valor oficial.
+```bash
+# 1. Abra estudo/03_pipes/respostas/p01.c no editor e implemente os TODOs.
+# 2. Rode o script; ele encontra esse arquivo automaticamente:
+python3 estudo/03_pipes/testes/p01/corrigir.py
 
-Avance quando conseguir explicar por que uma solução errada falha, além de obter aprovação nos casos.
+# Para corrigir um arquivo em outro lugar:
+python3 estudo/03_pipes/testes/p01/corrigir.py /caminho/minha_solucao.c
+```
 
-## Estrutura de cada parte
+O script compila com `cc -std=c11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pthread`. Use `CC` para selecionar outro compilador. Requisitos: Python 3, compilador C/Pthreads e terminal Linux/macOS; no Windows, use ambiente Linux/WSL. Os modelos incluem um adaptador de semáforos para threads no macOS/Linux, explicado no guia de modelos.
+
+Código de saída do corretor: **0** = passou nos casos; **1** = compilação, execução, resultado ou tempo reprovou; **2** = problema de uso/configuração. Cada execução tem timeout e limpeza dos processos descendentes. Resultados vão para stdout; diagnósticos para stderr. Não imprima prompts que o enunciado não pediu.
+
+## Ordem remanejada para a prova prática
+
+Comece por **Threads → Pipes → Mutex**, depois progrida para **Semáforos → Monitores**. Veja o [roteiro prático com sequências e simulados](ROTEIRO_PROVA_PRATICA.md). Os diretórios mantêm seus nomes para preservar links e referências, mas a ordem de resolução foi reorganizada por dificuldade de implementação.
+
+As antigas tarefas de explicação, previsão em JSON ou pseudocódigo foram reescritas como programas. Exemplos: a análise de `&i` virou implementação com argumentos independentes; o grafo exige threads reais e semáforos; o porto exige monitor em C; o problema de EOF exige leitura real de pipe até encerramento.
+
+## Como os testes corrigem concorrência
+
+Há três formas de comparação, indicadas em cada exercício:
+
+- **Resultado em ordem:** números/textos comparados ignorando espaços e quebras extras.
+- **Linhas em qualquer ordem:** permite escalonamentos diferentes, mas exige todos os registros, sem omissões ou duplicações.
+- **Eventos e invariantes:** aceita diferentes sequências válidas e verifica precedência, capacidade, exclusão, lotes, fases, prioridade ou barreiras. Nesses exercícios, `.out` é um exemplo válido, não uma saída única obrigatória.
+
+Registre eventos no momento da alteração protegida do estado. Não junte um log inventado após o término. O corretor observa resultados e rastros; a lista `rubrica.md` também exige conferir no código o uso das primitivas e a distribuição do trabalho. Passar testes não demonstra ausência de corridas em todos os escalonamentos nem substitui o requisito de usar threads/processos reais. Não há mais resposta teórica para entregar.
+
+## Organização
 
 ```text
 parte/
   conteudo.md
   exercicios.md
+  respostas/
+    identificador.c       # você escreve aqui
+    README.md
   testes/
     identificador/
-      corrigir.py
-      casos.json
+      corrigir.py         # sem argumento corrige o modelo acima
+      casos.json          # configuração do corretor; não é uma resposta
+      01.in / 01.out
+      README.md
       rubrica.md
-      # exercícios C: entradas .in e saídas .out
-      # análise: cenarios.md, respostas.modelo.json, gabarito.md
 ```
 
-Os pequenos scripts por exercício compartilham o motor `_infra/corretor.py`. Mantenha a pasta `estudo` inteira para que os imports funcionem. Nenhum pacote Python adicional é necessário para estudar/corrigir. Os PDFs originais não foram alterados.
+Mantenha a pasta `estudo` inteira: scripts e modelos usam `_infra`. Os fontes citados no Drive do roteiro 4.1 não vieram nos PDFs; as implementações propostas aqui são adaptações de treino identificadas, não cópias desses fontes ausentes.
 
-## Como executar
-
-Requisitos: terminal POSIX (Linux ou macOS), Python 3 e compilador C com Pthreads (`cc` ou variável `CC`). Linux é o ambiente-alvo dos roteiros. No Windows, use ambiente Linux/WSL. O exercício s16 explica a diferença de suporte a semáforos no macOS.
-
-Execute da raiz `provaPratica`:
-
-```bash
-# Exemplo de programa C
-python3 estudo/03_pipes/testes/p01/corrigir.py /caminho/solucao.c
-
-# Exemplo teórico: copie e preencha o modelo, sem editar os casos
-cp estudo/02_monitores/testes/m01/respostas.modelo.json /tmp/m01.json
-# Preencha /tmp/m01.json e escreva sua justificativa/pseudocódigo em resposta.md
-python3 estudo/02_monitores/testes/m01/corrigir.py /tmp/m01.json
-
-# Verificar o motor de correção
-python3 estudo/_infra/testar_corretor.py
-```
-
-Códigos de saída: **0** = todos os casos objetivos passaram; **1** = caso, compilação ou tempo falhou; **2** = arquivo/uso/configuração incorreta. A revisão manual continua necessária mesmo com código 0.
-
-Nos programas, envie resultados a stdout e diagnósticos a stderr. Os contratos dos exercícios dizem quando usar frases ou somente números. A comparação aceita diferenças de espaços e quebras; nos exercícios de impressão concorrente aceita qualquer ordem de linhas, mas exige todas as linhas, sem duplicação. O timeout encerra também processos descendentes deixados pelo programa. Cada teste usa diretório temporário; caminhos relativos da solução serão relativos a esse diretório.
-
-## O que a correção demonstra
-
-Nos programas, o corretor compila/roda o arquivo fornecido, compara resultados, verifica retorno e impõe tempo máximo. Repetições ajudam a revelar bugs intermitentes. Não provam ausência de data races, starvation ou deadlock em todos os escalonamentos. As rubricas verificam o uso de primitivas, a distribuição de trabalho, a vida útil da memória e o encerramento.
-
-Nas questões teóricas, os test cases são cenários de escalonamento/estado com respostas objetivas em JSON. O script **não corrige automaticamente uma dissertação ou pseudocódigo**. Depois de responder, confira a explicação do gabarito e a rubrica. Os gabaritos são abertos por finalidade didática; copiá-los só testa o formato, não o aprendizado.
-
-O roteiro 4.1 faz referência a arquivos em um Drive compartilhado; eles não estão nesta pasta. As perguntas foram preservadas e há variantes descritas para você reconstruir o experimento. Não apresentamos essas variantes como os fontes originais.
-
-Confira [mapa de cobertura](MAPA_DE_COBERTURA.md), [ressalvas dos PDFs](RESSALVAS_DOS_PDFS.md) e [verificação dos materiais](VERIFICACAO.md).
+Veja também [cobertura dos PDFs](MAPA_DE_COBERTURA.md), [ressalvas técnicas](RESSALVAS_DOS_PDFS.md) e [verificação](VERIFICACAO.md).

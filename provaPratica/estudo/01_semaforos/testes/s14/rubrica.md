@@ -1,5 +1,5 @@
-# Revisão manual — Buffer sem mutex e publicação fora de ordem
+# Requisitos de implementação — s14
 
-Declare hipótese de um único escritor por índice e semáforos com sincronização de memória. Não generalize SPSC para MPMC. No contraexemplo, P1 reserva slot0 e pausa, P2 escreve slot1 e publica item; consumidor tenta slot0. Também explique deadlock ao esperar vagas segurando mutex.
+Sem mutex no buffer SPSC; publicar item somente após escrever; liberar vaga somente após ler; não imprimir diretamente da entrada.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

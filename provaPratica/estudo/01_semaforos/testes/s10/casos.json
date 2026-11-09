@@ -1,29 +1,40 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "Cinco pegam seu esquerdo simultaneamente e aguardam direito: há deadlock? Booleano.",
-      "esperado": true,
-      "explicacao": "Cada recurso necessário está com o vizinho."
+      "parametros": {
+        "pessoas": 5,
+        "vezes": 1,
+        "capacidade": 5,
+        "vizinhos": true
+      },
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "Filósofos 0 e 4 podem comer simultaneamente? Booleano.",
-      "esperado": false,
-      "explicacao": "São vizinhos no ciclo."
+      "parametros": {
+        "pessoas": 5,
+        "vezes": 3,
+        "capacidade": 5,
+        "vizinhos": true
+      },
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
     },
     {
-      "id": "c",
-      "pergunta": "Filósofos 0 e 2 podem comer simultaneamente? Booleano.",
-      "esperado": true,
-      "explicacao": "Não compartilham garfo."
-    },
-    {
-      "id": "d",
-      "pergunta": "Apenas testar vizinhos prova atendimento justo a todo faminto? Booleano.",
-      "esperado": false,
-      "explicacao": "É preciso política de justiça adicional."
+      "parametros": {
+        "pessoas": 5,
+        "vezes": 8,
+        "capacidade": 5,
+        "vizinhos": true
+      },
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
-  ]
+  ],
+  "validador": "recurso",
+  "repeticoes": 5
 }

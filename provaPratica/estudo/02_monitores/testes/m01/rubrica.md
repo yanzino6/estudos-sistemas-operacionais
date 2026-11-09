@@ -1,5 +1,5 @@
-# Revisão manual — Buffer com if e sinaliza-e-continua
+# Requisitos de implementação — m01
 
-Mostre C1 bloqueado, produtor sinalizando, C2 consumindo antes de C1 retomar. Use while em torno do predicado; tire laço infinito de coloca para API de uma inserção por chamada. Não basta trocar nomes de condições.
+Use mutex e duas condições; espere em while, nunca if. Cada rotina do monitor realiza uma operação por chamada. Não substituir por um vetor pronto de resultados. Testes cobrem buffer de uma posição, vários produtores/consumidores e totais não divisíveis por C.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

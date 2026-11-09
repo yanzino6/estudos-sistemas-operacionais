@@ -1,5 +1,5 @@
-# Revisão manual — Quadrados retornados por threads
+# Requisitos de implementação — t12
 
-Argumentos individuais, quatro creates antes dos joins, retorno recuperado e liberado. Ordem de coleta não obriga a execução a seguir essa ordem.
+Quatro creates antes dos joins; recuperar resultados por join, liberar alocações.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

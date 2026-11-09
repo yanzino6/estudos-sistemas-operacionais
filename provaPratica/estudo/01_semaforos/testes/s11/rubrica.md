@@ -1,5 +1,5 @@
-# Revisão manual — Grafo da Lista 6
+# Requisitos de implementação — s11
 
-Uma solução usa cinco semáforos zero: F1 sinaliza autorização de F2 e F4; F3 sinaliza autorização de F5 e F6; F6 sinaliza autorização de F7. Ordens locais fornecem as demais setas. Não use um único token para duas liberações distintas.
+Criar todos os trabalhadores antes dos joins; semáforos inicialmente zero para precedência; sinalizar depois da ação; aguardar antes da dependente. Não imprimir tudo pela main nem serializar todos os trabalhadores com joins intermediários.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

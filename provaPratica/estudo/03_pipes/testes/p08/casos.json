@@ -1,23 +1,30 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "Nome da FIFO desaparece automaticamente quando ambos os processos terminam? Booleano.",
-      "esperado": false,
-      "explicacao": "Precisa ser removido."
+      "ausentes": [
+        "canal.fifo"
+      ],
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "open O_RDONLY|O_NONBLOCK sem escritor necessariamente falha ENXIO? Booleano.",
-      "esperado": false,
-      "explicacao": "Pode abrir com sucesso; a regra ENXIO aplica-se à escrita sem leitor."
+      "ausentes": [
+        "canal.fifo"
+      ],
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
     },
     {
-      "id": "c",
-      "pergunta": "Para comunicação bidirecional com pipes unidirecionais, quantos canais são necessários?",
-      "esperado": 2,
-      "explicacao": "Um por sentido."
+      "ausentes": [
+        "canal.fifo"
+      ],
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
-  ]
+  ],
+  "comparacao": "linhas_ordenadas"
 }

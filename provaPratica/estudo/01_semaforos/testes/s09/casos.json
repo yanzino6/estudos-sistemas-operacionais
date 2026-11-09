@@ -1,23 +1,59 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "Um em corte e cinco esperando: um novo cliente pode ser admitido? Booleano.",
-      "esperado": false,
-      "explicacao": "As cinco cadeiras de espera já estão ocupadas."
+      "parametros": {
+        "operacoes": [
+          "A 0",
+          "T"
+        ],
+        "cadeiras": 5
+      },
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "Nessa situação, qual o total de clientes no estabelecimento?",
-      "esperado": 6,
-      "explicacao": "Cinco esperando e um atendido."
+      "parametros": {
+        "operacoes": [
+          "A 0",
+          "A 1",
+          "A 2",
+          "A 3",
+          "A 4",
+          "A 5",
+          "A 6",
+          "A 7",
+          "T",
+          "T",
+          "T",
+          "T",
+          "T",
+          "T"
+        ],
+        "cadeiras": 5
+      },
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
     },
     {
-      "id": "c",
-      "pergunta": "Sem clientes, barbeiro deve fazer busy wait? Booleano.",
-      "esperado": false,
-      "explicacao": "Bloqueia em customers."
+      "parametros": {
+        "operacoes": [
+          "T",
+          "A 10",
+          "A 20",
+          "T",
+          "A 30",
+          "T",
+          "T"
+        ],
+        "cadeiras": 5
+      },
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
-  ]
+  ],
+  "validador": "barbearia"
 }

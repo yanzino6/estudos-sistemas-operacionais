@@ -2,344 +2,393 @@
   {
     "parte": "01_semaforos",
     "id": "s01",
-    "titulo": "Impressão ordenada de cinco blocos",
-    "origem": "Professor — Aula 11.2, pp. 3–4",
-    "tipo": "analise"
+    "titulo": "Cinco blocos ordenados por semáforos",
+    "origem": "Adaptação para programação a partir de: Professor — Aula 11.2, pp. 3–4",
+    "tipo": "programa",
+    "modelo": "01_semaforos/respostas/s01.c"
   },
   {
     "parte": "01_semaforos",
     "id": "s02",
     "titulo": "Grafo de nove funções",
-    "origem": "Professor — Aula 11.2, pp. 5–6",
-    "tipo": "analise"
+    "origem": "Adaptação para programação a partir de: Professor — Aula 11.2, pp. 5–6",
+    "tipo": "programa",
+    "modelo": "01_semaforos/respostas/s02.c"
   },
   {
     "parte": "01_semaforos",
     "id": "s03",
-    "titulo": "Junção A/B e bifurcação D/E",
-    "origem": "Professor — Aula 11.2, pp. 7–9",
-    "tipo": "analise"
+    "titulo": "Junção e bifurcação com semáforos",
+    "origem": "Adaptação para programação a partir de: Professor — Aula 11.2, pp. 7–9",
+    "tipo": "programa",
+    "modelo": "01_semaforos/respostas/s03.c"
   },
   {
     "parte": "01_semaforos",
     "id": "s04",
-    "titulo": "Pombo correio",
-    "origem": "Professor — Aula 11.2, pp. 10–12",
-    "tipo": "analise"
+    "titulo": "Pombo correio em lotes de 20",
+    "origem": "Adaptação para programação a partir de: Professor — Aula 11.2, pp. 10–12",
+    "tipo": "programa",
+    "modelo": "01_semaforos/respostas/s04.c"
   },
   {
     "parte": "01_semaforos",
     "id": "s05",
-    "titulo": "Montanha-russa",
-    "origem": "Professor — Aula 11.2, pp. 13–14",
-    "tipo": "analise"
+    "titulo": "Montanha-russa com desembarque",
+    "origem": "Adaptação para programação a partir de: Professor — Aula 11.2, pp. 13–14",
+    "tipo": "programa",
+    "modelo": "01_semaforos/respostas/s05.c"
   },
   {
     "parte": "01_semaforos",
     "id": "s06",
-    "titulo": "Canibais e cozinheiro",
-    "origem": "Professor — Aula 11.2, pp. 15–17",
-    "tipo": "analise"
+    "titulo": "Canibais e cozinheiro com encerramento",
+    "origem": "Adaptação para programação a partir de: Professor — Aula 11.2, pp. 15–17",
+    "tipo": "programa",
+    "modelo": "01_semaforos/respostas/s06.c"
   },
   {
     "parte": "01_semaforos",
     "id": "s07",
-    "titulo": "Filme sobre a vida de Hoare",
-    "origem": "Professor — Aula 11.2, pp. 18–20",
-    "tipo": "analise"
+    "titulo": "Sessões de filme com término sincronizado",
+    "origem": "Adaptação para programação a partir de: Professor — Aula 11.2, pp. 18–20",
+    "tipo": "programa",
+    "modelo": "01_semaforos/respostas/s07.c"
   },
   {
     "parte": "01_semaforos",
     "id": "s08",
-    "titulo": "Leitores e escritores: três políticas",
-    "origem": "Professor — Aula 11.2, pp. 21–33; Lista 6, questão 2",
-    "tipo": "analise"
+    "titulo": "Base compartilhada com leitores e escritores",
+    "origem": "Adaptação para programação a partir de: Professor — Aula 11.2, pp. 21–33; Lista 6, questão 2",
+    "tipo": "programa",
+    "modelo": "01_semaforos/respostas/s08.c"
   },
   {
     "parte": "01_semaforos",
     "id": "s09",
-    "titulo": "Barbeiro dorminhoco com semáforos",
-    "origem": "Professor — Aula 11.2, pp. 34–35",
-    "tipo": "analise"
+    "titulo": "Barbeiro com semáforos",
+    "origem": "Adaptação para programação a partir de: Professor — Aula 11.2, pp. 34–35",
+    "tipo": "programa",
+    "modelo": "01_semaforos/respostas/s09.c"
   },
   {
     "parte": "01_semaforos",
     "id": "s10",
-    "titulo": "Filósofos e deadlock",
-    "origem": "Professor — Aula 11.2, pp. 36–38",
-    "tipo": "analise"
+    "titulo": "Cinco filósofos usando semáforos",
+    "origem": "Adaptação para programação a partir de: Professor — Aula 11.2, pp. 36–38",
+    "tipo": "programa",
+    "modelo": "01_semaforos/respostas/s10.c"
   },
   {
     "parte": "01_semaforos",
     "id": "s11",
     "titulo": "Grafo da Lista 6",
-    "origem": "Professor — Lista 6, questão 1",
-    "tipo": "analise"
+    "origem": "Adaptação para programação a partir de: Professor — Lista 6, questão 1",
+    "tipo": "programa",
+    "modelo": "01_semaforos/respostas/s11.c"
   },
   {
     "parte": "01_semaforos",
     "id": "s12",
-    "titulo": "Semáforo múltiplo",
-    "origem": "Professor — Lista 6, questão 3",
-    "tipo": "analise"
+    "titulo": "Aquisição múltipla tudo-ou-nada",
+    "origem": "Adaptação para programação a partir de: Professor — Lista 6, questão 3",
+    "tipo": "programa",
+    "modelo": "01_semaforos/respostas/s12.c"
   },
   {
     "parte": "01_semaforos",
     "id": "s13",
-    "titulo": "Três fumantes",
-    "origem": "Professor — Lista 6, questão 4",
-    "tipo": "analise"
+    "titulo": "Agente e fumantes por rodadas",
+    "origem": "Adaptação para programação a partir de: Professor — Lista 6, questão 4",
+    "tipo": "programa",
+    "modelo": "01_semaforos/respostas/s13.c"
   },
   {
     "parte": "01_semaforos",
     "id": "s14",
-    "titulo": "Buffer sem mutex e publicação fora de ordem",
-    "origem": "Professor — Aula 11, pp. 14–22; casos de análise criados para o treino",
-    "tipo": "analise"
+    "titulo": "Buffer circular SPSC sem mutex",
+    "origem": "Adaptação para programação a partir de: Professor — Aula 11, pp. 14–22; casos de análise criados para o treino",
+    "tipo": "programa",
+    "modelo": "01_semaforos/respostas/s14.c"
   },
   {
     "parte": "01_semaforos",
     "id": "s15",
-    "titulo": "Semáforos: diagnóstico de recursos",
-    "origem": "Criado para este estudo",
-    "tipo": "analise"
+    "titulo": "Reserva de recursos limitados",
+    "origem": "Adaptação para programação a partir de: Criado para este estudo",
+    "tipo": "programa",
+    "modelo": "01_semaforos/respostas/s15.c"
   },
   {
     "parte": "01_semaforos",
     "id": "s16",
     "titulo": "Contador protegido por semáforo",
     "origem": "Criado para este estudo — implementação prática",
-    "tipo": "programa"
+    "tipo": "programa",
+    "modelo": "01_semaforos/respostas/s16.c"
   },
   {
     "parte": "02_monitores",
     "id": "m01",
-    "titulo": "Buffer com if e sinaliza-e-continua",
-    "origem": "Professor — Lista 7, questão 1; Aula 12, p.13",
-    "tipo": "analise"
+    "titulo": "Corrigir buffer para vários produtores e consumidores",
+    "origem": "Adaptação para programação a partir de: Professor — Lista 7, questão 1; Aula 12, p.13",
+    "tipo": "programa",
+    "modelo": "02_monitores/respostas/m01.c"
   },
   {
     "parte": "02_monitores",
     "id": "m02",
-    "titulo": "Porto com prioridade de saída",
-    "origem": "Professor — Lista 7, questão 2",
-    "tipo": "analise"
+    "titulo": "Porto com prioridade de saída em C",
+    "origem": "Adaptação para programação a partir de: Professor — Lista 7, questão 2",
+    "tipo": "programa",
+    "modelo": "02_monitores/respostas/m02.c"
   },
   {
     "parte": "02_monitores",
     "id": "m03",
-    "titulo": "Implementar Hoare e Hansen com semáforos",
-    "origem": "Professor — Lista 7, questão 3; Aula 12, pp.24–26",
-    "tipo": "analise"
+    "titulo": "Buffer com monitor Hoare implementado por semáforos",
+    "origem": "Adaptação para programação a partir de: Professor — Lista 7, questão 3; Aula 12, pp.24–26",
+    "tipo": "programa",
+    "modelo": "02_monitores/respostas/m03.c"
   },
   {
     "parte": "02_monitores",
     "id": "m04",
-    "titulo": "Barbeiro com monitor",
-    "origem": "Professor — Lista 7, questão 4",
-    "tipo": "analise"
+    "titulo": "Barbearia encapsulada em monitor",
+    "origem": "Adaptação para programação a partir de: Professor — Lista 7, questão 4",
+    "tipo": "programa",
+    "modelo": "02_monitores/respostas/m04.c"
   },
   {
     "parte": "02_monitores",
     "id": "m05",
-    "titulo": "Filósofos no monitor",
-    "origem": "Professor — Aula 12, pp.20–23",
-    "tipo": "analise"
+    "titulo": "Cinco filósofos usando monitor",
+    "origem": "Adaptação para programação a partir de: Professor — Aula 12, pp.20–23",
+    "tipo": "programa",
+    "modelo": "02_monitores/respostas/m05.c"
   },
   {
     "parte": "02_monitores",
     "id": "m06",
-    "titulo": "Notificação perdida e despertar espúrio",
-    "origem": "Criado para este estudo",
-    "tipo": "analise"
+    "titulo": "Barreira reutilizável com condição",
+    "origem": "Adaptação para programação a partir de: Criado para este estudo",
+    "tipo": "programa",
+    "modelo": "02_monitores/respostas/m06.c"
   },
   {
     "parte": "02_monitores",
     "id": "m07",
-    "titulo": "Buffer limitado em C",
+    "titulo": "Buffer limitado e soma",
     "origem": "Criado para este estudo — implementação de monitor com Pthreads",
-    "tipo": "programa"
+    "tipo": "programa",
+    "modelo": "02_monitores/respostas/m07.c"
   },
   {
     "parte": "03_pipes",
     "id": "p01",
-    "titulo": "Comunicação circular entre três processos",
+    "titulo": "Anel pai e dois filhos",
     "origem": "Professor — roteiro_lab03, exercício 1, p.1",
-    "tipo": "programa"
+    "tipo": "programa",
+    "modelo": "03_pipes/respostas/p01.c"
   },
   {
     "parte": "03_pipes",
     "id": "p02",
     "titulo": "Pipeline ping | grep",
     "origem": "Professor — roteiro_lab03, exercício 2, pp.2–3",
-    "tipo": "programa"
+    "tipo": "programa",
+    "modelo": "03_pipes/respostas/p02.c"
   },
   {
     "parte": "03_pipes",
     "id": "p03",
     "titulo": "Avô, pai e neto",
     "origem": "Professor — roteiro_lab03, exercício 3, pp.3–4",
-    "tipo": "programa"
+    "tipo": "programa",
+    "modelo": "03_pipes/respostas/p03.c"
   },
   {
     "parte": "03_pipes",
     "id": "p04",
-    "titulo": "Experimento pipe1.c e EOF",
-    "origem": "Professor — Aula 14, pp.24–27; cenários controlados de treino",
-    "tipo": "analise"
+    "titulo": "Ler um pipe até EOF",
+    "origem": "Adaptação para programação a partir de: Professor — Aula 14, pp.24–27; cenários controlados de treino",
+    "tipo": "programa",
+    "modelo": "03_pipes/respostas/p04.c"
   },
   {
     "parte": "03_pipes",
     "id": "p05",
-    "titulo": "Dois filhos escrevendo para o pai",
-    "origem": "Professor — Aula 14, exemplo double.c/son.c, pp.33–36",
-    "tipo": "analise"
+    "titulo": "Dois filhos enviando registros",
+    "origem": "Adaptação para programação a partir de: Professor — Aula 14, exemplo double.c/son.c, pp.33–36",
+    "tipo": "programa",
+    "modelo": "03_pipes/respostas/p05.c"
   },
   {
     "parte": "03_pipes",
     "id": "p06",
-    "titulo": "Explicar ls | wc e dup2",
-    "origem": "Professor — Aula 14, exemplo 3, pp.37–41",
-    "tipo": "analise"
+    "titulo": "Pipeline de filtro e contagem",
+    "origem": "Adaptação para programação a partir de: Professor — Aula 14, exemplo 3, pp.37–41",
+    "tipo": "programa",
+    "modelo": "03_pipes/respostas/p06.c"
   },
   {
     "parte": "03_pipes",
     "id": "p07",
-    "titulo": "Capacidade do pipe e alarm",
-    "origem": "Professor — Aula 14, exemplo 4, p.42",
-    "tipo": "analise"
+    "titulo": "Pipe com escrita não bloqueante",
+    "origem": "Adaptação para programação a partir de: Professor — Aula 14, exemplo 4, p.42",
+    "tipo": "programa",
+    "modelo": "03_pipes/respostas/p07.c"
   },
   {
     "parte": "03_pipes",
     "id": "p08",
-    "titulo": "FIFO com dois escritores",
-    "origem": "Professor — Aula 14, pp.43–55, exemplos reader/writer e comunicação bidirecional",
-    "tipo": "analise"
+    "titulo": "FIFO com dois escritores e limpeza",
+    "origem": "Adaptação para programação a partir de: Professor — Aula 14, pp.43–55, exemplos reader/writer e comunicação bidirecional",
+    "tipo": "programa",
+    "modelo": "03_pipes/respostas/p08.c"
   },
   {
     "parte": "03_pipes",
     "id": "p09",
-    "titulo": "Filtro de soma por pipe",
+    "titulo": "Soma pelo processo filho",
     "origem": "Criado para este estudo",
-    "tipo": "programa"
+    "tipo": "programa",
+    "modelo": "03_pipes/respostas/p09.c"
   },
   {
     "parte": "04_threads",
     "id": "t01",
-    "titulo": "Criando threads e interpretando a saída",
-    "origem": "Professor — roteiro 4.1, A.1; Aula 17, exemplos 1–5",
-    "tipo": "analise"
+    "titulo": "Duas threads com a mesma rotina",
+    "origem": "Adaptação para programação a partir de: Professor — roteiro 4.1, A.1; Aula 17, exemplos 1–5",
+    "tipo": "programa",
+    "modelo": "04_threads/respostas/t01.c"
   },
   {
     "parte": "04_threads",
     "id": "t02",
-    "titulo": "Joining threads e saída da main",
-    "origem": "Professor — roteiro 4.1, A.2",
-    "tipo": "analise"
+    "titulo": "Garantir término antes de sair da main",
+    "origem": "Adaptação para programação a partir de: Professor — roteiro 4.1, A.2",
+    "tipo": "programa",
+    "modelo": "04_threads/respostas/t02.c"
   },
   {
     "parte": "04_threads",
     "id": "t03",
-    "titulo": "Passagem de parâmetros",
-    "origem": "Professor — roteiro 4.1, B1",
-    "tipo": "analise"
+    "titulo": "Argumentos por estrutura",
+    "origem": "Adaptação para programação a partir de: Professor — roteiro 4.1, B1",
+    "tipo": "programa",
+    "modelo": "04_threads/respostas/t03.c"
   },
   {
     "parte": "04_threads",
     "id": "t04",
-    "titulo": "Primos: &i versus malloc",
-    "origem": "Professor — roteiro 4.1, B2 (a–g); roteiro 4.2, exercício 6, parte 2",
-    "tipo": "analise"
+    "titulo": "Corrigir passagem de &i",
+    "origem": "Adaptação para programação a partir de: Professor — roteiro 4.1, B2 (a–g); roteiro 4.2, exercício 6, parte 2",
+    "tipo": "programa",
+    "modelo": "04_threads/respostas/t04.c"
   },
   {
     "parte": "04_threads",
     "id": "t05",
-    "titulo": "Receber valores e exemplo do dado",
-    "origem": "Professor — roteiro 4.1, B3 (a–d); Aula 17, exemplo 6",
-    "tipo": "analise"
+    "titulo": "Retorno de dados alocados pela thread",
+    "origem": "Adaptação para programação a partir de: Professor — roteiro 4.1, B3 (a–d); Aula 17, exemplo 6",
+    "tipo": "programa",
+    "modelo": "04_threads/respostas/t05.c"
   },
   {
     "parte": "04_threads",
     "id": "t06",
     "titulo": "Soma dos dez primos em duas threads",
     "origem": "Professor — roteiro 4.1, exercício final",
-    "tipo": "programa"
+    "tipo": "programa",
+    "modelo": "04_threads/respostas/t06.c"
   },
   {
     "parte": "04_threads",
     "id": "t07",
-    "titulo": "Criação e identificação de dez threads",
+    "titulo": "Dez threads identificadas",
     "origem": "Professor — roteiro 4.2, exercício 1 (a–c)",
-    "tipo": "programa"
+    "tipo": "programa",
+    "modelo": "04_threads/respostas/t07.c"
   },
   {
     "parte": "04_threads",
     "id": "t08",
-    "titulo": "Posição de pthread_join",
-    "origem": "Professor — roteiro 4.2, exercício 2 (d–f)",
-    "tipo": "analise"
+    "titulo": "Dois modos de criação e join",
+    "origem": "Adaptação para programação a partir de: Professor — roteiro 4.2, exercício 2 (d–f)",
+    "tipo": "programa",
+    "modelo": "04_threads/respostas/t08.c"
   },
   {
     "parte": "04_threads",
     "id": "t09",
     "titulo": "Soma paralela de dez inteiros",
     "origem": "Professor — roteiro 4.2, exercício 3 (g–i)",
-    "tipo": "programa"
+    "tipo": "programa",
+    "modelo": "04_threads/respostas/t09.c"
   },
   {
     "parte": "04_threads",
     "id": "t10",
     "titulo": "Impressão concorrente de primos",
     "origem": "Professor — roteiro 4.2, exercício 6, parte 1",
-    "tipo": "programa"
+    "tipo": "programa",
+    "modelo": "04_threads/respostas/t10.c"
   },
   {
     "parte": "04_threads",
     "id": "t11",
-    "titulo": "ULT, KLT e recursos compartilhados",
-    "origem": "Criado para este estudo — revisão integral da Aula 16",
-    "tipo": "analise"
+    "titulo": "Partilhar heap entre trabalhadores",
+    "origem": "Adaptação para programação a partir de: Criado para este estudo — revisão integral da Aula 16",
+    "tipo": "programa",
+    "modelo": "04_threads/respostas/t11.c"
   },
   {
     "parte": "04_threads",
     "id": "t12",
     "titulo": "Quadrados retornados por threads",
     "origem": "Criado para este estudo",
-    "tipo": "programa"
+    "tipo": "programa",
+    "modelo": "04_threads/respostas/t12.c"
   },
   {
     "parte": "05_mutex_e_paralelismo",
     "id": "x01",
-    "titulo": "Investigar índice global sem proteção",
-    "origem": "Professor — roteiro 4.2, exercício 4 (j–l); Aula 17, pp.21–23",
-    "tipo": "analise"
+    "titulo": "Distribuição dinâmica com índice global seguro",
+    "origem": "Adaptação para programação a partir de: Professor — roteiro 4.2, exercício 4 (j–l); Aula 17, pp.21–23",
+    "tipo": "programa",
+    "modelo": "05_mutex_e_paralelismo/respostas/x01.c"
   },
   {
     "parte": "05_mutex_e_paralelismo",
     "id": "x02",
-    "titulo": "Corrigir índice global com mutex",
+    "titulo": "Soma com reserva de índice protegida",
     "origem": "Professor — roteiro 4.2, exercício 5 (m–o)",
-    "tipo": "programa"
+    "tipo": "programa",
+    "modelo": "05_mutex_e_paralelismo/respostas/x02.c"
   },
   {
     "parte": "05_mutex_e_paralelismo",
     "id": "x03",
-    "titulo": "Soma de 1000 elementos com N threads",
+    "titulo": "Soma de mil elementos com N threads",
     "origem": "Professor — roteiro 4.2, exercício 7; Aula 17, exercício de soma, pp.21–23",
-    "tipo": "programa"
+    "tipo": "programa",
+    "modelo": "05_mutex_e_paralelismo/respostas/x03.c"
   },
   {
     "parte": "05_mutex_e_paralelismo",
     "id": "x04",
-    "titulo": "Partição variável e casos de fronteira",
+    "titulo": "Partição com vetor de tamanho variável",
     "origem": "Criado para este estudo",
-    "tipo": "programa"
+    "tipo": "programa",
+    "modelo": "05_mutex_e_paralelismo/respostas/x04.c"
   },
   {
     "parte": "05_mutex_e_paralelismo",
     "id": "x05",
-    "titulo": "Desempenho, atributos e revisão de mutex",
-    "origem": "Criado para este estudo — revisão da Aula 17",
-    "tipo": "analise"
+    "titulo": "Trylock e sincronização sem sleep",
+    "origem": "Adaptação para programação a partir de: Criado para este estudo — revisão da Aula 17",
+    "tipo": "programa",
+    "modelo": "05_mutex_e_paralelismo/respostas/x05.c"
   }
 ]

@@ -1,104 +1,151 @@
-# Exercícios — 05_mutex_e_paralelismo
+# Prova prática — 05_mutex_e_paralelismo
 
-Comandos abaixo são executados a partir da raiz `provaPratica`. As adaptações de entrada/saída servem ao treino; as exigências originais e questões discursivas continuam na rubrica. Nos casos de análise, os cenários são complementos didáticos criados para avaliar a compreensão do enunciado original.
+Todas as questões pedem **programas C**. Os antigos pedidos de explicação/pseudocódigo foram convertidos em implementações. Os contratos finitos de entrada, saída e encerramento são adaptações de treino. Semáforos: use o adaptador descrito em [guia de modelos](../MODELOS_DE_RESPOSTA.md).
 
-## x01 — Investigar índice global sem proteção
+## x01 — Distribuição dinâmica com índice global seguro
 
-**Origem:** Professor — roteiro 4.2, exercício 4 (j–l); Aula 17, pp.21–23
+**Origem:** Adaptação para programação a partir de: Professor — roteiro 4.2, exercício 4 (j–l); Aula 17, pp.21–23
 
-Crie duas threads que somam partes de um vetor usando um índice global compartilhado e gravam parciais em vetor global. Execute várias vezes. Responda (j) risco de corrida, (k) quando mutex é necessário, (l) como garantir consistência. A versão propositalmente incorreta não tem saída errada obrigatória; por isso estes testes avaliam intercalamentos e a correção exige inspecionar o código.
+**Arquivo para escrever sua resposta:** [respostas/x01.c](respostas/x01.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/x01/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia n (0<=n<=1000) e n inteiros entre -1000000 e 1000000. Crie quatro threads; elas reservam o próximo índice usando variável global protegida por mutex. Cada reserva imprime `indice valor`, ordem livre. Cada posição deve ser processada exatamente uma vez.
+
+**Requisitos obrigatórios:** Teste de limite e incremento na mesma região crítica. Cada trabalhador usa cópia local do índice. Não usar divisão estática: o objetivo é implementar corretamente a reserva global.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/x01/01.in) · [saída de exemplo](testes/x01/01.out). [Todos os testes e regras](testes/x01/README.md).
+
+O corretor compara o multiconjunto de linhas, aceitando qualquer ordem, mas preservando a quantidade de repetições.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/05_mutex_e_paralelismo/testes/x01/respostas.modelo.json /tmp/x01.json
-# edite /tmp/x01.json
-python3 estudo/05_mutex_e_paralelismo/testes/x01/corrigir.py /tmp/x01.json
+python3 estudo/05_mutex_e_paralelismo/testes/x01/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/05_mutex_e_paralelismo/testes/x01/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/x01/gabarito.md) e [rubrica](testes/x01/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/x01.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/x01/rubrica.md).
 
 ---
 
-## x02 — Corrigir índice global com mutex
+## x02 — Soma com reserva de índice protegida
 
 **Origem:** Professor — roteiro 4.2, exercício 5 (m–o)
 
-Corrija o exercício 4 usando mutex_init/lock/unlock/destroy. A referência do PDF ao próprio exercício 5 é uma autorreferência; aqui usamos o anterior. Contrato de treino: leia dez inteiros entre -1000000000 e 1000000000; duas threads reservam índices de um índice global protegido, acumulam parciais e main imprime soma. Responda (m) determinismo, (n) impacto no desempenho, (o) custo de sincronização.
+**Arquivo para escrever sua resposta:** [respostas/x02.c](respostas/x02.c).
 
-### Como testar e corrigir
+### Implemente
 
-Implemente `solucao.c` conforme o contrato abaixo. O script compila com `cc -std=c11 -Wall -Wextra -pthread`, executa os casos em diretório temporário e limita cada execução a 5 segundos.
+Leia dez inteiros entre -1000000000 e 1000000000. Duas threads retiram índices de um índice global protegido por mutex e somam parciais. Main imprime o total long long após joins.
+
+**Requisitos obrigatórios:** mutex_init/lock/unlock/destroy; decisão de limite e reserva indivisíveis; não serializar create/join.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/x02/01.in) · [saída de exemplo](testes/x02/01.out). [Todos os testes e regras](testes/x02/README.md).
+
+O corretor compara os tokens em ordem, ignorando diferenças de espaços e quebras de linha.
+
+Da raiz `provaPratica`:
 
 ```bash
+python3 estudo/05_mutex_e_paralelismo/testes/x02/corrigir.py
+# Para corrigir outro arquivo C:
 python3 estudo/05_mutex_e_paralelismo/testes/x02/corrigir.py /caminho/solucao.c
-# ou compile e passe o executável:
-cc -std=c11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pthread solucao.c -o solucao
-python3 estudo/05_mutex_e_paralelismo/testes/x02/corrigir.py ./solucao
 ```
 
-Casos: [casos.json](testes/x02/casos.json), arquivos `.in`/`.out` ao lado. Saída sem prompts extras; espaços e quebras são normalizados. Confira também [rubrica.md](testes/x02/rubrica.md).
+O comando sem argumentos usa seu modelo em `respostas/x02.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/x02/rubrica.md).
 
 ---
 
-## x03 — Soma de 1000 elementos com N threads
+## x03 — Soma de mil elementos com N threads
 
 **Origem:** Professor — roteiro 4.2, exercício 7; Aula 17, exercício de soma, pp.21–23
 
-Vetor de exatamente 1000 inteiros e número t de threads. Divida em partes aproximadamente iguais, parâmetros alocados dinamicamente, retorno de parciais por join e liberação. Compare tempos para 1,2,4,8 threads em relatório. Contrato: primeira entrada t (1<=t<=1000), seguida por 1000 inteiros entre -1000000 e 1000000; stdout somente soma long long. Entrada t fora do intervalo: exit 1, stdout vazio. Também explique a variante de índice global da aula, comparando-a à divisão estática.
+**Arquivo para escrever sua resposta:** [respostas/x03.c](respostas/x03.c).
 
-### Como testar e corrigir
+### Implemente
 
-Implemente `solucao.c` conforme o contrato abaixo. O script compila com `cc -std=c11 -Wall -Wextra -pthread`, executa os casos em diretório temporário e limita cada execução a 10 segundos.
+Leia t (1<=t<=1000), seguido de exatamente 1000 inteiros entre -1000000 e 1000000. Divida em intervalos de tamanhos que diferem no máximo em um. Use argumentos alocados dinamicamente e colete parciais com join. Imprima soma long long. t inválido: stdout vazio, retorno 1.
+
+**Requisitos obrigatórios:** Cobrir todas as posições sem sobreposição, tratar resto, liberar argumentos/resultados, criar todos antes dos joins.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/x03/01.in) · [saída de exemplo](testes/x03/01.out). [Todos os testes e regras](testes/x03/README.md).
+
+O corretor compara os tokens em ordem, ignorando diferenças de espaços e quebras de linha.
+
+Da raiz `provaPratica`:
 
 ```bash
+python3 estudo/05_mutex_e_paralelismo/testes/x03/corrigir.py
+# Para corrigir outro arquivo C:
 python3 estudo/05_mutex_e_paralelismo/testes/x03/corrigir.py /caminho/solucao.c
-# ou compile e passe o executável:
-cc -std=c11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pthread solucao.c -o solucao
-python3 estudo/05_mutex_e_paralelismo/testes/x03/corrigir.py ./solucao
 ```
 
-Casos: [casos.json](testes/x03/casos.json), arquivos `.in`/`.out` ao lado. Saída sem prompts extras; espaços e quebras são normalizados. Confira também [rubrica.md](testes/x03/rubrica.md).
+O comando sem argumentos usa seu modelo em `respostas/x03.c`. Tempo máximo por execução: 10 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/x03/rubrica.md).
 
 ---
 
-## x04 — Partição variável e casos de fronteira
+## x04 — Partição com vetor de tamanho variável
 
 **Origem:** Criado para este estudo
 
-Leia n,t (0<=n<=1000,1<=t<=32), seguidos por n inteiros entre -1000000 e 1000000. Distribua intervalos aproximadamente iguais entre t threads, permitindo intervalos vazios. Imprima soma. Rejeite n/t fora do contrato com exit 1 e stdout vazio.
+**Arquivo para escrever sua resposta:** [respostas/x04.c](respostas/x04.c).
 
-### Como testar e corrigir
+### Implemente
 
-Implemente `solucao.c` conforme o contrato abaixo. O script compila com `cc -std=c11 -Wall -Wextra -pthread`, executa os casos em diretório temporário e limita cada execução a 5 segundos.
+Leia n,t (0<=n<=1000,1<=t<=32) e n inteiros entre -1000000 e 1000000. Divida equilibradamente entre t threads, permitindo intervalos vazios; imprima soma long long. n/t fora do contrato: stdout vazio, retorno 1.
+
+**Requisitos obrigatórios:** Tratar n=0, t>n e restos, não dividir antes de validar.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/x04/01.in) · [saída de exemplo](testes/x04/01.out). [Todos os testes e regras](testes/x04/README.md).
+
+O corretor compara os tokens em ordem, ignorando diferenças de espaços e quebras de linha.
+
+Da raiz `provaPratica`:
 
 ```bash
+python3 estudo/05_mutex_e_paralelismo/testes/x04/corrigir.py
+# Para corrigir outro arquivo C:
 python3 estudo/05_mutex_e_paralelismo/testes/x04/corrigir.py /caminho/solucao.c
-# ou compile e passe o executável:
-cc -std=c11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pthread solucao.c -o solucao
-python3 estudo/05_mutex_e_paralelismo/testes/x04/corrigir.py ./solucao
 ```
 
-Casos: [casos.json](testes/x04/casos.json), arquivos `.in`/`.out` ao lado. Saída sem prompts extras; espaços e quebras são normalizados. Confira também [rubrica.md](testes/x04/rubrica.md).
+O comando sem argumentos usa seu modelo em `respostas/x04.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/x04/rubrica.md).
 
 ---
 
-## x05 — Desempenho, atributos e revisão de mutex
+## x05 — Trylock e sincronização sem sleep
 
-**Origem:** Criado para este estudo — revisão da Aula 17
+**Origem:** Adaptação para programação a partir de: Criado para este estudo — revisão da Aula 17
 
-Explique init/destroy, trylock, tipos normal/recursivo/error-checking, robustez, compartilhamento entre processos, contenção, acumulação local e false sharing. Calcule um limite ideal de aceleração e planeje a comparação de 1/2/4/8 trabalhadores.
+**Arquivo para escrever sua resposta:** [respostas/x05.c](respostas/x05.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/x05/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Sem entrada. Main inicializa e adquire um mutex de recurso antes de criar uma thread. Trabalhadora tenta pthread_mutex_trylock, confirma EBUSY e imprime OCUPADO. Em seguida avisa main por uma condição protegida por outro mutex. Main só então libera o recurso. Trabalhadora faz lock normal, imprime ADQUIRIDO, libera e termina. Main faz join e destrói os objetos.
+
+**Requisitos obrigatórios:** Handshake com mutex de controle distinto do mutex de recurso. Verificar EBUSY, não confundir erro com posse. A thread que adquire o mutex é quem o libera.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/x05/01.in) · [saída de exemplo](testes/x05/01.out). [Todos os testes e regras](testes/x05/README.md).
+
+O corretor compara os tokens em ordem, ignorando diferenças de espaços e quebras de linha.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/05_mutex_e_paralelismo/testes/x05/respostas.modelo.json /tmp/x05.json
-# edite /tmp/x05.json
-python3 estudo/05_mutex_e_paralelismo/testes/x05/corrigir.py /tmp/x05.json
+python3 estudo/05_mutex_e_paralelismo/testes/x05/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/05_mutex_e_paralelismo/testes/x05/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/x05/gabarito.md) e [rubrica](testes/x05/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/x05.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/x05/rubrica.md).

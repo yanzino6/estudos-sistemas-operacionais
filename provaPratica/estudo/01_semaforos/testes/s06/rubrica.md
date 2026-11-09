@@ -1,5 +1,5 @@
-# Revisão manual — Canibais e cozinheiro
+# Requisitos de implementação — s06
 
-Proteja contagem e retirada; apenas um pedido de reposição por esvaziamento; cozinheiro não pode depender de um mutex retido por quem espera seu sinal. Servir-se e reservar porção devem ter protocolo consistente. Comer fica fora da região crítica.
+Semáforos para pedido/retorno, contador protegido; um pedido por reposição; não repor antes de vazio. Ids de 0 a N-1.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

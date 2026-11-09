@@ -1,5 +1,5 @@
-# Revisão manual — Filósofos no monitor
+# Requisitos de implementação — m05
 
-Garanta cinco garfos, exclusão entre vizinhos, alteração do estado sob monitor e reavaliação adequada na tradução. Política de justiça precisa ser explícita para prometer ausência de starvation.
+Use estados e uma condição por filósofo, sob monitor. Crie todos antes dos joins. Os eventos devem corresponder à posse real, não a uma simulação na main.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

@@ -1,23 +1,20 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "Para direcionar stdout ao pipe, qual índice padrão é segundo argumento de dup2?",
-      "esperado": 1,
-      "explicacao": "STDOUT_FILENO é 1."
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "Exec bem-sucedido retorna à instrução seguinte? Booleano.",
-      "esperado": false,
-      "explicacao": "Substitui a imagem."
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
     },
     {
-      "id": "c",
-      "pergunta": "O descritor de entrada padrão é qual número?",
-      "esperado": 0,
-      "explicacao": "STDIN_FILENO é 0."
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
   ]
 }

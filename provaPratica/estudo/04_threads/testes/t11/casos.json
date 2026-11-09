@@ -1,29 +1,20 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "M:1 puro permite duas ULTs do mesmo processo executarem simultaneamente em duas CPUs? Booleano.",
-      "esperado": false,
-      "explicacao": "Só há uma entidade escalonável do núcleo."
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "Threads do mesmo processo compartilham heap? Booleano.",
-      "esperado": true,
-      "explicacao": "Espaço de endereçamento é comum."
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
     },
     {
-      "id": "c",
-      "pergunta": "Cada thread precisa de contexto de registradores próprio? Booleano.",
-      "esperado": true,
-      "explicacao": "Mantém fluxo de execução independente."
-    },
-    {
-      "id": "d",
-      "pergunta": "Modelo estudado para NPTL: use \"1:1\".",
-      "esperado": "1:1",
-      "explicacao": "Há correspondência com entidades do núcleo."
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
   ]
 }

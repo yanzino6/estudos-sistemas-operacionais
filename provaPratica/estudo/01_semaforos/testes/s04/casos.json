@@ -1,23 +1,43 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "Com 19 mensagens e nenhum novo usuário, quantas viagens podem começar?",
-      "esperado": 0,
-      "explicacao": "Lote incompleto aguarda."
+      "parametros": {
+        "capacidade": 20,
+        "viagens": 1,
+        "pessoas": 20,
+        "saida": false,
+        "unicos": true
+      },
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "Durante a viagem, pode ocorrer nova colagem? Booleano.",
-      "esperado": false,
-      "explicacao": "Vagas só são repostas na volta."
+      "parametros": {
+        "capacidade": 20,
+        "viagens": 2,
+        "pessoas": 40,
+        "saida": false,
+        "unicos": true
+      },
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
     },
     {
-      "id": "c",
-      "pergunta": "Após entregar 40 mensagens em lotes completos, quantas viagens ocorreram?",
-      "esperado": 2,
-      "explicacao": "Cada viagem transporta 20."
+      "parametros": {
+        "capacidade": 20,
+        "viagens": 4,
+        "pessoas": 80,
+        "saida": false,
+        "unicos": true
+      },
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
-  ]
+  ],
+  "validador": "lote",
+  "repeticoes": 3
 }

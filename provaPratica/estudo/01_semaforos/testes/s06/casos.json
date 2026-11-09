@@ -1,23 +1,37 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "M=3 inicialmente cheio: quantas reposições são necessárias para concluir sete refeições?",
-      "esperado": 2,
-      "explicacao": "Três iniciais, três da primeira reposição, uma da segunda."
+      "parametros": {
+        "pessoas": 1,
+        "capacidade": 1,
+        "refeicoes": 1
+      },
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "Dois canibais observam vazio: devem solicitar duas reposições para o mesmo esvaziamento? Booleano.",
-      "esperado": false,
-      "explicacao": "Pedido deve ser serializado/registrado."
+      "parametros": {
+        "pessoas": 3,
+        "capacidade": 2,
+        "refeicoes": 3
+      },
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
     },
     {
-      "id": "c",
-      "pergunta": "Cozinheiro precisar do mesmo mutex que o canibal mantém enquanto espera reposição é seguro? Booleano.",
-      "esperado": false,
-      "explicacao": "Cria dependência circular."
+      "parametros": {
+        "pessoas": 5,
+        "capacidade": 3,
+        "refeicoes": 4
+      },
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
-  ]
+  ],
+  "validador": "comida",
+  "repeticoes": 3
 }

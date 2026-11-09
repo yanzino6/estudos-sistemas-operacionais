@@ -1,5 +1,5 @@
-# Revisão manual — Desempenho, atributos e revisão de mutex
+# Requisitos de implementação — x05
 
-Trylock falho não concede posse; mutex privado copiado por fork não é compartilhado; robustez requer recuperação. Separar custo de criação da computação. Amdahl depende de fração serial; não medir com printf dominando. C não é universalmente mais rápido que Java.
+Handshake com mutex de controle distinto do mutex de recurso. Verificar EBUSY, não confundir erro com posse. A thread que adquire o mutex é quem o libera.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

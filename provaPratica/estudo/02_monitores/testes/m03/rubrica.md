@@ -1,5 +1,5 @@
-# Revisão manual — Implementar Hoare e Hansen com semáforos
+# Requisitos de implementação — m03
 
-Hoare: mutex=1,next=0,next_count=0; uma fila por condição e prioridade de next no epílogo/wait. Signal suspende sinalizador somente se há waiter. Sinaliza-e-continua: sinalizador mantém entrada e waiter readquire antes de retornar. Registro de espera deve ocorrer antes de liberar mutex; fila com semáforo privado evita roubo de sinal.
+Implemente entrada/saída, wait e signal de monitor Hoare usando mutex semafórico, fila urgente next e fila por condição; não use pthread_cond_t. Acordado recebe monitor antes do sinalizador continuar. Não substituir por um vetor pronto de resultados. Testes cobrem buffer de uma posição, vários produtores/consumidores e totais não divisíveis por C.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

@@ -1,23 +1,40 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "Quantos garfos existem no ciclo clássico com cinco filósofos?",
-      "esperado": 5,
-      "explicacao": "Há um entre cada par adjacente."
+      "parametros": {
+        "pessoas": 5,
+        "vezes": 1,
+        "capacidade": 5,
+        "vizinhos": true
+      },
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "Vizinho já COMENDO: test pode conceder imediatamente? Booleano.",
-      "esperado": false,
-      "explicacao": "Compartilham um garfo."
+      "parametros": {
+        "pessoas": 5,
+        "vezes": 3,
+        "capacidade": 5,
+        "vizinhos": true
+      },
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
     },
     {
-      "id": "c",
-      "pergunta": "Um signal POSIX garante que o predicado estará verdadeiro ao retomar? Booleano.",
-      "esperado": false,
-      "explicacao": "É necessário reavaliar."
+      "parametros": {
+        "pessoas": 5,
+        "vezes": 8,
+        "capacidade": 5,
+        "vizinhos": true
+      },
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
-  ]
+  ],
+  "validador": "recurso",
+  "repeticoes": 5
 }

@@ -1,23 +1,21 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "B pode aparecer antes de A? Booleano.",
-      "esperado": true,
-      "explicacao": "Criação não determina a ordem de escrita."
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "Read pedindo 11 bytes é obrigada a retornar 11? Booleano.",
-      "esperado": false,
-      "explicacao": "Pode retornar menos bytes."
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
     },
     {
-      "id": "c",
-      "pergunta": "Um número de descritor enviado por argumento substitui a necessidade de herdá-lo aberto? Booleano.",
-      "esperado": false,
-      "explicacao": "O número só faz sentido na tabela que possui a referência."
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
-  ]
+  ],
+  "comparacao": "linhas_ordenadas"
 }

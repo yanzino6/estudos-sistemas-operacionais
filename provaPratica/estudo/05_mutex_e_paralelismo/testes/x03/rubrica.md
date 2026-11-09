@@ -1,5 +1,5 @@
-# Revisão manual — Soma de 1000 elementos com N threads
+# Requisitos de implementação — x03
 
-Cobrir cada posição uma vez, inclusive restos, diferenças de tamanho <=1; criar todos antes de join; liberar argumentos/resultados; validar t antes de divisão. Medir repetidamente com relógio monotônico e trabalho equivalente, sem exigir speedup em vetor pequeno. Não confundir correção com desempenho.
+Cobrir todas as posições sem sobreposição, tratar resto, liberar argumentos/resultados, criar todos antes dos joins.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

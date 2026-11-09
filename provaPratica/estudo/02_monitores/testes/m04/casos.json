@@ -1,23 +1,59 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "Barbeiro dormindo e sala vazia: primeiro cliente deve ir embora? Booleano.",
-      "esperado": false,
-      "explicacao": "Ele acorda o barbeiro e recebe atendimento."
+      "parametros": {
+        "operacoes": [
+          "A 0",
+          "T"
+        ],
+        "cadeiras": 5
+      },
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "Um em corte e quatro esperando: quantos lugares de espera restam?",
-      "esperado": 1,
-      "explicacao": "Limite de espera é cinco."
+      "parametros": {
+        "operacoes": [
+          "A 0",
+          "A 1",
+          "A 2",
+          "A 3",
+          "A 4",
+          "A 5",
+          "A 6",
+          "A 7",
+          "T",
+          "T",
+          "T",
+          "T",
+          "T",
+          "T"
+        ],
+        "cadeiras": 5
+      },
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
     },
     {
-      "id": "c",
-      "pergunta": "Sinal de que foi chamado equivale a corte concluído? Booleano.",
-      "esperado": false,
-      "explicacao": "São eventos diferentes."
+      "parametros": {
+        "operacoes": [
+          "T",
+          "A 10",
+          "A 20",
+          "T",
+          "A 30",
+          "T",
+          "T"
+        ],
+        "cadeiras": 5
+      },
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
-  ]
+  ],
+  "validador": "barbearia"
 }

@@ -1,23 +1,43 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "C=3: com dois embarcados o carro pode partir? Booleano.",
-      "esperado": false,
-      "explicacao": "É exigida lotação completa."
+      "parametros": {
+        "capacidade": 2,
+        "viagens": 2,
+        "pessoas": 3,
+        "saida": true,
+        "unicos": false
+      },
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "Ao terminar uma viagem de C=3, quantas permissões de fim devem ser publicadas?",
-      "esperado": 3,
-      "explicacao": "Uma para cada passageiro do lote."
+      "parametros": {
+        "capacidade": 1,
+        "viagens": 3,
+        "pessoas": 2,
+        "saida": true,
+        "unicos": false
+      },
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
     },
     {
-      "id": "c",
-      "pergunta": "É seguro reabrir embarque antes de todos os passageiros anteriores saírem, mantendo só contador de ocupação por lote? Booleano.",
-      "esperado": false,
-      "explicacao": "Isso mistura gerações sem protocolo adicional."
+      "parametros": {
+        "capacidade": 4,
+        "viagens": 3,
+        "pessoas": 6,
+        "saida": true,
+        "unicos": false
+      },
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
-  ]
+  ],
+  "validador": "lote",
+  "repeticoes": 3
 }

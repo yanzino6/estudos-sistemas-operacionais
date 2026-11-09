@@ -1,23 +1,21 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "pthread_join(t,NULL) dispensa esperar? Booleano.",
-      "esperado": false,
-      "explicacao": "Dispensa apenas receber retorno."
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "Prints misturados provam uso simultâneo de duas CPUs? Booleano.",
-      "esperado": false,
-      "explicacao": "Uma CPU pode intercalar."
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
     },
     {
-      "id": "c",
-      "pergunta": "Global começa 20, thread escreve 40 e main lê após join: qual valor?",
-      "esperado": 40,
-      "explicacao": "Join ordena a observação após conclusão."
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
-  ]
+  ],
+  "comparacao": "linhas_ordenadas"
 }

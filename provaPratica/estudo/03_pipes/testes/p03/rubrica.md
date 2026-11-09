@@ -1,5 +1,5 @@
-# Revisão manual — Avô, pai e neto
+# Requisitos de implementação — p03
 
-Conferir hierarquia real: somente o filho cria neto. Multiplicação no filho, inversão no neto, impressão no avô. Cada processo fecha pontas e espera seus filhos. Validar tamanho e preservar todos os elementos.
+Neto criado pelo filho, quatro canais direcionais ou protocolo equivalente; operações nos processos especificados; waitpid na hierarquia.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

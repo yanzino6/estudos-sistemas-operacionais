@@ -1,5 +1,5 @@
-# Revisão manual — ULT, KLT e recursos compartilhados
+# Requisitos de implementação — t11
 
-Cada thread tem contexto/pilha e compartilha espaço de endereçamento. M:1 puro não explora simultaneidade de vários núcleos internamente; syscall bloqueante pode parar toda a entidade. 1:1 permite kernel escalonar cada thread. M:N combina níveis e adiciona complexidade.
+Compartilhar o mesmo vetor alocado; não copiar todo o vetor para cada thread; main só lê depois dos joins. Sem mutex necessário para posições distintas.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

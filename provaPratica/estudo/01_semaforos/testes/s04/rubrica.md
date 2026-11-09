@@ -1,5 +1,5 @@
-# Revisão manual — Pombo correio
+# Requisitos de implementação — s04
 
-Inicialize enchendo=20, cheia=0, mutex=1 e contador=0. Proteja colagem/contador; vigésimo sinaliza cheia; pombo espera cheia e só repõe permissões após voltar. Mostre que cada viagem tem exatamente 20, sem mensagens duplicadas/perdidas.
+Use semáforos e contadores protegidos. Eventos representam alterações reais do estado, impressos na mesma região crítica da alteração. Sem sleep para garantir ordem; número finito de rodadas e join em todas as threads.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

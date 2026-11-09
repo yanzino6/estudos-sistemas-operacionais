@@ -1,5 +1,5 @@
-# Revisão manual — Joining threads e saída da main
+# Requisitos de implementação — t02
 
-Com join, a main aguarda conclusão; sem join e com return de main, o processo pode encerrar antes do trabalhador. Sleep não garante conclusão. Distinguir return da rotina, return de main e pthread_exit da main.
+Trabalho executado na thread; FIM na main após join. Não usar sleep para esperar.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

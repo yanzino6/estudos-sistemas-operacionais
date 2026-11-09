@@ -1,23 +1,22 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "Hoare: P sinaliza Q já esperando. Quem executa primeiro dentro do monitor? Use \"Q\".",
-      "esperado": "Q",
-      "explicacao": "A posse é transferida imediatamente."
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "Sinaliza-e-continua: P sinaliza Q. Quem continua até liberar o monitor? Use \"P\".",
-      "esperado": "P",
-      "explicacao": "O acordado precisa aguardar acesso."
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
     },
     {
-      "id": "c",
-      "pergunta": "Na implementação Hoare, qual valor inicial de next?",
-      "esperado": 0,
-      "explicacao": "Sinalizadores precisam esperar entrega explícita."
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
-  ]
+  ],
+  "comparacao": "linhas_ordenadas",
+  "repeticoes": 5
 }

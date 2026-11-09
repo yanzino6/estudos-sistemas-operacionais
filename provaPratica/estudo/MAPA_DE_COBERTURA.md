@@ -1,6 +1,6 @@
 # Mapa de cobertura dos PDFs
 
-As páginas são as posições no PDF, contando a primeira como 1. Slides repetidos/animações foram consolidados na explicação do conceito. As explicações são reescritas didaticamente; não são transcrição literal. Os casos de análise e contratos de execução são complementos deste estudo.
+As páginas são as posições no PDF, contando a primeira como 1. Slides repetidos/animações foram consolidados na explicação do conceito. As explicações são reescritas didaticamente; não são transcrição literal. Todos os exercícios foram adaptados para escrita de código C, com contratos finitos de entrada/saída. O mapa indica a origem temática, não que o novo enunciado seja uma transcrição do professor.
 
 | PDF em materiais | Páginas | Destino e atividades |
 |---|---|---|
@@ -30,6 +30,10 @@ As páginas são as posições no PDF, contando a primeira como 1. Slides repeti
 | roteiro_lab04_1 | 1–5 | NPTL e APIs no conteúdo; A.1=t01; A.2=t02; B1=t03; B2(a–g)=t04; B3(a–d)=t05; exercício final=t06 |
 | roteiro_lab_04_2 (1) | 1–5 | Ex1(a–c)=t07; Ex2(d–f)=t08; Ex3(g–i)=t09; Ex4(j–l)=x01; Ex5(m–o)=x02; Ex6 parte1=t10/parte2=t04; Ex7=x03 |
 
-Complementos criados: s15/s16, m06/m07, p09, t11/t12, x04/x05. Atividades como s08 e t04 agrupam questões repetidas entre PDFs sem apagar as perguntas de cada fonte. Diagramas essenciais foram conferidos visualmente, não inferidos apenas da extração textual.
+Complementos criados: s15/s16, m06/m07, p09, t11/t12, x04/x05. Atividades como s08 e t04 agrupam questões repetidas entre PDFs convertendo as perguntas de cada fonte em requisitos de implementação. Diagramas essenciais foram conferidos visualmente, não inferidos apenas da extração textual.
 
 Bibliografias e links de referência dos slides permanecem nos PDFs originais. O conteúdo indicado apenas por link externo (por exemplo vídeo de filósofos ou fontes do Drive) não foi tratado como se estivesse anexado; a solução conceitual dos filósofos é explicada aqui a partir dos slides disponíveis.
+
+## Adaptações práticas desta revisão
+
+As perguntas discursivas permanecem explicadas em `conteudo.md`, mas as entregas são exclusivamente C. p06 troca ls/wc por grep/wc com entrada controlada; p07 troca a medição de capacidade por transferência não bloqueante; s09/m04 usam comandos de chegada/término para tornar o atendimento reproduzível; t11 exercita compartilhamento de heap. As demais adaptações e limites aparecem em cada enunciado.

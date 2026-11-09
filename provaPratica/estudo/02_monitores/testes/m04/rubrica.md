@@ -1,5 +1,5 @@
-# Revisão manual — Barbeiro com monitor
+# Requisitos de implementação — m04
 
-Distinguir espera e corte. Registrar cliente escolhido, não acordar arbitrariamente e permitir outro ocupar a cadeira. Esperar predicado correto com while. Corte fora do monitor, estado reservado dentro. Se usar uma condição geral, broadcast e predicados individuais ou fila explícita.
+Implemente fila/cadeira usando mutex e variáveis de condição. O barbeiro executa as conclusões de corte; despachante envia comandos e aguarda confirmação sem busy wait. Não simular toda a barbearia sequencialmente na main.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

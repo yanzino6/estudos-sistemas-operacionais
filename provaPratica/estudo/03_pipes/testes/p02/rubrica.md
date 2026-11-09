@@ -1,5 +1,5 @@
-# Revisão manual — Pipeline ping | grep
+# Requisitos de implementação — p02
 
-Nenhum system/popen/shell para substituir a construção do pipeline. Conferir argumentos de exec, stdin/stdout redirecionados, pai sem extremidades abertas e waitpid para ambos. Não hardcodar a saída. A verificação de uso de chamadas é manual.
+Sem system/popen; argumentos corretos, ambos criados antes da espera; fechar pontas. Não usar caminho absoluto para ping.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

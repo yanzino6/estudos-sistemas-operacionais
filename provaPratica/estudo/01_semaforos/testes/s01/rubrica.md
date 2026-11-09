@@ -1,5 +1,5 @@
-# Revisão manual — Impressão ordenada de cinco blocos
+# Requisitos de implementação — s01
 
-Confira quatro semáforos iniciados em zero, espera antes de cada bloco exceto o primeiro, sinalização após cada bloco exceto o último. Não serializar por sleep. Justifique por que notificações anteriores à espera não se perdem.
+Quatro semáforos de precedência; cinco creates antes dos joins; cada thread imprime seu bloco.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

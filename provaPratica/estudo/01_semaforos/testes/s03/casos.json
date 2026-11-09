@@ -1,17 +1,39 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "Quantos V(S3) C deve fazer para liberar D e E?",
-      "esperado": 2,
-      "explicacao": "Cada P consome uma permissão."
-    },
-    {
-      "id": "b",
-      "pergunta": "C pode começar apenas após A, antes de B? Booleano.",
-      "esperado": false,
-      "explicacao": "É uma junção de duas dependências."
+      "parametros": {
+        "nos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "arestas": [
+          [
+            "A",
+            "C"
+          ],
+          [
+            "B",
+            "C"
+          ],
+          [
+            "C",
+            "D"
+          ],
+          [
+            "C",
+            "E"
+          ]
+        ]
+      },
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     }
-  ]
+  ],
+  "validador": "grafo",
+  "repeticoes": 10
 }

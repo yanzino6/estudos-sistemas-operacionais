@@ -1,23 +1,20 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "PIPE_BUF mede necessariamente a capacidade total do pipe? Booleano.",
-      "esperado": false,
-      "explicacao": "É limite de atomicidade."
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "Sem consumo e com referência de leitura aberta, escritas suficientes podem bloquear? Booleano.",
-      "esperado": true,
-      "explicacao": "O buffer eventualmente enche."
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
     },
     {
-      "id": "c",
-      "pergunta": "Reagendar alarm em cada iteração mantém um prazo fixo a partir do início? Booleano.",
-      "esperado": false,
-      "explicacao": "O prazo é renovado."
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
   ]
 }

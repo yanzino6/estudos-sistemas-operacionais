@@ -1,5 +1,5 @@
-# Revisão manual — Experimento pipe1.c e EOF
+# Requisitos de implementação — p04
 
-Distinguir leitor aberto de processo efetivamente lendo. Escrita pequena cabe, repetição pode encher. Sem leitores: SIGPIPE/EPIPE; fd inválido: EBADF; EOF exige buffer drenado e zero escritores. Corrigir fd[2] fora do vetor no código de erro do slide.
+Fechar pontas corretamente e esperar filho. Sem ponta de escrita esquecida. read()==0 é critério de término.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

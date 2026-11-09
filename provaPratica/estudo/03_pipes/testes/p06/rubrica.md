@@ -1,5 +1,5 @@
-# Revisão manual — Explicar ls | wc e dup2
+# Requisitos de implementação — p06
 
-Explicar direção oldfd→newfd, fechamento das pontas originais e que exec não cria PID. Wc sem argumentos conta linhas, palavras e bytes. Não fixar resultado sem conhecer arquivos do diretório.
+Criar ambos antes de enviar/esperar; não usar system ou popen; não contar as linhas na main; fechar todas as escritas para propagar EOF.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

@@ -1,23 +1,40 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "Após três aquisições bem-sucedidas, quantas permissões sobram?",
-      "esperado": 0,
-      "explicacao": "Todas as ferramentas estão reservadas."
+      "parametros": {
+        "pessoas": 1,
+        "vezes": 2,
+        "capacidade": 1,
+        "vizinhos": false
+      },
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "Uma quarta aquisição pode prosseguir antes de alguma liberação? Booleano.",
-      "esperado": false,
-      "explicacao": "Precisa de uma permissão."
+      "parametros": {
+        "pessoas": 8,
+        "vezes": 3,
+        "capacidade": 2,
+        "vizinhos": false
+      },
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
     },
     {
-      "id": "c",
-      "pergunta": "Para transformar o semáforo em precedência de evento futuro, qual inicialização usar?",
-      "esperado": 0,
-      "explicacao": "O evento ainda não publicou permissão."
+      "parametros": {
+        "pessoas": 10,
+        "vezes": 4,
+        "capacidade": 3,
+        "vizinhos": false
+      },
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
-  ]
+  ],
+  "validador": "recurso",
+  "repeticoes": 5
 }

@@ -1,5 +1,5 @@
-# Revisão manual — Criando threads e interpretando a saída
+# Requisitos de implementação — t01
 
-Não inventar saída exata dos arquivos ausentes. NULL de attr indica padrões; de arg, ausência de dado; de join, descarte do resultado. Intercalamento não prova simultaneidade. Global lido após join vê a alteração. Limitar 100 posições no exemplo interativo, entrada e vida útil dos nomes.
+Duas criações antes dos joins; argumentos distintos, uma linha por printf e sem duplicações.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

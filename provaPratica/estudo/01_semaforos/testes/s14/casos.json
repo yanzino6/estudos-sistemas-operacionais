@@ -1,23 +1,20 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "N=2 inicialmente vazio: valor inicial de vagas?",
-      "esperado": 2,
-      "explicacao": "Duas posições livres."
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "No SPSC descrito, mutex é indispensável mesmo com semáforos corretos e índices exclusivos? Booleano.",
-      "esperado": false,
-      "explicacao": "Cada índice tem um escritor e disponibilidade é coordenada."
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
     },
     {
-      "id": "c",
-      "pergunta": "Na otimização, P2 publica slot1 antes de P1 escrever slot0. Consumidor que usa out=0 pode ler dado não pronto? Booleano.",
-      "esperado": true,
-      "explicacao": "Contagem global não identifica o slot publicado."
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
   ]
 }

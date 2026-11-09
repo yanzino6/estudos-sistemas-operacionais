@@ -1,5 +1,5 @@
-# Revisão manual — Capacidade do pipe e alarm
+# Requisitos de implementação — p07
 
-Capacidade é finita e dependente do sistema. PIPE_BUF não é capacidade. Alarm interno é reagendado a cada passo; externo limita o tempo desde início. Printf/exit no handler não são uma estratégia robusta de sinal.
+Não fixar capacidade do pipe nem tratar EAGAIN como perda de dados. Não usar alarm/printf em handler. Resultado deve vir dos bytes recebidos, não de n*120 na main.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

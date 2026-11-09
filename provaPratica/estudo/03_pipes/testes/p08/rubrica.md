@@ -1,5 +1,5 @@
-# Revisão manual — FIFO com dois escritores
+# Requisitos de implementação — p08
 
-Criar com mkfifo, open apropriado, leitura com delimitação limitada, close e unlink. Distinguir persistência do nome de persistência de dados. Ler até EOF sem coordenação pode perder uma sessão futura. Abertura não bloqueante de leitura sem escritor pode ter sucesso; escrita sem leitor dá ENXIO.
+mkfifo com permissões octais, open/read/write/close/unlink. Registros pequenos com escrita atômica e leitura recomposta. Coordenação de abertura, por exemplo canal auxiliar de prontidão, sem sleep. O corretor também verifica que canal.fifo não permaneceu.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

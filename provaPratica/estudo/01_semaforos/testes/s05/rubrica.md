@@ -1,5 +1,5 @@
-# Revisão manual — Montanha-russa
+# Requisitos de implementação — s05
 
-Verifique limite C, partida com C, ninguém saindo antes do fim e reabertura somente após desembarque do lote. A solução com embarque, cheio, fim e mutex descrita no conteúdo usa quatro semáforos. Contadores e transições devem estar protegidos.
+Use semáforos e contadores protegidos. Eventos representam alterações reais do estado, impressos na mesma região crítica da alteração. Sem sleep para garantir ordem; número finito de rodadas e join em todas as threads. Use no máximo quatro semáforos; o protocolo de encerramento deve usar esses mesmos objetos.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

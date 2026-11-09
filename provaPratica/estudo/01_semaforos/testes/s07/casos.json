@@ -1,23 +1,43 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "Nove fãs bastam para começar a sessão? Booleano.",
-      "esperado": false,
-      "explicacao": "Capacidade exigida é dez."
+      "parametros": {
+        "capacidade": 10,
+        "viagens": 1,
+        "pessoas": 10,
+        "saida": true,
+        "unicos": true
+      },
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "Autorização de entrada é suficiente para liberar o telefonema? Booleano.",
-      "esperado": false,
-      "explicacao": "É necessária a conclusão do filme."
+      "parametros": {
+        "capacidade": 10,
+        "viagens": 2,
+        "pessoas": 20,
+        "saida": true,
+        "unicos": true
+      },
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
     },
     {
-      "id": "c",
-      "pergunta": "Leitura de nFans fora da proteção é automaticamente segura porque escritas têm mutex? Booleano.",
-      "esperado": false,
-      "explicacao": "Todas as operações conflitantes precisam de sincronização."
+      "parametros": {
+        "capacidade": 10,
+        "viagens": 3,
+        "pessoas": 30,
+        "saida": true,
+        "unicos": true
+      },
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
-  ]
+  ],
+  "validador": "lote",
+  "repeticoes": 3
 }

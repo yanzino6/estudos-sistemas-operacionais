@@ -1,5 +1,5 @@
-# Revisão manual — Soma paralela de dez inteiros
+# Requisitos de implementação — t09
 
-Usar retorno da rotina, não apenas escrever global no lugar da exigência. Criar ambas antes dos joins. Somar em long long, não retornar endereço local, liberar resultados e argumentos. Vazamento não desaparece como boa prática só porque processo termina.
+Não retornar endereço local nem substituir retorno por variável global; liberar heap.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

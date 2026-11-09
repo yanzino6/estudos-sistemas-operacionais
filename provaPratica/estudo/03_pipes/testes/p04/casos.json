@@ -1,29 +1,20 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "Pai mantém fd de leitura aberto, filho terminou; escrita pequena que cabe necessariamente gera SIGPIPE? Booleano.",
-      "esperado": false,
-      "explicacao": "Ainda existe referência de leitura."
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "Buffer vazio, pai ainda mantém escrita aberta: leitor recebe EOF imediatamente? Booleano.",
-      "esperado": false,
-      "explicacao": "Ainda pode haver dados futuros."
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
     },
     {
-      "id": "c",
-      "pergunta": "Todos os escritores fecharam e buffer foi drenado: retorno de read?",
-      "esperado": 0,
-      "explicacao": "É EOF."
-    },
-    {
-      "id": "d",
-      "pergunta": "Read num descritor fechado representa EOF? Booleano.",
-      "esperado": false,
-      "explicacao": "É erro EBADF."
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
   ]
 }

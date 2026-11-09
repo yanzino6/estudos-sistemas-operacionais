@@ -1,5 +1,5 @@
-# Revisão manual — Partição variável e casos de fronteira
+# Requisitos de implementação — x04
 
-Provar cobertura/ausência de sobreposição, tratar n=0 e t>n, retornar parciais com vida útil válida. Não dividir por t antes de validar. Não usar total compartilhado sem sincronização.
+Tratar n=0, t>n e restos, não dividir antes de validar.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

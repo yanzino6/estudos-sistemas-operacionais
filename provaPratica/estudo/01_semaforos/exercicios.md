@@ -1,304 +1,460 @@
-# Exercícios — 01_semaforos
+# Prova prática — 01_semaforos
 
-Comandos abaixo são executados a partir da raiz `provaPratica`. As adaptações de entrada/saída servem ao treino; as exigências originais e questões discursivas continuam na rubrica. Nos casos de análise, os cenários são complementos didáticos criados para avaliar a compreensão do enunciado original.
+Todas as questões pedem **programas C**. Os antigos pedidos de explicação/pseudocódigo foram convertidos em implementações. Os contratos finitos de entrada, saída e encerramento são adaptações de treino. Semáforos: use o adaptador descrito em [guia de modelos](../MODELOS_DE_RESPOSTA.md).
 
-## s01 — Impressão ordenada de cinco blocos
+## s01 — Cinco blocos ordenados por semáforos
 
-**Origem:** Professor — Aula 11.2, pp. 3–4
+**Origem:** Adaptação para programação a partir de: Professor — Aula 11.2, pp. 3–4
 
-Crie cinco processos lógicos: o primeiro imprime 1–200, o segundo 201–400, até 801–1000. Acrescente semáforos para garantir essa ordem. Dê inicialização e operações de cada participante. A numeração P0–P4 dos códigos equivale aos processos 1–5 do texto.
+**Arquivo para escrever sua resposta:** [respostas/s01.c](respostas/s01.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/s01/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia k (1<=k<=200). Crie cinco threads. Thread i, com i=0..4, imprime os números de i*k+1 a (i+1)*k, um por linha. Use semáforos para imprimir os blocos em ordem. k=200 reproduz os cinco blocos da aula.
+
+**Requisitos obrigatórios:** Quatro semáforos de precedência; cinco creates antes dos joins; cada thread imprime seu bloco.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/s01/01.in) · [saída de exemplo](testes/s01/01.out). [Todos os testes e regras](testes/s01/README.md).
+
+O corretor compara os tokens em ordem, ignorando diferenças de espaços e quebras de linha.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/01_semaforos/testes/s01/respostas.modelo.json /tmp/s01.json
-# edite /tmp/s01.json
-python3 estudo/01_semaforos/testes/s01/corrigir.py /tmp/s01.json
+python3 estudo/01_semaforos/testes/s01/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/01_semaforos/testes/s01/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/s01/gabarito.md) e [rubrica](testes/s01/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/s01.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/s01/rubrica.md).
 
 ---
 
 ## s02 — Grafo de nove funções
 
-**Origem:** Professor — Aula 11.2, pp. 5–6
+**Origem:** Adaptação para programação a partir de: Professor — Aula 11.2, pp. 5–6
 
-Acrescente no máximo seis semáforos aos processos A: F1,F2,F9,F4; B: F3,F7; C: F8,F5,F6. O grafo exige F1→F2,F5,F8; F2→F3,F6; F5→F6,F9; F8→F9; F6→F7; F9→F7; F3→F4; F7→F4. Veja a figura em referencias/grafo_nove_funcoes.png. Preserve as ordens locais. Analise também o código apresentado como solução na página 6.
+**Arquivo para escrever sua resposta:** [respostas/s02.c](respostas/s02.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/s02/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Implemente em C/Pthreads o grafo usando semáforos. Crie os trabalhadores com as sequências locais: A: F1,F2,F9,F4; B: F3,F7; C: F8,F5,F6. Cada função é representada por uma linha com seu nome, impressa quando executada. Sem entrada. Cada nó deve aparecer exatamente uma vez. Arestas obrigatórias: F1→F2, F1→F5, F1→F8, F2→F3, F2→F6, F5→F6, F5→F9, F8→F9, F6→F7, F9→F7, F3→F4, F7→F4, F2→F9, F8→F5, F3→F7. Qualquer ordenação que respeite essas dependências é aceita.
+
+**Requisitos obrigatórios:** Criar todos os trabalhadores antes dos joins; semáforos inicialmente zero para precedência; sinalizar depois da ação; aguardar antes da dependente. Não imprimir tudo pela main nem serializar todos os trabalhadores com joins intermediários.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/s02/01.in) · [saída de exemplo](testes/s02/01.out). [Todos os testes e regras](testes/s02/README.md).
+
+O corretor valida eventos e invariantes; `.out` é **um exemplo válido**, não uma ordem única exigida. Veja os parâmetros de cada caso no JSON.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/01_semaforos/testes/s02/respostas.modelo.json /tmp/s02.json
-# edite /tmp/s02.json
-python3 estudo/01_semaforos/testes/s02/corrigir.py /tmp/s02.json
+python3 estudo/01_semaforos/testes/s02/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/01_semaforos/testes/s02/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/s02/gabarito.md) e [rubrica](testes/s02/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/s02.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/s02/rubrica.md).
 
 ---
 
-## s03 — Junção A/B e bifurcação D/E
+## s03 — Junção e bifurcação com semáforos
 
-**Origem:** Professor — Aula 11.2, pp. 7–9
+**Origem:** Adaptação para programação a partir de: Professor — Aula 11.2, pp. 7–9
 
-Modele A→C, B→C, C→D e C→E. Use os três semáforos sugeridos nos slides e mostre os cinco processos.
+**Arquivo para escrever sua resposta:** [respostas/s03.c](respostas/s03.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/s03/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Implemente em C/Pthreads o grafo usando semáforos. Crie os trabalhadores com as sequências locais: uma thread para cada nó A,B,C,D,E. Cada função é representada por uma linha com seu nome, impressa quando executada. Sem entrada. Cada nó deve aparecer exatamente uma vez. Arestas obrigatórias: A→C, B→C, C→D, C→E. Qualquer ordenação que respeite essas dependências é aceita.
+
+**Requisitos obrigatórios:** Criar todos os trabalhadores antes dos joins; semáforos inicialmente zero para precedência; sinalizar depois da ação; aguardar antes da dependente. Não imprimir tudo pela main nem serializar todos os trabalhadores com joins intermediários.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/s03/01.in) · [saída de exemplo](testes/s03/01.out). [Todos os testes e regras](testes/s03/README.md).
+
+O corretor valida eventos e invariantes; `.out` é **um exemplo válido**, não uma ordem única exigida. Veja os parâmetros de cada caso no JSON.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/01_semaforos/testes/s03/respostas.modelo.json /tmp/s03.json
-# edite /tmp/s03.json
-python3 estudo/01_semaforos/testes/s03/corrigir.py /tmp/s03.json
+python3 estudo/01_semaforos/testes/s03/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/01_semaforos/testes/s03/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/s03/gabarito.md) e [rubrica](testes/s03/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/s03.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/s03/rubrica.md).
 
 ---
 
-## s04 — Pombo correio
+## s04 — Pombo correio em lotes de 20
 
-**Origem:** Professor — Aula 11.2, pp. 10–12
+**Origem:** Adaptação para programação a partir de: Professor — Aula 11.2, pp. 10–12
 
-Modele muitos usuários e um pombo. A mochila comporta exatamente 20 mensagens; o vigésimo usuário acorda o pombo; ninguém cola mensagens durante a viagem; após levar as mensagens de A a B ele volta e aceita novo lote. Identifique regiões críticas.
+**Arquivo para escrever sua resposta:** [respostas/s04.c](respostas/s04.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/s04/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia v (1<=v<=4), número de viagens. Crie 20*v threads usuárias, cada uma cola uma mensagem de id 0..20*v-1, e uma thread pombo. Cada mensagem aparece uma vez.
+
+Registre uma linha por evento: `ENTRA id` ao reservar/colar; `INICIO` com lote cheio; `FIM` ao terminar a viagem/exibição. O pombo retorna no evento FIM, que libera o lote e permite novas mensagens; não imprima SAI.
+
+**Requisitos obrigatórios:** Use semáforos e contadores protegidos. Eventos representam alterações reais do estado, impressos na mesma região crítica da alteração. Sem sleep para garantir ordem; número finito de rodadas e join em todas as threads.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/s04/01.in) · [saída de exemplo](testes/s04/01.out). [Todos os testes e regras](testes/s04/README.md).
+
+O corretor valida eventos e invariantes; `.out` é **um exemplo válido**, não uma ordem única exigida. Veja os parâmetros de cada caso no JSON.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/01_semaforos/testes/s04/respostas.modelo.json /tmp/s04.json
-# edite /tmp/s04.json
-python3 estudo/01_semaforos/testes/s04/corrigir.py /tmp/s04.json
+python3 estudo/01_semaforos/testes/s04/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/01_semaforos/testes/s04/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/s04/gabarito.md) e [rubrica](testes/s04/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/s04.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/s04/rubrica.md).
 
 ---
 
-## s05 — Montanha-russa
+## s05 — Montanha-russa com desembarque
 
-**Origem:** Professor — Aula 11.2, pp. 13–14
+**Origem:** Adaptação para programação a partir de: Professor — Aula 11.2, pp. 13–14
 
-Há n passageiros que repetem embarque, passeio e retorno à fila; um carro comporta C<n pessoas e só parte cheio. Várias portas permitem embarques concorrentes. Resolva usando no máximo quatro semáforos, distinguindo embarque, fim da viagem e desembarque. A p. 13 contém nomes copiados do pombo; use o enunciado da p. 14.
+**Arquivo para escrever sua resposta:** [respostas/s05.c](respostas/s05.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/s05/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia n,C,v (2<=n<=16,1<=C<n,1<=v<=4). Crie n threads passageiras e uma thread carro. Faça exatamente v viagens. Passageiros podem repetir viagens; cada passageiro ocupa no máximo um assento por viagem. Encerre também os passageiros que estão esperando quando todas as viagens acabarem.
+
+Registre uma linha por evento: `ENTRA id` ao reservar/colar; `INICIO` com lote cheio; `FIM` ao terminar a viagem/exibição. Cada participante registra `SAI id` ao sair; só reabra a entrada quando o lote inteiro sair.
+
+**Requisitos obrigatórios:** Use semáforos e contadores protegidos. Eventos representam alterações reais do estado, impressos na mesma região crítica da alteração. Sem sleep para garantir ordem; número finito de rodadas e join em todas as threads. Use no máximo quatro semáforos; o protocolo de encerramento deve usar esses mesmos objetos.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/s05/01.in) · [saída de exemplo](testes/s05/01.out). [Todos os testes e regras](testes/s05/README.md).
+
+O corretor valida eventos e invariantes; `.out` é **um exemplo válido**, não uma ordem única exigida. Veja os parâmetros de cada caso no JSON.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/01_semaforos/testes/s05/respostas.modelo.json /tmp/s05.json
-# edite /tmp/s05.json
-python3 estudo/01_semaforos/testes/s05/corrigir.py /tmp/s05.json
+python3 estudo/01_semaforos/testes/s05/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/01_semaforos/testes/s05/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/s05/gabarito.md) e [rubrica](testes/s05/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/s05.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/s05/rubrica.md).
 
 ---
 
-## s06 — Canibais e cozinheiro
+## s06 — Canibais e cozinheiro com encerramento
 
-**Origem:** Professor — Aula 11.2, pp. 15–17
+**Origem:** Adaptação para programação a partir de: Professor — Aula 11.2, pp. 15–17
 
-Modele N canibais e uma travessa de M porções. Quem encontra a travessa vazia acorda o cozinheiro e espera reposição; ele deve ser acordado apenas quando necessário. Desenvolva os dois processos, sem deadlock. Declare estado inicial; nos cenários abaixo a travessa começa cheia.
+**Arquivo para escrever sua resposta:** [respostas/s06.c](respostas/s06.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/s06/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia N,M,k (1<=N<=8,1<=M<=8,1<=k<=8). Travessa começa com M porções. Crie N canibais, cada um come k porções, e um cozinheiro. Registre `COME id` na retirada e `REPOE` ao repor M porções. Só reponha quando vazio e ainda houver refeições pendentes. Encerre o cozinheiro após todas as refeições.
+
+**Requisitos obrigatórios:** Semáforos para pedido/retorno, contador protegido; um pedido por reposição; não repor antes de vazio. Ids de 0 a N-1.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/s06/01.in) · [saída de exemplo](testes/s06/01.out). [Todos os testes e regras](testes/s06/README.md).
+
+O corretor valida eventos e invariantes; `.out` é **um exemplo válido**, não uma ordem única exigida. Veja os parâmetros de cada caso no JSON.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/01_semaforos/testes/s06/respostas.modelo.json /tmp/s06.json
-# edite /tmp/s06.json
-python3 estudo/01_semaforos/testes/s06/corrigir.py /tmp/s06.json
+python3 estudo/01_semaforos/testes/s06/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/01_semaforos/testes/s06/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/s06/gabarito.md) e [rubrica](testes/s06/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/s06.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/s06/rubrica.md).
 
 ---
 
-## s07 — Filme sobre a vida de Hoare
+## s07 — Sessões de filme com término sincronizado
 
-**Origem:** Professor — Aula 11.2, pp. 18–20
+**Origem:** Adaptação para programação a partir de: Professor — Aula 11.2, pp. 18–20
 
-Modele um demonstrador e muitos fãs. Auditório comporta dez; exibição começa lotada; fãs só saem para telefonar depois do filme completo e então retornam à fila. Analise o problema da solução proposta e apresente protocolo corrigido.
+**Arquivo para escrever sua resposta:** [respostas/s07.c](respostas/s07.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/s07/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia v (1<=v<=3). Crie 10*v threads fãs distintas e uma thread demonstradora. Cada fã participa exatamente uma vez. Execute v sessões com dez espectadores e não libere saída antes do fim.
+
+Registre uma linha por evento: `ENTRA id` ao reservar/colar; `INICIO` com lote cheio; `FIM` ao terminar a viagem/exibição. Cada participante registra `SAI id` ao sair; só reabra a entrada quando o lote inteiro sair.
+
+**Requisitos obrigatórios:** Use semáforos e contadores protegidos. Eventos representam alterações reais do estado, impressos na mesma região crítica da alteração. Sem sleep para garantir ordem; número finito de rodadas e join em todas as threads.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/s07/01.in) · [saída de exemplo](testes/s07/01.out). [Todos os testes e regras](testes/s07/README.md).
+
+O corretor valida eventos e invariantes; `.out` é **um exemplo válido**, não uma ordem única exigida. Veja os parâmetros de cada caso no JSON.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/01_semaforos/testes/s07/respostas.modelo.json /tmp/s07.json
-# edite /tmp/s07.json
-python3 estudo/01_semaforos/testes/s07/corrigir.py /tmp/s07.json
+python3 estudo/01_semaforos/testes/s07/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/01_semaforos/testes/s07/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/s07/gabarito.md) e [rubrica](testes/s07/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/s07.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/s07/rubrica.md).
 
 ---
 
-## s08 — Leitores e escritores: três políticas
+## s08 — Base compartilhada com leitores e escritores
 
-**Origem:** Professor — Aula 11.2, pp. 21–33; Lista 6, questão 2
+**Origem:** Adaptação para programação a partir de: Professor — Aula 11.2, pp. 21–33; Lista 6, questão 2
 
-Explique preferência dos leitores, preferência dos escritores e a solução com R,M,W. Na Lista 6: leitor 2:P(R),3:P(M),4:rc++,5:se rc==1 P(W),6:V(M),7:V(R),8:LÊ,9:P(M),10:rc--,11:se rc==0 V(W),12:V(M). Escritor 3:P(R),4:P(W),5:ESCREVE,6:V(W),7:V(R). Todos os semáforos começam em 1, rc=0. (a) Discuta starvation citando linhas; (b) explique M e dê um intercalamento ruim sem ele.
+**Arquivo para escrever sua resposta:** [respostas/s08.c](respostas/s08.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/s08/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia R,W,k (1..8 cada). Crie R leitores e W escritores. Cada um acessa a base k vezes. Base inicia em zero; cada escrita soma um. Leitor registra `RI id valor` na entrada e `RF id` na saída; escritor registra `WI id` na entrada e `WF id novo_valor` após incremento, antes de liberar a base. Ids de leitores/escritores são independentes, ambos começam em zero.
+
+**Requisitos obrigatórios:** Implemente a catraca R e proteção M/W da Lista 6 usando semáforos. Permitir múltiplos leitores; nenhum escritor junto com qualquer outro acesso. Todas as threads terminam. Mutex de log não deve manter a base serializada durante toda a leitura.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/s08/01.in) · [saída de exemplo](testes/s08/01.out). [Todos os testes e regras](testes/s08/README.md).
+
+O corretor valida eventos e invariantes; `.out` é **um exemplo válido**, não uma ordem única exigida. Veja os parâmetros de cada caso no JSON.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/01_semaforos/testes/s08/respostas.modelo.json /tmp/s08.json
-# edite /tmp/s08.json
-python3 estudo/01_semaforos/testes/s08/corrigir.py /tmp/s08.json
+python3 estudo/01_semaforos/testes/s08/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/01_semaforos/testes/s08/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/s08/gabarito.md) e [rubrica](testes/s08/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/s08.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/s08/rubrica.md).
 
 ---
 
-## s09 — Barbeiro dorminhoco com semáforos
+## s09 — Barbeiro com semáforos
 
-**Origem:** Professor — Aula 11.2, pp. 34–35
+**Origem:** Adaptação para programação a partir de: Professor — Aula 11.2, pp. 34–35
 
-Modele um barbeiro, sua cadeira e cinco cadeiras de espera. Sem clientes ele dorme; cliente que encontra espera cheia vai embora; caso contrário aguarda atendimento. Explique customers, barbers, mutex e waiting; acrescente conclusão se desejar saída somente após corte.
+**Arquivo para escrever sua resposta:** [respostas/s09.c](respostas/s09.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/s09/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia q (1<=q<=100), depois q comandos `A id` (chegada de cliente) ou `T` (autoriza concluir um corte). Ids de clientes são distintos e não negativos. Crie uma thread barbeiro e uma thread despachante (pode ser a main). A despachante só envia o próximo comando após confirmação do anterior. A chegada ocupa a cadeira livre (`ATENDE id`), entra na fila FIFO de cinco lugares (`ESPERA id`) ou é recusada (`RECUSA id`). T sem cliente imprime `LIVRE`; T com cliente imprime `FIM id` seguido de `ATENDE proximo` ou `LIVRE`. Os testes encerram sem clientes pendentes. Esse relógio de comandos torna reproduzível o atendimento concorrente.
+
+**Requisitos obrigatórios:** Implemente fila/cadeira usando semáforos. O barbeiro executa as conclusões de corte; despachante envia comandos e aguarda confirmação sem busy wait. Não simular toda a barbearia sequencialmente na main.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/s09/01.in) · [saída de exemplo](testes/s09/01.out). [Todos os testes e regras](testes/s09/README.md).
+
+O corretor valida eventos e invariantes; `.out` é **um exemplo válido**, não uma ordem única exigida. Veja os parâmetros de cada caso no JSON.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/01_semaforos/testes/s09/respostas.modelo.json /tmp/s09.json
-# edite /tmp/s09.json
-python3 estudo/01_semaforos/testes/s09/corrigir.py /tmp/s09.json
+python3 estudo/01_semaforos/testes/s09/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/01_semaforos/testes/s09/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/s09/gabarito.md) e [rubrica](testes/s09/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/s09.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/s09/rubrica.md).
 
 ---
 
-## s10 — Filósofos e deadlock
+## s10 — Cinco filósofos usando semáforos
 
-**Origem:** Professor — Aula 11.2, pp. 36–38
+**Origem:** Adaptação para programação a partir de: Professor — Aula 11.2, pp. 36–38
 
-Cinco filósofos alternam pensar/comer e precisam dos dois garfos adjacentes. Explique a espera circular de pegar sempre o esquerdo e desenvolva a solução por estados, mutex e semáforo por filósofo. Discuta justiça.
+**Arquivo para escrever sua resposta:** [respostas/s10.c](respostas/s10.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/s10/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia k (1<=k<=8). Crie cinco filósofos; cada um come k vezes. Ids 0..4 formam ciclo; 0 e 4 são vizinhos. Registre `IN id` após adquirir os recursos e `OUT id` antes de liberá-los. Todos devem terminar. O corretor verifica contagem, aquisições/liberações e vizinhos nunca ativos simultaneamente.
+
+**Requisitos obrigatórios:** Use semáforos para controlar as aquisições. Crie todos antes dos joins. Os eventos devem corresponder à posse real, não a uma simulação na main.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/s10/01.in) · [saída de exemplo](testes/s10/01.out). [Todos os testes e regras](testes/s10/README.md).
+
+O corretor valida eventos e invariantes; `.out` é **um exemplo válido**, não uma ordem única exigida. Veja os parâmetros de cada caso no JSON.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/01_semaforos/testes/s10/respostas.modelo.json /tmp/s10.json
-# edite /tmp/s10.json
-python3 estudo/01_semaforos/testes/s10/corrigir.py /tmp/s10.json
+python3 estudo/01_semaforos/testes/s10/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/01_semaforos/testes/s10/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/s10/gabarito.md) e [rubrica](testes/s10/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/s10.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/s10/rubrica.md).
 
 ---
 
 ## s11 — Grafo da Lista 6
 
-**Origem:** Professor — Lista 6, questão 1
+**Origem:** Adaptação para programação a partir de: Professor — Lista 6, questão 1
 
-Inicialize semáforos e acrescente P/V a P1: F1,F3; P2: F2,F5,F7; P3: F4,F6. Dependências: F1→F2,F3,F4; F2→F5; F3→F5,F6; F4→F6; F5→F7; F6→F7. Consulte referencias/lista6_grafo.png.
+**Arquivo para escrever sua resposta:** [respostas/s11.c](respostas/s11.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/s11/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Implemente em C/Pthreads o grafo usando semáforos. Crie os trabalhadores com as sequências locais: P1: F1,F3; P2: F2,F5,F7; P3: F4,F6. Cada função é representada por uma linha com seu nome, impressa quando executada. Sem entrada. Cada nó deve aparecer exatamente uma vez. Arestas obrigatórias: F1→F2, F1→F3, F1→F4, F2→F5, F3→F5, F3→F6, F4→F6, F5→F7, F6→F7. Qualquer ordenação que respeite essas dependências é aceita.
+
+**Requisitos obrigatórios:** Criar todos os trabalhadores antes dos joins; semáforos inicialmente zero para precedência; sinalizar depois da ação; aguardar antes da dependente. Não imprimir tudo pela main nem serializar todos os trabalhadores com joins intermediários.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/s11/01.in) · [saída de exemplo](testes/s11/01.out). [Todos os testes e regras](testes/s11/README.md).
+
+O corretor valida eventos e invariantes; `.out` é **um exemplo válido**, não uma ordem única exigida. Veja os parâmetros de cada caso no JSON.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/01_semaforos/testes/s11/respostas.modelo.json /tmp/s11.json
-# edite /tmp/s11.json
-python3 estudo/01_semaforos/testes/s11/corrigir.py /tmp/s11.json
+python3 estudo/01_semaforos/testes/s11/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/01_semaforos/testes/s11/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/s11/gabarito.md) e [rubrica](testes/s11/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/s11.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/s11/rubrica.md).
 
 ---
 
-## s12 — Semáforo múltiplo
+## s12 — Aquisição múltipla tudo-ou-nada
 
-**Origem:** Professor — Lista 6, questão 3
+**Origem:** Adaptação para programação a partir de: Professor — Lista 6, questão 3
 
-Implemente down(S1,...,Sn) e up(S1,...,Sn) atômicos sobre o conjunto. Você pode consultar os contadores. O esboço da lista devolve booleano: use tentativa tudo-ou-nada e explique como uma variante bloqueante seria diferente. Inclua liberação e sincronização de todos os acessos.
+**Arquivo para escrever sua resposta:** [respostas/s12.c](respostas/s12.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/s12/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia m,q (1<=m<=8,1<=q<=100), m contadores iniciais não negativos e q comandos. Cada comando tem letra D ou U seguida de m demandas não negativas. D tenta adquirir o vetor de demandas atomicamente, imprime OK se conseguiu ou FALHA sem mudar nada. U soma o vetor e imprime OK. Ao final imprima `ESTADO` e os m contadores. Todos os valores e somas ficam abaixo de 1000000. Faça down_multiplo/up_multiplo sob um mutex; a main aplica os comandos na ordem da entrada.
+
+**Requisitos obrigatórios:** O teste de todos os contadores e a alteração inteira ocorrem na mesma região crítica. Não consumir parcialmente. API deve ser segura para chamadas concorrentes; os casos ordenados tornam o resultado verificável.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/s12/01.in) · [saída de exemplo](testes/s12/01.out). [Todos os testes e regras](testes/s12/README.md).
+
+O corretor compara os tokens em ordem, ignorando diferenças de espaços e quebras de linha.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/01_semaforos/testes/s12/respostas.modelo.json /tmp/s12.json
-# edite /tmp/s12.json
-python3 estudo/01_semaforos/testes/s12/corrigir.py /tmp/s12.json
+python3 estudo/01_semaforos/testes/s12/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/01_semaforos/testes/s12/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/s12/gabarito.md) e [rubrica](testes/s12/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/s12.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/s12/rubrica.md).
 
 ---
 
-## s13 — Três fumantes
+## s13 — Agente e fumantes por rodadas
 
-**Origem:** Professor — Lista 6, questão 4
+**Origem:** Adaptação para programação a partir de: Professor — Lista 6, questão 4
 
-Agente fornece dois dos ingredientes tabaco, papel e fósforo. Cada fumante possui ilimitadamente um deles. Desbloqueie exatamente o fumante que tem o ingrediente faltante; ele termina e acorda o agente para nova rodada. Desenvolva os processos usando semáforos.
+**Arquivo para escrever sua resposta:** [respostas/s13.c](respostas/s13.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/s13/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia q (1<=q<=100), seguido de q pares a,b de ingredientes distintos entre 0,1,2. 0=tabaco,1=papel,2=fósforo. Crie um agente e três fumantes. Em cada rodada, agente disponibiliza o par; só o fumante que possui o ingrediente faltante pode atender. Imprima uma linha `FUMA id` por rodada, na ordem dos pares. Agente espera conclusão antes de publicar outro par; encerre os três fumantes ao final.
+
+**Requisitos obrigatórios:** Semáforo individual por fumante e confirmação ao agente; publicar somente para o correto. Main não calcula nem imprime as linhas no lugar das threads.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/s13/01.in) · [saída de exemplo](testes/s13/01.out). [Todos os testes e regras](testes/s13/README.md).
+
+O corretor compara os tokens em ordem, ignorando diferenças de espaços e quebras de linha.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/01_semaforos/testes/s13/respostas.modelo.json /tmp/s13.json
-# edite /tmp/s13.json
-python3 estudo/01_semaforos/testes/s13/corrigir.py /tmp/s13.json
+python3 estudo/01_semaforos/testes/s13/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/01_semaforos/testes/s13/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/s13/gabarito.md) e [rubrica](testes/s13/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/s13.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/s13/rubrica.md).
 
 ---
 
-## s14 — Buffer sem mutex e publicação fora de ordem
+## s14 — Buffer circular SPSC sem mutex
 
-**Origem:** Professor — Aula 11, pp. 14–22; casos de análise criados para o treino
+**Origem:** Adaptação para programação a partir de: Professor — Aula 11, pp. 14–22; casos de análise criados para o treino
 
-Explique a solução com vagas/itens/mutex. Responda ao exercício da p.20: um produtor e um consumidor permitem retirar mutex? Depois analise a otimização da p.22, em que vários produtores reservam índice sob lock, liberam lock e só depois escrevem. Produza um contraexemplo se necessário.
+**Arquivo para escrever sua resposta:** [respostas/s14.c](respostas/s14.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/s14/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia N,k e k inteiros (1<=N<=8,0<=k<=1000). Use uma thread produtora e uma consumidora. Implemente buffer circular usando somente semáforos vagas/itens: cada índice tem um único escritor. A consumidora imprime cada valor retirado, um por linha, preservando a ordem de entrada.
+
+**Requisitos obrigatórios:** Sem mutex no buffer SPSC; publicar item somente após escrever; liberar vaga somente após ler; não imprimir diretamente da entrada.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/s14/01.in) · [saída de exemplo](testes/s14/01.out). [Todos os testes e regras](testes/s14/README.md).
+
+O corretor compara os tokens em ordem, ignorando diferenças de espaços e quebras de linha.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/01_semaforos/testes/s14/respostas.modelo.json /tmp/s14.json
-# edite /tmp/s14.json
-python3 estudo/01_semaforos/testes/s14/corrigir.py /tmp/s14.json
+python3 estudo/01_semaforos/testes/s14/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/01_semaforos/testes/s14/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/s14/gabarito.md) e [rubrica](testes/s14/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/s14.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/s14/rubrica.md).
 
 ---
 
-## s15 — Semáforos: diagnóstico de recursos
+## s15 — Reserva de recursos limitados
 
-**Origem:** Criado para este estudo
+**Origem:** Adaptação para programação a partir de: Criado para este estudo
 
-Uma oficina tem três ferramentas idênticas, cinco trabalhadores e contador semafórico iniciado em três. Simule aquisições e liberações. Compare recurso limitado, exclusão mútua, precedência, deadlock e starvation.
+**Arquivo para escrever sua resposta:** [respostas/s15.c](respostas/s15.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/s15/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia n,C,k (1<=C<=n<=16,1<=k<=8). Crie n trabalhadores, cada um usa um dos C recursos idênticos k vezes. Registre `IN id` após adquirir os recursos e `OUT id` antes de liberá-los. Todos devem terminar. O corretor verifica contagem, aquisições/liberações e no máximo C usuários ativos.
+
+**Requisitos obrigatórios:** Use semáforos para controlar as aquisições. Crie todos antes dos joins. Os eventos devem corresponder à posse real, não a uma simulação na main.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/s15/01.in) · [saída de exemplo](testes/s15/01.out). [Todos os testes e regras](testes/s15/README.md).
+
+O corretor valida eventos e invariantes; `.out` é **um exemplo válido**, não uma ordem única exigida. Veja os parâmetros de cada caso no JSON.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/01_semaforos/testes/s15/respostas.modelo.json /tmp/s15.json
-# edite /tmp/s15.json
-python3 estudo/01_semaforos/testes/s15/corrigir.py /tmp/s15.json
+python3 estudo/01_semaforos/testes/s15/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/01_semaforos/testes/s15/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/s15/gabarito.md) e [rubrica](testes/s15/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/s15.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/s15/rubrica.md).
 
 ---
 
@@ -306,17 +462,26 @@ O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo
 
 **Origem:** Criado para este estudo — implementação prática
 
-Leia t e k (1<=t<=16, 0<=k<=10000). Crie t threads; cada uma incrementa k vezes um contador compartilhado protegido por semáforo binário. Imprima somente o total. No Linux pode usar sem_init; no macOS use um semáforo nomeado com sem_open e limpeza adequada ou execute em Linux. Não substituir a atividade por multiplicação direta.
+**Arquivo para escrever sua resposta:** [respostas/s16.c](respostas/s16.c).
 
-### Como testar e corrigir
+### Implemente
 
-Implemente `solucao.c` conforme o contrato abaixo. O script compila com `cc -std=c11 -Wall -Wextra -pthread`, executa os casos em diretório temporário e limita cada execução a 5 segundos.
+Leia t,k (1<=t<=16,0<=k<=10000). Crie t threads, cada uma incrementa k vezes um contador global usando semáforo binário. Imprima somente o total.
+
+**Requisitos obrigatórios:** Semáforo iniciado em 1; criar todos antes dos joins; contador atualizado realmente pelas threads.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/s16/01.in) · [saída de exemplo](testes/s16/01.out). [Todos os testes e regras](testes/s16/README.md).
+
+O corretor compara os tokens em ordem, ignorando diferenças de espaços e quebras de linha.
+
+Da raiz `provaPratica`:
 
 ```bash
+python3 estudo/01_semaforos/testes/s16/corrigir.py
+# Para corrigir outro arquivo C:
 python3 estudo/01_semaforos/testes/s16/corrigir.py /caminho/solucao.c
-# ou compile e passe o executável:
-cc -std=c11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pthread solucao.c -o solucao
-python3 estudo/01_semaforos/testes/s16/corrigir.py ./solucao
 ```
 
-Casos: [casos.json](testes/s16/casos.json), arquivos `.in`/`.out` ao lado. Saída sem prompts extras; espaços e quebras são normalizados. Confira também [rubrica.md](testes/s16/rubrica.md).
+O comando sem argumentos usa seu modelo em `respostas/s16.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/s16/rubrica.md).

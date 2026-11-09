@@ -1,17 +1,34 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "Produtor define pronto=true sob mutex antes de consumidor chegar. Consumidor deve esperar mesmo observando pronto=true? Booleano.",
-      "esperado": false,
-      "explicacao": "O predicado já permite continuar."
+      "parametros": {
+        "pessoas": 1,
+        "rodadas": 2
+      },
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "Wait retorna sem item disponível. Consumidor deve voltar a esperar? Booleano.",
-      "esperado": true,
-      "explicacao": "O laço protege contra retorno sem condição satisfeita."
+      "parametros": {
+        "pessoas": 4,
+        "rodadas": 3
+      },
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
+    },
+    {
+      "parametros": {
+        "pessoas": 8,
+        "rodadas": 5
+      },
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
-  ]
+  ],
+  "validador": "barreira",
+  "repeticoes": 5
 }

@@ -1,5 +1,5 @@
-# Revisão manual — Dois filhos escrevendo para o pai
+# Requisitos de implementação — p05
 
-Não assumir ordem A/B. Tratar retorno real de read e acumular registro completo. Não imprimir bytes não inicializados. Exec preserva descritor sem close-on-exec. Verificar exec e evitar continuar código do pai no filho em caso de erro.
+Pai não fabrica registros; filhos compartilham escrita do pipe e pai lê até EOF. Reconstruir mensagens mesmo com leitura parcial; fechar pontas e waitpid em ambos.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

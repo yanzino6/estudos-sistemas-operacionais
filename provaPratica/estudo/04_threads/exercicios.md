@@ -1,104 +1,154 @@
-# Exercícios — 04_threads
+# Prova prática — 04_threads
 
-Comandos abaixo são executados a partir da raiz `provaPratica`. As adaptações de entrada/saída servem ao treino; as exigências originais e questões discursivas continuam na rubrica. Nos casos de análise, os cenários são complementos didáticos criados para avaliar a compreensão do enunciado original.
+Todas as questões pedem **programas C**. Os antigos pedidos de explicação/pseudocódigo foram convertidos em implementações. Os contratos finitos de entrada, saída e encerramento são adaptações de treino. Semáforos: use o adaptador descrito em [guia de modelos](../MODELOS_DE_RESPOSTA.md).
 
-## t01 — Criando threads e interpretando a saída
+## t01 — Duas threads com a mesma rotina
 
-**Origem:** Professor — roteiro 4.1, A.1; Aula 17, exemplos 1–5
+**Origem:** Adaptação para programação a partir de: Professor — roteiro 4.1, A.1; Aula 17, exemplos 1–5
 
-O roteiro pede compilar cria_threads com -pthread, explicar NULL em create/join, observar a saída e retirar comentários para comparar. O arquivo cria_threads não foi fornecido. Variante de treino: escreva duas threads com a mesma rotina, cada uma emitindo dez registros; compare com/sem pausas e responda (a) significado de NULL, (b) se saída prova paralelismo, (c) se a conclusão muda com pausas. Analise ainda os exemplos global 20→40 após join, x/o infinitos, cinco Hello e criação de nomes com malloc da Aula 17.
+**Arquivo para escrever sua resposta:** [respostas/t01.c](respostas/t01.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/t01/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia k (1<=k<=100). Crie duas threads com uma mesma função, argumentos id=0 e id=1. Cada uma imprime `id passo` para passo=0..k-1. Espere ambas. Ordem de linhas livre.
+
+**Requisitos obrigatórios:** Duas criações antes dos joins; argumentos distintos, uma linha por printf e sem duplicações.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/t01/01.in) · [saída de exemplo](testes/t01/01.out). [Todos os testes e regras](testes/t01/README.md).
+
+O corretor compara o multiconjunto de linhas, aceitando qualquer ordem, mas preservando a quantidade de repetições.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/04_threads/testes/t01/respostas.modelo.json /tmp/t01.json
-# edite /tmp/t01.json
-python3 estudo/04_threads/testes/t01/corrigir.py /tmp/t01.json
+python3 estudo/04_threads/testes/t01/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/04_threads/testes/t01/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/t01/gabarito.md) e [rubrica](testes/t01/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/t01.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/t01/rubrica.md).
 
 ---
 
-## t02 — Joining threads e saída da main
+## t02 — Garantir término antes de sair da main
 
-**Origem:** Professor — roteiro 4.1, A.2
+**Origem:** Adaptação para programação a partir de: Professor — roteiro 4.1, A.2
 
-O roteiro pede executar joining_thread, com myturn em newthread e yourturn na main, explicar a saída e depois comentar o join. O fonte não está incluído. Recrie uma variante com cinco iterações de cada rotina. Compare com/sem join e explique por que não há uma quantidade universal de linhas garantida na versão sem espera.
+**Arquivo para escrever sua resposta:** [respostas/t02.c](respostas/t02.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/t02/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia k (1<=k<=100). Crie uma thread trabalhadora que imprime `TRABALHO i` para i=0..k-1. Main só imprime `FIM` depois de todas essas linhas, usando pthread_join.
+
+**Requisitos obrigatórios:** Trabalho executado na thread; FIM na main após join. Não usar sleep para esperar.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/t02/01.in) · [saída de exemplo](testes/t02/01.out). [Todos os testes e regras](testes/t02/README.md).
+
+O corretor compara os tokens em ordem, ignorando diferenças de espaços e quebras de linha.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/04_threads/testes/t02/respostas.modelo.json /tmp/t02.json
-# edite /tmp/t02.json
-python3 estudo/04_threads/testes/t02/corrigir.py /tmp/t02.json
+python3 estudo/04_threads/testes/t02/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/04_threads/testes/t02/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/t02/gabarito.md) e [rubrica](testes/t02/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/t02.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/t02/rubrica.md).
 
 ---
 
-## t03 — Passagem de parâmetros
+## t03 — Argumentos por estrutura
 
-**Origem:** Professor — roteiro 4.1, B1
+**Origem:** Adaptação para programação a partir de: Professor — roteiro 4.1, B1
 
-Explique a transformação de passing_parameter em relação à tarefa A.2: último argumento de create torna-se o endereço de uma variável. Fonte ausente. Variante: passe estrutura {inicio,fim} a uma rotina, explique void*, conversão e vida útil; crie antes de join e analise a saída sem presumir ordem.
+**Arquivo para escrever sua resposta:** [respostas/t03.c](respostas/t03.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/t03/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia quatro pares inicio,fim, com 0<=inicio<=fim<=1000. Crie quatro threads, cada uma recebe uma estrutura com id e intervalo [inicio,fim). Ela soma os inteiros desse intervalo e imprime `id soma`, ordem livre.
+
+**Requisitos obrigatórios:** Quatro objetos distintos, preenchidos antes de create e vivos até join. Função recebe void* e converte ao tipo da estrutura.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/t03/01.in) · [saída de exemplo](testes/t03/01.out). [Todos os testes e regras](testes/t03/README.md).
+
+O corretor compara o multiconjunto de linhas, aceitando qualquer ordem, mas preservando a quantidade de repetições.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/04_threads/testes/t03/respostas.modelo.json /tmp/t03.json
-# edite /tmp/t03.json
-python3 estudo/04_threads/testes/t03/corrigir.py /tmp/t03.json
+python3 estudo/04_threads/testes/t03/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/04_threads/testes/t03/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/t03/gabarito.md) e [rubrica](testes/t03/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/t03.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/t03/rubrica.md).
 
 ---
 
-## t04 — Primos: &i versus malloc
+## t04 — Corrigir passagem de &i
 
-**Origem:** Professor — roteiro 4.1, B2 (a–g); roteiro 4.2, exercício 6, parte 2
+**Origem:** Adaptação para programação a partir de: Professor — roteiro 4.1, B2 (a–g); roteiro 4.2, exercício 6, parte 2
 
-Analise primos_malloc_v1 (fonte não fornecido): dez threads recebem índice por referência à variável do laço. (a) Simule criação/join; (b) explique impressão incorreta possível; (c) identifique causa; (d) explique efeito de sleep(1). Na v2 cada argumento tem malloc próprio: (e) compare saída; (f) explique a correção; (g) resuma por que v1 falha. Responda também às quatro perguntas de investigação do roteiro 4.2: resultados sempre corretos? repetição de valores? acesso inválido? diferença entre &i e objeto dinâmico?
+**Arquivo para escrever sua resposta:** [respostas/t04.c](respostas/t04.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/t04/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia dez inteiros. Crie dez threads, cada uma imprime `indice valor`, ordem livre. Cada argumento deve ser alocado individualmente com malloc, preenchido antes de create e liberado pela thread após copiar seus dados. Use índice 0..9.
+
+**Requisitos obrigatórios:** Não passar endereço da variável de controle; dez mallocs distintos, tratar falhas e fazer todos os joins.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/t04/01.in) · [saída de exemplo](testes/t04/01.out). [Todos os testes e regras](testes/t04/README.md).
+
+O corretor compara o multiconjunto de linhas, aceitando qualquer ordem, mas preservando a quantidade de repetições.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/04_threads/testes/t04/respostas.modelo.json /tmp/t04.json
-# edite /tmp/t04.json
-python3 estudo/04_threads/testes/t04/corrigir.py /tmp/t04.json
+python3 estudo/04_threads/testes/t04/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/04_threads/testes/t04/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/t04/gabarito.md) e [rubrica](testes/t04/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/t04.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/t04/rubrica.md).
 
 ---
 
-## t05 — Receber valores e exemplo do dado
+## t05 — Retorno de dados alocados pela thread
 
-**Origem:** Professor — roteiro 4.1, B3 (a–d); Aula 17, exemplo 6
+**Origem:** Adaptação para programação a partir de: Professor — roteiro 4.1, B3 (a–d); Aula 17, exemplo 6
 
-Explique alocação do resultado na rotina, retorno void*, variável void* na main e join com endereço desse ponteiro. O roteiro pede compilar receiving_values, observar saída e analisar receiving_values_dice, mas fontes não estão em materiais. Variante: rotina retorna um inteiro alocado com valor 99; depois adapte para um dado 1–6, sem esperar sequência aleatória fixa.
+**Arquivo para escrever sua resposta:** [respostas/t05.c](respostas/t05.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/t05/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia quatro inteiros x entre 0 e 1000000. Cada uma de quatro threads calcula um lançamento determinístico `1 + x % 6`, aloca o resultado e retorna o ponteiro. Main recolhe por join e imprime os quatro resultados na ordem original, liberando cada alocação.
+
+**Requisitos obrigatórios:** Resultado alocado dentro da rotina; receber com void** no join; não retornar endereço de variável automática nem compartilhar uma única variável de retorno.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/t05/01.in) · [saída de exemplo](testes/t05/01.out). [Todos os testes e regras](testes/t05/README.md).
+
+O corretor compara os tokens em ordem, ignorando diferenças de espaços e quebras de linha.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/04_threads/testes/t05/respostas.modelo.json /tmp/t05.json
-# edite /tmp/t05.json
-python3 estudo/04_threads/testes/t05/corrigir.py /tmp/t05.json
+python3 estudo/04_threads/testes/t05/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/04_threads/testes/t05/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/t05/gabarito.md) e [rubrica](testes/t05/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/t05.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/t05/rubrica.md).
 
 ---
 
@@ -106,61 +156,89 @@ O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo
 
 **Origem:** Professor — roteiro 4.1, exercício final
 
-Use o vetor fixo [2,3,5,7,11,13,17,19,23,29]. Primeira thread soma posições 0–4, segunda 5–9. Retorne parciais para main por retorno da thread e join; main soma e imprime. Contrato de treino: sem entrada, stdout somente 129.
+**Arquivo para escrever sua resposta:** [respostas/t06.c](respostas/t06.c).
 
-### Como testar e corrigir
+### Implemente
 
-Implemente `solucao.c` conforme o contrato abaixo. O script compila com `cc -std=c11 -Wall -Wextra -pthread`, executa os casos em diretório temporário e limita cada execução a 5 segundos.
+Sem entrada. Use [2,3,5,7,11,13,17,19,23,29]. Primeira thread soma posições 0..4 e segunda 5..9. Retorne parciais por ponteiros recolhidos com join; main imprime soma total.
+
+**Requisitos obrigatórios:** Criar duas antes dos joins; retornar objetos vivos e liberar resultados.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/t06/01.in) · [saída de exemplo](testes/t06/01.out). [Todos os testes e regras](testes/t06/README.md).
+
+O corretor compara os tokens em ordem, ignorando diferenças de espaços e quebras de linha.
+
+Da raiz `provaPratica`:
 
 ```bash
+python3 estudo/04_threads/testes/t06/corrigir.py
+# Para corrigir outro arquivo C:
 python3 estudo/04_threads/testes/t06/corrigir.py /caminho/solucao.c
-# ou compile e passe o executável:
-cc -std=c11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pthread solucao.c -o solucao
-python3 estudo/04_threads/testes/t06/corrigir.py ./solucao
 ```
 
-Casos: [casos.json](testes/t06/casos.json), arquivos `.in`/`.out` ao lado. Saída sem prompts extras; espaços e quebras são normalizados. Confira também [rubrica.md](testes/t06/rubrica.md).
+O comando sem argumentos usa seu modelo em `respostas/t06.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/t06/rubrica.md).
 
 ---
 
-## t07 — Criação e identificação de dez threads
+## t07 — Dez threads identificadas
 
 **Origem:** Professor — roteiro 4.2, exercício 1 (a–c)
 
-Crie dez threads, cada uma recebe uma posição de vetor de dez inteiros e imprime pthread_self() e valor. Main espera todas. Discuta (a) passar &i, (b) ordem de impressão, (c) papel do join. Adaptação testável: leia os dez valores; stdout tem dez linhas “indice valor”, índices 0–9, ordem livre; escreva identificação real pthread_self() em stderr com representação adequada ao sistema.
+**Arquivo para escrever sua resposta:** [respostas/t07.c](respostas/t07.c).
 
-### Como testar e corrigir
+### Implemente
 
-Implemente `solucao.c` conforme o contrato abaixo. O script compila com `cc -std=c11 -Wall -Wextra -pthread`, executa os casos em diretório temporário e limita cada execução a 5 segundos.
+Leia dez inteiros. Crie uma thread por elemento, que imprime `indice valor` em stdout, ordem livre. Imprima também pthread_self() em stderr numa representação adequada à plataforma.
+
+**Requisitos obrigatórios:** Índices 0..9, argumentos independentes, todos os joins.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/t07/01.in) · [saída de exemplo](testes/t07/01.out). [Todos os testes e regras](testes/t07/README.md).
+
+O corretor compara o multiconjunto de linhas, aceitando qualquer ordem, mas preservando a quantidade de repetições.
+
+Da raiz `provaPratica`:
 
 ```bash
+python3 estudo/04_threads/testes/t07/corrigir.py
+# Para corrigir outro arquivo C:
 python3 estudo/04_threads/testes/t07/corrigir.py /caminho/solucao.c
-# ou compile e passe o executável:
-cc -std=c11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pthread solucao.c -o solucao
-python3 estudo/04_threads/testes/t07/corrigir.py ./solucao
 ```
 
-Casos: [casos.json](testes/t07/casos.json), arquivos `.in`/`.out` ao lado. Saída sem prompts extras; espaços e quebras são normalizados. Confira também [rubrica.md](testes/t07/rubrica.md).
+O comando sem argumentos usa seu modelo em `respostas/t07.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/t07/rubrica.md).
 
 ---
 
-## t08 — Posição de pthread_join
+## t08 — Dois modos de criação e join
 
-**Origem:** Professor — roteiro 4.2, exercício 2 (d–f)
+**Origem:** Adaptação para programação a partir de: Professor — roteiro 4.2, exercício 2 (d–f)
 
-Compare a versão com todas as criações antes dos joins com a versão create/join no mesmo laço. Execute ambas. (d) Quantos trabalhadores podem estar ativos em cada versão? (e) Qual permite paralelismo? (f) Por que a segunda se parece com execução sequencial? Diferencie trabalhadores vivos, executáveis e efetivamente em CPU.
+**Arquivo para escrever sua resposta:** [respostas/t08.c](respostas/t08.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/t08/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia modo,n (modo 0 ou 1,1<=n<=16). Modo 0: para cada id, crie e faça join imediatamente; trabalhador imprime INICIO id e FIM id. Modo 1: crie todos antes dos joins; cada trabalhador imprime CHEGA 0 id, aguarda uma barreira de n participantes e imprime PASSA 0 id. A barreira torna verificável a coexistência dos trabalhadores sem medir tempo.
+
+**Requisitos obrigatórios:** No modo 0 no máximo um trabalhador do laço vivo. No modo 1 use mutex/condição para barreira; não faça join antes de criar todos.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/t08/01.in) · [saída de exemplo](testes/t08/01.out). [Todos os testes e regras](testes/t08/README.md).
+
+O corretor valida eventos e invariantes; `.out` é **um exemplo válido**, não uma ordem única exigida. Veja os parâmetros de cada caso no JSON.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/04_threads/testes/t08/respostas.modelo.json /tmp/t08.json
-# edite /tmp/t08.json
-python3 estudo/04_threads/testes/t08/corrigir.py /tmp/t08.json
+python3 estudo/04_threads/testes/t08/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/04_threads/testes/t08/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/t08/gabarito.md) e [rubrica](testes/t08/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/t08.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/t08/rubrica.md).
 
 ---
 
@@ -168,20 +246,29 @@ O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo
 
 **Origem:** Professor — roteiro 4.2, exercício 3 (g–i)
 
-Leia dez inteiros. Duas threads somam metades de cinco, retornam parciais pelo retorno da rotina e main recupera por join. Imprima somente a soma em long long. Discuta (g) independência das partes, (h) coleta dos resultados, (i) consequência de não liberar memória. Valores entre -1000000000 e 1000000000.
+**Arquivo para escrever sua resposta:** [respostas/t09.c](respostas/t09.c).
 
-### Como testar e corrigir
+### Implemente
 
-Implemente `solucao.c` conforme o contrato abaixo. O script compila com `cc -std=c11 -Wall -Wextra -pthread`, executa os casos em diretório temporário e limita cada execução a 5 segundos.
+Leia dez inteiros entre -1000000000 e 1000000000. Duas threads somam cinco elementos cada; retornam parciais via retorno da rotina. Main recupera com join, soma e imprime long long.
+
+**Requisitos obrigatórios:** Não retornar endereço local nem substituir retorno por variável global; liberar heap.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/t09/01.in) · [saída de exemplo](testes/t09/01.out). [Todos os testes e regras](testes/t09/README.md).
+
+O corretor compara os tokens em ordem, ignorando diferenças de espaços e quebras de linha.
+
+Da raiz `provaPratica`:
 
 ```bash
+python3 estudo/04_threads/testes/t09/corrigir.py
+# Para corrigir outro arquivo C:
 python3 estudo/04_threads/testes/t09/corrigir.py /caminho/solucao.c
-# ou compile e passe o executável:
-cc -std=c11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pthread solucao.c -o solucao
-python3 estudo/04_threads/testes/t09/corrigir.py ./solucao
 ```
 
-Casos: [casos.json](testes/t09/casos.json), arquivos `.in`/`.out` ao lado. Saída sem prompts extras; espaços e quebras são normalizados. Confira também [rubrica.md](testes/t09/rubrica.md).
+O comando sem argumentos usa seu modelo em `respostas/t09.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/t09/rubrica.md).
 
 ---
 
@@ -189,40 +276,59 @@ Casos: [casos.json](testes/t09/casos.json), arquivos `.in`/`.out` ao lado. Saíd
 
 **Origem:** Professor — roteiro 4.2, exercício 6, parte 1
 
-Crie dez threads, uma por primo, com parâmetros próprios e liberação adequada. Use [2,3,5,7,11,13,17,19,23,29]: o roteiro escreve [2,..,27], mas 27 não é primo. Sem entrada. Stdout: linhas “indice primo”, ordem livre; pthread_self() em stderr. Parte 2 investigativa está em t04.
+**Arquivo para escrever sua resposta:** [respostas/t10.c](respostas/t10.c).
 
-### Como testar e corrigir
+### Implemente
 
-Implemente `solucao.c` conforme o contrato abaixo. O script compila com `cc -std=c11 -Wall -Wextra -pthread`, executa os casos em diretório temporário e limita cada execução a 5 segundos.
+Sem entrada. Crie dez threads para [2,3,5,7,11,13,17,19,23,29]. Stdout tem `indice primo`, ordem livre; pthread_self() em stderr.
+
+**Requisitos obrigatórios:** Parâmetro próprio por thread, liberação e join em todas; 27 não é primo.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/t10/01.in) · [saída de exemplo](testes/t10/01.out). [Todos os testes e regras](testes/t10/README.md).
+
+O corretor compara o multiconjunto de linhas, aceitando qualquer ordem, mas preservando a quantidade de repetições.
+
+Da raiz `provaPratica`:
 
 ```bash
+python3 estudo/04_threads/testes/t10/corrigir.py
+# Para corrigir outro arquivo C:
 python3 estudo/04_threads/testes/t10/corrigir.py /caminho/solucao.c
-# ou compile e passe o executável:
-cc -std=c11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pthread solucao.c -o solucao
-python3 estudo/04_threads/testes/t10/corrigir.py ./solucao
 ```
 
-Casos: [casos.json](testes/t10/casos.json), arquivos `.in`/`.out` ao lado. Saída sem prompts extras; espaços e quebras são normalizados. Confira também [rubrica.md](testes/t10/rubrica.md).
+O comando sem argumentos usa seu modelo em `respostas/t10.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/t10/rubrica.md).
 
 ---
 
-## t11 — ULT, KLT e recursos compartilhados
+## t11 — Partilhar heap entre trabalhadores
 
-**Origem:** Criado para este estudo — revisão integral da Aula 16
+**Origem:** Adaptação para programação a partir de: Criado para este estudo — revisão integral da Aula 16
 
-Compare M:1, 1:1 e M:N, papel do PCB/TCB, bloqueio, pilhas, heap, descritores, escalonamento, responsividade e economia. Use os exemplos editor, servidor e multiplicação de matrizes. Explique por que a API Pthreads não determina universalmente o modelo.
+**Arquivo para escrever sua resposta:** [respostas/t11.c](respostas/t11.c).
 
-### Como testar e corrigir
+### Implemente
 
-Escreva a resolução e o pseudocódigo pedido em `resposta.md`. Leia [os cenários](testes/t11/cenarios.md), copie `respostas.modelo.json` para um arquivo seu e substitua cada `null` pela resposta pedida (booleanos JSON são `true`/`false`).
+Leia n (0<=n<=1000) e n inteiros entre -10000 e 10000. Aloque vetor no heap. Crie duas threads: a primeira dobra elementos de índice par; a segunda dobra elementos de índice ímpar. Após ambos os joins, main imprime o vetor transformado na ordem original. Cada posição tem um único escritor.
+
+**Requisitos obrigatórios:** Compartilhar o mesmo vetor alocado; não copiar todo o vetor para cada thread; main só lê depois dos joins. Sem mutex necessário para posições distintas.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/t11/01.in) · [saída de exemplo](testes/t11/01.out). [Todos os testes e regras](testes/t11/README.md).
+
+O corretor compara os tokens em ordem, ignorando diferenças de espaços e quebras de linha.
+
+Da raiz `provaPratica`:
 
 ```bash
-cp estudo/04_threads/testes/t11/respostas.modelo.json /tmp/t11.json
-# edite /tmp/t11.json
-python3 estudo/04_threads/testes/t11/corrigir.py /tmp/t11.json
+python3 estudo/04_threads/testes/t11/corrigir.py
+# Para corrigir outro arquivo C:
+python3 estudo/04_threads/testes/t11/corrigir.py /caminho/solucao.c
 ```
 
-O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo**. Depois da tentativa, use [gabarito](testes/t11/gabarito.md) e [rubrica](testes/t11/rubrica.md) para concluir a correção manual.
+O comando sem argumentos usa seu modelo em `respostas/t11.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/t11/rubrica.md).
 
 ---
 
@@ -230,17 +336,26 @@ O script corrige as previsões dos cenários, **não o texto nem o pseudocódigo
 
 **Origem:** Criado para este estudo
 
-Leia quatro inteiros entre -10000 e 10000. Crie quatro threads, cada uma retorna o quadrado de seu valor em memória com vida útil válida. Após os joins, main imprime os quatro quadrados na ordem original. Não precisa mutex para resultados independentes.
+**Arquivo para escrever sua resposta:** [respostas/t12.c](respostas/t12.c).
 
-### Como testar e corrigir
+### Implemente
 
-Implemente `solucao.c` conforme o contrato abaixo. O script compila com `cc -std=c11 -Wall -Wextra -pthread`, executa os casos em diretório temporário e limita cada execução a 5 segundos.
+Leia quatro inteiros entre -10000 e 10000. Crie quatro threads, cada uma retorna o quadrado de seu valor em objeto de vida útil válida. Main recolhe e imprime os quatro quadrados na ordem original.
+
+**Requisitos obrigatórios:** Quatro creates antes dos joins; recuperar resultados por join, liberar alocações.
+
+### Entrada, saída e correção
+
+Primeiro caso: [entrada](testes/t12/01.in) · [saída de exemplo](testes/t12/01.out). [Todos os testes e regras](testes/t12/README.md).
+
+O corretor compara os tokens em ordem, ignorando diferenças de espaços e quebras de linha.
+
+Da raiz `provaPratica`:
 
 ```bash
+python3 estudo/04_threads/testes/t12/corrigir.py
+# Para corrigir outro arquivo C:
 python3 estudo/04_threads/testes/t12/corrigir.py /caminho/solucao.c
-# ou compile e passe o executável:
-cc -std=c11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pthread solucao.c -o solucao
-python3 estudo/04_threads/testes/t12/corrigir.py ./solucao
 ```
 
-Casos: [casos.json](testes/t12/casos.json), arquivos `.in`/`.out` ao lado. Saída sem prompts extras; espaços e quebras são normalizados. Confira também [rubrica.md](testes/t12/rubrica.md).
+O comando sem argumentos usa seu modelo em `respostas/t12.c`. Tempo máximo por execução: 5 segundos. Código 0 = testes passaram; 1 = reprovação; 2 = erro de uso/configuração. [Requisitos para conferir no código](testes/t12/rubrica.md).

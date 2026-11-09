@@ -1,5 +1,5 @@
-# Revisão manual — Semáforos: diagnóstico de recursos
+# Requisitos de implementação — s15
 
-Distinguir permissões disponíveis de trabalhadores aguardando. Aquisição bloqueada não equivale a usar recurso. Liberações devem corresponder a recursos adquiridos. Explique diferença entre travamento coletivo e preterição de um participante.
+Use semáforos para controlar as aquisições. Crie todos antes dos joins. Os eventos devem corresponder à posse real, não a uma simulação na main.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

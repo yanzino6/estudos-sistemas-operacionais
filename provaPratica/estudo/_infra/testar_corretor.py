@@ -15,12 +15,18 @@ class CorretorTest(unittest.TestCase):
  def test_timeout(self):
   r=self.invoke({'tipo':'programa','timeout':0.2,'casos':[{'nome':'bloqueio','entrada':'','saida':''}]},'int main(void){for(;;){}}', '.c')
   self.assertEqual(r.returncode,1); self.assertIn('tempo',r.stdout)
- def test_resposta_estruturada_nao_aprova_dissertacao(self):
-  r=self.invoke({'tipo':'analise','casos':[{'id':'a','pergunta':'Pode entrar?','esperado':False}]},'{"a":false}', '.json')
-  self.assertEqual(r.returncode,0,r.stderr); self.assertIn('REVISÃO MANUAL',r.stdout)
- def test_rejeita_tipo_e_resposta_errada(self):
-  r=self.invoke({'tipo':'analise','casos':[{'id':'a','pergunta':'Pode entrar?','esperado':False}]},'{"a":0}', '.json')
-  self.assertEqual(r.returncode,1); self.assertIn('FALHOU',r.stdout)
+ def test_eventos_rejeita_ordem_invalida(self):
+  r=self.invoke({'tipo':'programa','validador':'grafo','casos':[{'nome':'grafo','entrada':'','parametros':{'nos':['A','B'],'arestas':[['A','B']]}}]},'#include <stdio.h>\nint main(void){puts("B\\nA");}', '.c')
+  self.assertEqual(r.returncode,1,r.stdout); self.assertIn('FALHOU',r.stdout)
+ def test_eventos_aceita_ordem_valida(self):
+  r=self.invoke({'tipo':'programa','validador':'grafo','casos':[{'nome':'grafo','entrada':'','parametros':{'nos':['A','B'],'arestas':[['A','B']]}}]},'#include <stdio.h>\nint main(void){puts("A\\nB");}', '.c')
+  self.assertEqual(r.returncode,0,r.stdout+r.stderr)
+ def test_validador_por_caso(self):
+  r=self.invoke({'tipo':'programa','casos':[{'nome':'grafo','entrada':'','validador':'grafo','parametros':{'nos':['A','B'],'arestas':[['A','B']]}}]},'#include <stdio.h>\nint main(void){puts("B\\nA");}', '.c')
+  self.assertEqual(r.returncode,1,r.stdout)
+ def test_rejeita_fifo_nao_removida(self):
+  r=self.invoke({'tipo':'programa','casos':[{'nome':'limpeza','entrada':'','saida':'','ausentes':['canal.fifo']}]},'#include <sys/stat.h>\nint main(void){return mkfifo("canal.fifo",0600);}', '.c')
+  self.assertEqual(r.returncode,1,r.stdout)
  def test_linhas_fora_de_ordem(self):
   r=self.invoke({'tipo':'programa','comparacao':'linhas_ordenadas','casos':[{'nome':'ordem','entrada':'','saida':'a\nb'}]},'#include <stdio.h>\nint main(void){puts("b");puts("a");}', '.c')
   self.assertEqual(r.returncode,0,r.stdout+r.stderr)

@@ -1,5 +1,5 @@
-# Revisão manual — Soma dos dez primos em duas threads
+# Requisitos de implementação — t06
 
-Conferir duas rotinas/instâncias de trabalho, parciais 28 e 101, coleta via join e vida útil válida. Não imprimir literal nem calcular tudo na main. Liberar resultados alocados.
+Criar duas antes dos joins; retornar objetos vivos e liberar resultados.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

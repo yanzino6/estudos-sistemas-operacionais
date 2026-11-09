@@ -1,5 +1,5 @@
-# Revisão manual — Porto com prioridade de saída
+# Requisitos de implementação — m02
 
-Proteger estado pelo monitor. Reservar canal no pedido antes de retornar; confirmar libera canal. Reservar capacidade para quem entra; liberar após saída. Contar saídas esperando para bloquear novas entradas. Reavaliar condições ao acordar. Não segurar execução ativa do monitor durante travessia.
+Apenas um navio no canal; ocupação inclui reservas de entrada; EN não pode ocorrer enquanto há PS ainda não atendido por SA. Um pedido não interrompe travessia já concedida. Use while nos predicados e termine todas as threads.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

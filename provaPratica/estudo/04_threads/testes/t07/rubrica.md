@@ -1,5 +1,5 @@
-# Revisão manual — Criação e identificação de dez threads
+# Requisitos de implementação — t07
 
-Uma thread por posição, argumentos independentes, pthread_self chamado na rotina, todos os joins. Relatório responde a–c. Identificador lógico não substitui pthread_self no requisito original; ele só estabiliza a saída de teste.
+Índices 0..9, argumentos independentes, todos os joins.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

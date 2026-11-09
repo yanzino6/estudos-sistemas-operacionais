@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Correção local, sem dependências externas além de Python 3 e compilador C."""
 import json, os, pathlib, signal, subprocess, sys, tempfile
+from eventos import validar
 
 def executar(cmd, entrada, cwd, timeout, env=None):
     p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
@@ -26,17 +27,6 @@ def main(pasta, solucao):
     pasta, solucao = pathlib.Path(pasta).resolve(), pathlib.Path(solucao).resolve()
     try:
         spec = json.loads((pasta/'casos.json').read_text())
-        if spec['tipo'] == 'analise':
-            respostas = json.loads(solucao.read_text())
-            falhas = 0
-            for caso in spec['casos']:
-                valor = respostas.get(caso['id']) if isinstance(respostas,dict) else None
-                ok = type(valor) is type(caso['esperado']) and valor == caso['esperado']
-                print(('OK' if ok else 'FALHOU') + ': ' + caso['id'] + ' - ' + caso['pergunta'])
-                if not ok: print('  Reveja o cenário e consulte gabarito.md depois de tentar.')
-                falhas += not ok
-            print('REVISÃO MANUAL OBRIGATÓRIA: confira resposta.md/pseudocódigo com rubrica.md. Este script corrige apenas os casos objetivos.')
-            return int(falhas > 0)
         with tempfile.TemporaryDirectory(prefix='estudo-so-') as tmp:
             tmp = pathlib.Path(tmp)
             if solucao.suffix == '.c':
@@ -64,6 +54,13 @@ def main(pasta, solucao):
                 for repeticao in range(caso.get('repeticoes',spec.get('repeticoes',1))):
                     rc, out, err = executar([str(programa)]+caso.get('args',[]), entrada, tmp, spec.get('timeout',5), env)
                     ok = rc == caso.get('retorno',0) and (esperado is None or normalizar(out,spec.get('comparacao','tokens')) == normalizar(esperado,spec.get('comparacao','tokens')))
+                    validador = caso.get('validador',spec.get('validador'))
+                    if validador:
+                        ok = rc == caso.get('retorno',0) and validar(validador,caso['parametros'],out)
+                    restantes = [nome for nome in caso.get('ausentes',[]) if (tmp/nome).exists()]
+                    if restantes:
+                        ok = False
+                        err += ' Arquivos não removidos: ' + ', '.join(restantes)
                     print(('OK' if ok else 'FALHOU')+f": {caso['nome']} [{repeticao+1}]")
                     if not ok:
                         print(f'  retorno={rc}; stderr={err[:1000]!r}; saída={out[:1000]!r}; esperado={str(esperado)[:1000]!r}')
@@ -77,5 +74,5 @@ def main(pasta, solucao):
 
 if __name__ == '__main__':
     if len(sys.argv)!=3:
-        print('Uso: python3 corretor.py PASTA_DOS_CASOS SOLUCAO.c|EXECUTAVEL|RESPOSTAS.json'); sys.exit(2)
+        print('Uso: python3 corretor.py PASTA_DOS_CASOS SOLUCAO.c|EXECUTAVEL'); sys.exit(2)
     sys.exit(main(*sys.argv[1:]))

@@ -160,4 +160,4 @@ Em Java, cada objeto possui monitor; `synchronized` protege método ou bloco. `w
 
 ## Como estudar esta parte
 
-Para cada exercício, desenhe o estado antes e depois de wait/signal. Pergunte quem possui a exclusão em cada etapa. Escreva o invariante ao lado do procedimento e teste: estado vazio, estado cheio, dois acordados disputando uma vaga e prioridade de entrada. Os casos objetivos verificam essas decisões; a rubrica exige revisar também o pseudocódigo completo.
+Para cada exercício, desenhe o estado antes e depois de wait/signal. Pergunte quem possui a exclusão em cada etapa. Escreva o invariante ao lado do procedimento e teste: estado vazio, estado cheio, dois acordados disputando uma vaga e prioridade de entrada. Os exercícios exigem implementar esses protocolos em C; os scripts verificam resultados ou rastros de eventos, e a rubrica registra os requisitos de implementação.

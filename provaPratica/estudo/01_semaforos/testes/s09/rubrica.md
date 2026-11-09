@@ -1,5 +1,5 @@
-# Revisão manual — Barbeiro dorminhoco com semáforos
+# Requisitos de implementação — s09
 
-Waiting conta apenas espera. Teste de vaga e incremento são uma região crítica. O barbeiro decrementa ao chamar alguém. Notificação de disponibilidade não equivale ao término do corte; explique esse limite do modelo.
+Implemente fila/cadeira usando semáforos. O barbeiro executa as conclusões de corte; despachante envia comandos e aguarda confirmação sem busy wait. Não simular toda a barbearia sequencialmente na main.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

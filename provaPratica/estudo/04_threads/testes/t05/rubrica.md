@@ -1,5 +1,5 @@
-# Revisão manual — Receber valores e exemplo do dado
+# Requisitos de implementação — t05
 
-Não retornar endereço de variável local. Main usa void *resultado e join(t,&resultado), converte, lê e libera. Verificar falhas. Identidade da thread e endereço de resultado não são o valor retornado.
+Resultado alocado dentro da rotina; receber com void** no join; não retornar endereço de variável automática nem compartilhar uma única variável de retorno.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

@@ -1,23 +1,61 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "F5 pode ocorrer depois de F2 mas antes de F3? Booleano.",
-      "esperado": false,
-      "explicacao": "Tem duas dependências."
-    },
-    {
-      "id": "b",
-      "pergunta": "F4 precisa esperar F3? Booleano.",
-      "esperado": false,
-      "explicacao": "Ambos dependem de F1, mas não um do outro."
-    },
-    {
-      "id": "c",
-      "pergunta": "F7 pode ocorrer antes de F6, já tendo F5 terminado? Booleano.",
-      "esperado": false,
-      "explicacao": "A junção final exige os dois ramos."
+      "parametros": {
+        "nos": [
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5",
+          "F6",
+          "F7"
+        ],
+        "arestas": [
+          [
+            "F1",
+            "F2"
+          ],
+          [
+            "F1",
+            "F3"
+          ],
+          [
+            "F1",
+            "F4"
+          ],
+          [
+            "F2",
+            "F5"
+          ],
+          [
+            "F3",
+            "F5"
+          ],
+          [
+            "F3",
+            "F6"
+          ],
+          [
+            "F4",
+            "F6"
+          ],
+          [
+            "F5",
+            "F7"
+          ],
+          [
+            "F6",
+            "F7"
+          ]
+        ]
+      },
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     }
-  ]
+  ],
+  "validador": "grafo",
+  "repeticoes": 10
 }

@@ -1,5 +1,5 @@
-# Revisão manual — Notificação perdida e despertar espúrio
+# Requisitos de implementação — m06
 
-Diferenciar estado persistente de sinal não acumulado. Wait libera/readquire mutex atomicamente em relação à espera. Explicar que único sinalizador não elimina disputa de consumidores nem despertar espúrio.
+Mutex, condição, while e broadcast. Não reaproveitar contador sem geração. Registro CHEGA é feito com a contagem de chegada; PASSA só após condição da geração satisfeita.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

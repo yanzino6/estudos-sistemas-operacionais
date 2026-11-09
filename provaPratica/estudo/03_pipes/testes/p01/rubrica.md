@@ -1,5 +1,5 @@
-# Revisão manual — Comunicação circular entre três processos
+# Requisitos de implementação — p01
 
-Operações devem ocorrer nos processos especificados. Fechar todas as pontas não utilizadas, tratar erros e transferências parciais, recolher dois filhos. Calcular x+15 apenas no pai reprova estruturalmente.
+Dois filhos irmãos, três pipes, read/write, fechamentos e waitpid; operações nos processos pedidos.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

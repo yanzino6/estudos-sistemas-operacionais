@@ -1,5 +1,5 @@
-# Revisão manual — Impressão concorrente de primos
+# Requisitos de implementação — t10
 
-Não misturar índice lógico e identidade POSIX. Exigir parâmetros próprios, todos os joins e liberação. Saída é multiconjunto de dez pares sem omissão/repetição; ordem não é requisito.
+Parâmetro próprio por thread, liberação e join em todas; 27 não é primo.
 
-Marque cada requisito como atendido, ausente ou incorreto. Corrija os ausentes/incorretos e execute os casos novamente. A aprovação automática cobre somente o contrato objetivo; não atribui nota ao pseudocódigo ou à explicação.
+O script compila e executa todos os casos. Confira estes requisitos no código: resultados corretos não provam que você usou a primitiva exigida. Não há entrega de resposta teórica/JSON; a entrega é o programa C.

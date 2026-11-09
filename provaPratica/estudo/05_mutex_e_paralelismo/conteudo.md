@@ -98,7 +98,7 @@ Testes importantes: zeros, negativos, valores repetidos, grandes valores, divis�
 
 Uma ferramenta como ThreadSanitizer pode ajudar em ambiente compatível (`-fsanitize=thread -g`), mas disponibilidade depende do compilador/plataforma. AddressSanitizer ajuda a encontrar acessos inválidos, mas não substitui o detector de corridas. Não combine tudo sem verificar suporte e não use tempos instrumentados para comparar performance.
 
-Para a versão deliberadamente incorreta do exercício 4, não há saída errada obrigatória: ela pode parecer correta muitas vezes. O teste desse exercício é de análise, com intercalamentos controlados, e a revisão manual procura a operação compartilhada sem proteção. Para a versão corrigida, os testes executam a soma e a rubrica exige inspecionar o mutex. Um programa sequencial pode passar pelos testes de valores e ainda reprovar no requisito de concorrência.
+Para a versão deliberadamente incorreta do exercício 4, não há saída errada obrigatória: ela pode parecer correta muitas vezes. Na versão prática deste estudo, x01 exige escrever a reserva corrigida e emitir cada índice exatamente uma vez; x02 exige somar com essa reserva. Os scripts executam ambos e os requisitos exigem inspecionar o mutex. Um programa sequencial pode passar pelos testes de valores e ainda reprovar no requisito de concorrência.
 
 ## 8. Roteiro mental antes de entregar
 

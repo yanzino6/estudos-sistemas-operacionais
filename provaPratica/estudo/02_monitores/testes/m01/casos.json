@@ -1,23 +1,22 @@
 {
-  "tipo": "analise",
+  "tipo": "programa",
   "casos": [
     {
-      "id": "a",
-      "pergunta": "C1 acorda depois que C2 retirou o único item. C1 pode retirar sem testar de novo? Booleano.",
-      "esperado": false,
-      "explicacao": "A condição deixou de ser verdadeira."
+      "nome": "caso_01",
+      "entrada_arquivo": "01.in",
+      "saida_arquivo": "01.out"
     },
     {
-      "id": "b",
-      "pergunta": "O while(1) externo com return após a retirada impede esse erro? Booleano.",
-      "esperado": false,
-      "explicacao": "A retirada ocorre antes de uma nova avaliação."
+      "nome": "caso_02",
+      "entrada_arquivo": "02.in",
+      "saida_arquivo": "02.out"
     },
     {
-      "id": "c",
-      "pergunta": "Signal sem nenhum waiter guarda uma permissão futura? Booleano.",
-      "esperado": false,
-      "explicacao": "Condição não é semáforo."
+      "nome": "caso_03",
+      "entrada_arquivo": "03.in",
+      "saida_arquivo": "03.out"
     }
-  ]
+  ],
+  "comparacao": "linhas_ordenadas",
+  "repeticoes": 5
 }

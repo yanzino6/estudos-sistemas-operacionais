@@ -20,18 +20,77 @@
 #include <fcntl.h>
 #include <poll.h>
 #include <pthread.h>
+#include <semaphore.h>
 #include "../../_infra/semaforo_portatil.h"
 
+sem_t sems[6];
+
+
 /* Interfaces sugeridas: adapte os argumentos/estruturas à sua organização. */
-void *processo_a(void *arg);
-void *processo_b(void *arg);
-void *processo_c(void *arg);
+void *processo_a(void *arg)
+{
+    printf("F1\n");
+    sem_post(&sems[0]);
+    printf("F2\n");
+    sem_post(&sems[1]);
+    sem_post(&sems[4]);
+    sem_wait(&sems[2]);
+    printf("F9\n");
+    sem_post(&sems[3]);
+    sem_wait(&sems[5]);
+    printf("F4\n");
+    return NULL;
+}
+void *processo_b(void *arg)
+{
+    sem_wait(&sems[1]);
+    printf("F3\n");
+    sem_wait(&sems[3]);
+    sem_wait(&sems[3]);
+    printf("F7\n");
+    sem_post(&sems[5]);
+    return NULL;
+}
+void *processo_c(void *arg)
+{
+    sem_wait(&sems[0]);
+    printf("F8\n");
+    printf("F5\n");
+    sem_post(&sems[2]);
+    sem_wait(&sems[4]);
+    printf("F6\n");
+    sem_post(&sems[3]);
+    return NULL;
+}
 
 int main(void) {
     /* TODO 1: ler e validar a entrada descrita no enunciado. */
     /* TODO 2: inicializar recursos e argumentos com vida útil correta. */
     /* TODO 3: criar os participantes e executar o protocolo pedido. */
     /* TODO 4: recolher participantes, liberar recursos e produzir a saída. */
-    fprintf(stderr, "s02: implemente a solução neste arquivo.\n");
-    return 1; /* Troque pelo retorno do seu programa ao implementar. */
+    
+    for (int i = 0; i < 6; i++)
+    {
+        sem_init(&sems[i],0,0);
+    }
+    
+
+
+    pthread_t threads[3];
+    pthread_create(&threads[0],NULL,processo_a,NULL);
+    pthread_create(&threads[1],NULL,processo_b,NULL);
+    pthread_create(&threads[2],NULL,processo_c,NULL);
+
+    for (int i = 0; i < 3; i++)
+    {
+        pthread_join(threads[i],NULL);
+    }
+    
+    for (int i = 0; i < 6; i++)
+    {
+        sem_destroy(&sems[i]);
+    }
+    
+
+    return 0; /* Troque pelo retorno do seu programa ao implementar. */
 }

@@ -33,6 +33,8 @@ O script compila com `cc -std=c11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pthre
 
 Código de saída do corretor: **0** = passou nos casos; **1** = compilação, execução, resultado ou tempo reprovou; **2** = problema de uso/configuração. Cada execução tem timeout e limpeza dos processos descendentes. Resultados vão para stdout; diagnósticos para stderr. Não imprima prompts que o enunciado não pediu.
 
+O corretor cria automaticamente os diretórios e salva a saída do seu programa em `testes/<id>/saidas/01.out`, `02.out`, etc., com o stderr correspondente em `.err`, inclusive quando o teste reprova. Casos com repetições usam `01_01.out`, `01_02.out`, etc. Esses arquivos são atualizados a cada execução do caso. Se um gabarito como `testes/<id>/01.out` estiver ausente, o corretor o gera compilando e executando o programa C de referência de `_infra/fixtures`, com a entrada do caso. Gabaritos existentes são preservados; a saída da sua solução não é usada como gabarito.
+
 ## Ordem remanejada para a prova prática
 
 Comece por **Threads → Pipes → Mutex**, depois progrida para **Semáforos → Monitores**. Veja o [roteiro prático com sequências e simulados](ROTEIRO_PROVA_PRATICA.md). Os diretórios mantêm seus nomes para preservar links e referências, mas a ordem de resolução foi reorganizada por dificuldade de implementação.
@@ -63,6 +65,7 @@ parte/
       corrigir.py         # sem argumento corrige o modelo acima
       casos.json          # configuração do corretor; não é uma resposta
       01.in / 01.out
+      saidas/             # saídas .out e diagnósticos .err da sua solução
       README.md
       rubrica.md
 ```

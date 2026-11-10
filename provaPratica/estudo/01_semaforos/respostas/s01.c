@@ -20,16 +20,86 @@
 #include <fcntl.h>
 #include <poll.h>
 #include <pthread.h>
+#include <semaphore.h>
 #include "../../_infra/semaforo_portatil.h"
 
+typedef struct {
+    int k;
+    int i;
+    sem_t *semWait;
+    sem_t *semFree;
+} Parametros;
+
 /* Interfaces sugeridas: adapte os argumentos/estruturas à sua organização. */
-void *imprimir_bloco(void *arg);
+void *imprimir_bloco(void *arg)
+{
+    Parametros *p = (Parametros*)arg;
+
+    if (p->semWait!=NULL)
+    {
+        sem_wait(p->semWait);
+    }
+    
+    for (int i = (p->i*p->k)+1; i <= (p->i+1)*p->k; i++)
+    {
+        printf("%d\n",i);
+    }
+    if (p->semFree!=NULL)
+    {
+        sem_post(p->semFree);
+    }
+    return NULL;
+}
 
 int main(void) {
     /* TODO 1: ler e validar a entrada descrita no enunciado. */
     /* TODO 2: inicializar recursos e argumentos com vida útil correta. */
     /* TODO 3: criar os participantes e executar o protocolo pedido. */
     /* TODO 4: recolher participantes, liberar recursos e produzir a saída. */
-    fprintf(stderr, "s01: implemente a solução neste arquivo.\n");
-    return 1; /* Troque pelo retorno do seu programa ao implementar. */
+    sem_t sem[4];
+    for (int i = 0; i < 4; i++)
+    {
+        sem_init(&sem[i],0,0);
+    }
+    int k;
+    scanf("%d",&k);
+    pthread_t threads[5];
+    Parametros p[5];
+
+    for (int i = 0; i < 5; i++)
+    {
+        
+        p[i].i=i;
+        p[i].k=k;
+        if (i==0)
+        {
+            p[i].semWait=NULL;
+        }
+        else
+        {
+            p[i].semWait=&sem[i-1];
+        }
+        if (i==4)
+        {
+            p[i].semFree=NULL;
+        }
+        else
+        {
+            p[i].semFree=&sem[i];
+        }
+        
+        pthread_create(&threads[i],NULL,imprimir_bloco,&p[i]);
+    }
+    for (int i = 0; i < 5; i++)
+    {
+        
+        pthread_join(threads[i],NULL);
+    }
+    for (int i = 0; i < 4; i++)
+    {
+        
+        sem_destroy(&sem[i]);
+    }
+
+    return 0; /* Troque pelo retorno do seu programa ao implementar. */
 }

@@ -1,0 +1,68 @@
+[t=0ms] [RR] Chegada PID 12
+[t=0ms] [RR] Chegada PID 40
+[t=0ms] [RR] [CPU0] Executando PID 12
+[t=0ms] [RR] [CPU1] Executando PID 40
+[t=200ms] [RR] [CPU1] PID 40 finalizado
+[t=400ms] [RR] Chegada PID 39
+[t=400ms] [RR] [CPU2] Executando PID 39
+[t=500ms] [RR] [CPU0] Quantum esgotado PID 12
+[t=500ms] [RR] [CPU0] Executando PID 12
+[t=600ms] [RR] Chegada PID 46
+[t=600ms] [RR] [CPU1] Executando PID 46
+[t=800ms] [RR] Chegada PID 11
+[t=800ms] [RR] Chegada PID 44
+[t=800ms] [RR] [CPU2] PID 39 finalizado
+[t=800ms] [RR] [CPU3] Executando PID 11
+[t=900ms] [RR] Chegada PID 23
+[t=900ms] [RR] [CPU2] Executando PID 44
+[t=1000ms] [RR] [CPU0] Quantum esgotado PID 12
+[t=1000ms] [RR] [CPU0] Executando PID 23
+[t=1100ms] [RR] Chegada PID 10
+[t=1100ms] [RR] Chegada PID 36
+[t=1100ms] [RR] Chegada PID 43
+[t=1100ms] [RR] [CPU1] Quantum esgotado PID 46
+[t=1100ms] [RR] [CPU1] Executando PID 12
+[t=1200ms] [RR] [CPU1] PID 12 finalizado
+[t=1300ms] [RR] [CPU3] Quantum esgotado PID 11
+[t=1300ms] [RR] [CPU3] Executando PID 10
+[t=1400ms] [RR] [CPU2] PID 44 finalizado
+[t=1400ms] [RR] [CPU2] Executando PID 36
+[t=1500ms] [RR] [CPU0] PID 23 finalizado
+[t=1500ms] [RR] [CPU0] Executando PID 43
+[t=1600ms] [RR] [CPU1] Executando PID 46
+[t=1700ms] [RR] [CPU2] PID 36 finalizado
+[t=1800ms] [RR] [CPU3] Quantum esgotado PID 10
+[t=1800ms] [RR] [CPU3] Executando PID 11
+[t=1900ms] [RR] [CPU1] PID 46 finalizado
+[t=1900ms] [RR] [CPU2] Executando PID 10
+[t=2000ms] [RR] [CPU0] Quantum esgotado PID 43
+[t=2000ms] [RR] [CPU0] Executando PID 43
+[t=2300ms] [RR] [CPU3] Quantum esgotado PID 11
+[t=2300ms] [RR] [CPU3] Executando PID 11
+[t=2400ms] [RR] [CPU2] PID 10 finalizado
+[t=2400ms] [RR] [CPU3] PID 11 finalizado
+[t=2500ms] [RR] [CPU0] Quantum esgotado PID 43
+[t=2500ms] [RR] [CPU0] Executando PID 43
+[t=2600ms] [RR] [CPU0] PID 43 finalizado
+[t=3000ms] [RR] Escalonador terminou execução de todos processos
+=== METRICAS ===
+PID 10 | espera=300ms | turnaround=1300ms | resposta=200ms
+PID 11 | espera=500ms | turnaround=1600ms | resposta=0ms
+PID 12 | espera=100ms | turnaround=1200ms | resposta=0ms
+PID 23 | espera=100ms | turnaround=600ms | resposta=100ms
+PID 36 | espera=300ms | turnaround=600ms | resposta=300ms
+PID 39 | espera=0ms | turnaround=400ms | resposta=0ms
+PID 40 | espera=0ms | turnaround=200ms | resposta=0ms
+PID 43 | espera=400ms | turnaround=1500ms | resposta=400ms
+PID 44 | espera=100ms | turnaround=600ms | resposta=100ms
+PID 46 | espera=500ms | turnaround=1300ms | resposta=0ms
+Espera media: 230.00 ms
+Turnaround medio: 930.00 ms
+Resposta media: 110.00 ms
+Trocas de contexto: 14
+Utilizacao CPU0: 100.00%
+Utilizacao CPU1: 42.31%
+Utilizacao CPU2: 65.38%
+Utilizacao CPU3: 61.54%
+Throughput: 3.85 processos/s
+Makespan: 2600 ms

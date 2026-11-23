@@ -1,3 +1,5 @@
+> **ARQUIVADO em 23/11/2026.** Este arquivo foi absorvido por `04_TRILHA_A.md` e `05_TRILHA_B.md` e não é mais atualizado. **Não implemente a partir deste arquivo:** o laço do escalonador e o `cpus_iniciar` daqui têm uma corrida na partida (a CPU1 pode levar o primeiro processo), corrigida nas trilhas. Os headers válidos são os de `contrato/`. Pode ser apagado.
+
 # 03 · Arquitetura e contratos
 
 Este arquivo substitui a reunião de kickoff. **Os headers da seção 2 são o contrato:**

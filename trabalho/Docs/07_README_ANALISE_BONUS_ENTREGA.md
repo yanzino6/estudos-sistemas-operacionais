@@ -1,3 +1,5 @@
+> **ARQUIVADO em 23/11/2026.** Este arquivo foi absorvido por `04_TRILHA_A.md` e `05_TRILHA_B.md` e não é mais atualizado. README, análise, bônus e empacotamento estão agora nas trilhas (A12 e A14 na Trilha A; B10 a B12 na Trilha B). Pode ser apagado.
+
 # 07 · README, análise comparativa, bônus e entrega
 
 O README vale 1,5 ponto, e a organização e os comentários valem mais 1,0. O professor pode

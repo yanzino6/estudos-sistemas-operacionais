@@ -1,91 +1,71 @@
-# TP SO 2026/2 · Mini-kernel · Plano v2 (após revisão cega)
+# TP SO 2026/2 · Mini-kernel · Leia primeiro (revisão de 23/11)
 
-> Estes arquivos substituem os três planos anteriores (geral, Plano A e Plano B).
-> Eles foram reescritos depois de uma revisão cega feita contra o PDF do enunciado
-> e os 6 casos públicos. Quem implementar seguindo só estes arquivos, na ordem,
-> não precisa de reunião.
+## O que cada um lê
 
-## 1. Quem é quem
-
-| Sigla | Pessoa | Trilha |
+| Quem | Arquivo | E mais nada |
 |---|---|---|
-| **A** | Yan | Motor: tempo, entrada, PCB e threads, barreira, geradora, escalonador, políticas, `main`, estresse e análise comparativa |
-| **B** | Dupla | Infraestrutura e multiprocessador: Makefile, fila, log, CPUs (GLOBAL e POR_CPU), métricas, comparador, bônus, empacotamento e seção de decisões do README |
+| **A** (Yan): motor, políticas, estresse, análise | `04_TRILHA_A.md` | a trilha traz o desenho, o contrato, o pseudocódigo, os testes e a metade de B explicada |
+| **B** (dupla): infraestrutura, multiprocessador, bônus, entrega | `05_TRILHA_B.md` | idem, com a metade de A explicada |
 
-A troca de papéis é permitida, desde que seja feita antes de 23/11 e escrita no `STATUS.md` do repositório.
+Cada trilha é autossuficiente: dá para implementar a sua metade e entender o trabalho
+inteiro sem abrir nenhum outro arquivo de `Docs/`. Os trechos comuns (desenho, contrato,
+pseudocódigo, pontos em aberto) são **idênticos** nas duas. Elas supõem que você já leu o
+enunciado e o `LEIA-ME` dos casos, e relembram cada regra no ponto em que ela vira código.
 
-## 2. Ordem de leitura
+## O que há na pasta `trabalho/`
 
-Leia na ordem. Cada arquivo supõe que você leu os anteriores.
+| Pasta | Conteúdo |
+|---|---|
+| `Docs/` | este arquivo, as duas trilhas, o PDF do enunciado e cinco arquivos antigos, arquivados |
+| `contrato/` | os 12 headers (`.h`). No marco M0, A copia todos para a raiz do repositório, sem alterar. O Makefile inicial está escrito na etapa A0 da Trilha A |
+| `ferramentas/` | `oraculo.py` (simulador de referência) e `contar_migracoes.py` (medidas do bônus). Não vão na entrega |
+| `casos_publicos_v1/` | os 6 casos oficiais (01, 03, 05 mono; 13, 15, 17 multi GLOBAL) |
+| `casos_extras/` | 14 casos gerados pelo oráculo (GLOBAL e POR_CPU, 2 e 4 CPUs), todos não ambíguos. Não são oficiais |
 
-| # | Arquivo | A | B | Tempo de leitura |
-|---|---|---|---|---|
-| 00 | `00_LEIA_PRIMEIRO.md` (este) | ✅ | ✅ | 10 min |
-| 01 | `01_REVISAO_CEGA.md`: o que estava errado nos planos antigos e por quê | ✅ | ✅ | 15 min |
-| 02 | `02_REGRAS_CONSOLIDADAS.md`: todas as regras do enunciado e dos casos num lugar só, com rastros | ✅ | ✅ | 30 min |
-| 03 | `03_ARQUITETURA_E_CONTRATOS.md`: módulos, headers (contrato), travas, modelo de tempo, protocolo da fatia, laço do escalonador | ✅ | ✅ | 45 min |
-| 04 | `04_TRILHA_A.md`: o dia a dia de A | ✅ | só os marcos | 20 min |
-| 05 | `05_TRILHA_B.md`: o dia a dia de B | só os marcos | ✅ | 20 min |
-| 06 | `06_TESTES_E_AMBIENTE.md`: ambiente Linux no Mac, oráculo, comparador, valgrind/helgrind, estresse | ✅ | ✅ | 20 min |
-| 07 | `07_README_ANALISE_BONUS_ENTREGA.md`: README, análise comparativa, bônus, empacotamento e entrega | ✅ | ✅ | 15 min |
+## Arquivos arquivados
 
-Junto vem `ferramentas/oraculo.py`: um simulador determinístico das regras que
-reproduz **byte a byte** as saídas dos casos 01, 03, 05, 13, 15, 17 e do exemplo 4.5.
-Ele gera a saída esperada de qualquer entrada nova. Ele não vai na entrega. `ferramentas/contar_migracoes.py` extrai de um log as medidas do bônus de afinidade.
+`01_REVISAO_CEGA.md`, `02_REGRAS_CONSOLIDADAS.md`, `03_ARQUITETURA_E_CONTRATOS.md`,
+`06_TESTES_E_AMBIENTE.md` e `07_README_ANALISE_BONUS_ENTREGA.md` foram absorvidos pelas
+trilhas e **não são mais atualizados**. Não implemente a partir deles: o `03`, em
+especial, ainda traz o laço de escalonador com a corrida de partida (item 1 abaixo).
+Podem ser apagados.
 
-## 3. Como trabalhamos sem reunião
+## O que mudou nesta revisão
 
-### 3.1 Fonte única da verdade
-- **Repositório privado no GitHub** (criado por A no marco M0). A `main` sempre compila nos dois alvos.
-- **`STATUS.md`** na raiz do repositório. Fica fora do `.tar.gz`. Cada um atualiza a própria seção **ao fim de toda sessão de trabalho**, com o formato abaixo:
+1. **Corrida na partida (corrigida).** No desenho anterior a geradora era criada antes das escalonadoras e cada escalonadora começava escolhendo sozinha da fila. Com poucos processos em t=0, a CPU1 podia chegar à trava antes da CPU0 e levar o primeiro processo (viola o desempate 3). Medido num caso mínimo (2 processos em t=0, 8 CPUs): CPU errada em 48 de 150 execuções. Correção: toda CPU **nasce ociosa** e a escalonadora começa em `cpus_esperar_trabalho`; o primeiro processo sempre chega por entrega direta, em ordem de índice. Depois da correção: 0 de 250.
+2. **O oráculo não estava na pasta.** Os arquivos antigos diziam que `ferramentas/oraculo.py` e `contar_migracoes.py` "vinham junto", mas não existiam aqui. Foram recriados. O oráculo reproduz byte a byte os 6 casos públicos e o exemplo 4.5, e os números de afinidade do caso 17 que os arquivos antigos citavam.
+3. **Contrato como arquivos.** Os headers saíram do markdown e viraram `contrato/*.h`, compilados com `-Wall` sem warnings. `entrada.h`, `escalonador.h` e `metricas.h` estavam incompletos (sem guarda nem includes) e foram completados. `arred100` e `cpus_encerrado` não eram usados por ninguém e saíram.
+4. **Trilhas autossuficientes.** Antes eram listas de tarefas que apontavam para quatro outros arquivos. Agora cada etapa traz os lembretes do enunciado, o header, o pseudocódigo, os porquês, as armadilhas e um teste com os valores esperados.
+5. **Armadilhas que não estavam escritas:** `pcb_iniciar` só depois do `qsort` (mutex iniciado não pode ser movido); `agora_ms` com a conta em microssegundos; `proxima_chegada` só avança depois do lote inserido.
+6. **Teste novo para B:** `test_cpus`, que exercita o `cpus.c` inteiro (GLOBAL e POR_CPU, com migração e término) usando uma thread só, antes de o escalonador de A existir.
+7. **Pontos em aberto novos:** P7 (CPU já ociosa × CPU que libera no mesmo instante de uma chegada) e P8 (no POR_CPU, a ociosa não rouba o processo recém-reinserido). Estão no apêndice A das trilhas, com o padrão adotado.
+8. **Ambiente.** Os arquivos antigos supunham macOS para o Yan; a máquina dele é Linux, então a seção de ambiente da Trilha A ficou em duas linhas.
+9. **Datas.** O M0 passou das 12h para as **14h de segunda 23/11**. O resto do calendário não mudou.
 
-```
-## A (Yan) · atualizado em 2026-11-24 22:10
-Feito: geradora.c, escalonador.c (laço), politica.c
-Próximo: integração M2 amanhã de manhã
-Bloqueado por: nada
-Perguntas para B: #7 (issue)
-```
+## Como o pseudocódigo das trilhas foi conferido
 
-- **Contratos** (`*.h` listados no arquivo 03): só mudam por PR com o rótulo `contrato`, e o outro precisa aprovar. Mudança de contrato sem aprovação é proibida. É isso que permite trabalhar em paralelo sem conversar.
+Ele foi implementado linha a linha num protótipo de teste (que **não** está na pasta: o
+código da entrega é de vocês). Resultados:
+- os 6 casos públicos e os 14 extras passam, em 3 execuções seguidas;
+- mais de 60 entradas aleatórias não ambíguas saem iguais ao oráculo (8 delas com o bônus de afinidade ligado);
+- mais de 300 entradas ambíguas, 64 delas no formato do caso oculto de estresse (8 CPUs, 40 processos, até 4 threads), terminam sem violar nenhum invariante, com o tempo medido a menos de 40 ms do instante lógico;
+- `valgrind --leak-check=full` e `valgrind --tool=helgrind` com 0 erros em mono, GLOBAL e POR_CPU (inclusive com migração);
+- os valores esperados dos testes unitários descritos nas trilhas (`test_pcb`, `test_barreira`, `test_politica`, `test_log`, `test_cpus`, `test_metricas`) foram obtidos nesse protótipo.
 
-### 3.2 Branches e PRs
-- Branches: `a/<tema>` e `b/<tema>`. PR para a `main`.
-- Todo PR de marco tem o título `M<n>: ...` e, no corpo, a lista "Como verificar", com os comandos e a saída obtida.
-- **Revisão em até 24 h.** Se o revisor não aparecer em 24 h e os comandos de verificação passarem, o autor pode fazer o merge e anota isso no `STATUS.md`. Ninguém fica parado esperando.
+O que **não** dá para conferir daqui: os casos ocultos e os casos oficiais POR_CPU, que não
+vieram no pacote público. Os pontos P1, P2, P7 e P8 são leituras nossas do enunciado.
 
-### 3.3 Dúvidas
-- Abra uma issue com o rótulo `duvida`. O outro responde em até 12 h.
-- **Enquanto a resposta não vem, siga o padrão escrito nestes arquivos.** Todo ponto em aberto tem um padrão definido (ver arquivo 02, seção 9). Se não houver padrão, escolha a opção mais simples, siga em frente e registre na issue.
+## Calendário
 
-### 3.4 Regra de ouro
-Quem quebra a `main` conserta antes de qualquer outra coisa. Erro de compilação vale nota zero.
+| Marco | Prazo | A (Yan) | B (dupla) |
+|---|---|---|---|
+| M0 | seg 23/11, 14h | repositório, contrato, stubs | (adianta o comparador) |
+| M1 | ter 24/11, 23h | motor completo (PR `M1-A`) | infraestrutura e `cpus.c` (PR `M1-B`) |
+| M2 | qua 25/11, 23h | integra: mono passando | revisa |
+| M3 | sex 27/11, 23h | estresse e helgrind | multi GLOBAL |
+| M4 | dom 29/11, 23h | estresse POR_CPU | POR_CPU |
+| M5 | seg 30/11, 23h | análise no README | bônus e decisões no README |
+| M6 | ter 01/12, 23h | teste de professor (qua 02) | congelamento e pacote |
+| Entrega | qui 03/12 | envia | confere |
 
-## 4. Marcos (pontos de entrega e verificação)
-
-Cada marco tem **dono**, **prazo**, **o que entra na `main`** e **como o outro verifica**. Os detalhes estão nas trilhas (arquivos 04 e 05).
-
-| Marco | Prazo | Dono | Entrega na `main` | Verificação (quem não é o dono roda) |
-|---|---|---|---|---|
-| **M0** | seg 23/11, 12h | A | repositório, `.gitignore`, `STATUS.md`, **todos os headers do arquivo 03 copiados literalmente**, `.c` vazios (stubs), Makefile do arquivo 03, `tests/casos/` com os casos públicos, `ferramentas/oraculo.py` e `ferramentas/contar_migracoes.py` | `make monoprocessador && make multiprocessador` sem nenhum warning |
-| **M1-B** | ter 24/11, 23h | B | `fila.c`, `log.c`, `metricas.c`, `cpus.c` (só modo GLOBAL), `tests/compare.py`, `tests/run_all.sh`, testes unitários | `make teste_unidade` passa; `python3 tests/compare.py tests/casos/saida_01.txt tests/casos/saida_01.txt` sai com 0 |
-| **M1-A** | ter 24/11, 23h | A | `tempo.c`, `barreira.c`, `entrada.c`, `pcb.c`, `geradora.c`, `politica.c`, `escalonador.c`, `main.c` | compila; o teste de barreira passa; o teste de threads (arquivo 04, dia 1) passa |
-| **M2** | qua 25/11, 23h | A (integra) | merge de M1-A e M1-B; **casos 01, 03 e 05 passando** no mono | `tests/run_all.sh mono` mostra 3/3 ok, 3 vezes seguidas; valgrind com 0 erros no caso 05 |
-| **M3** | sex 27/11, 23h | B (multi) e A (estresse) | **casos 13, 15, 17 e exemplo 4.5 passando** no multi GLOBAL; gerador de estresse e verificador de invariantes | `tests/run_all.sh` mostra 7/7 ok, 5 vezes seguidas; helgrind limpo em 3 casos pequenos |
-| **M4** | dom 29/11, 23h | B | `cpus.c` com POR_CPU (colocação, migração); casos POR_CPU gerados pelo oráculo passando | `tests/run_all.sh porcpu` ok; A roda helgrind com POR_CPU e 8 CPUs, sem erros |
-| **M5** | seg 30/11, 23h | A e B | bônus de afinidade atrás de `AFINIDADE=1` + `ANALISE_AFINIDADE.md` (B), tabela da análise sem afinidade (A), README completo (decisões e bônus: B; análise: A) | o outro lê o README e marca "ok" no PR |
-| **M6** | ter 01/12, 23h | B | **código congelado**, tag `v1.0`, `ferramentas/empacotar.sh`, teste "de professor" numa pasta limpa | A repete o teste de professor no LabGrad (ou numa VM Ubuntu) na quarta |
-| Entrega | qui 03/12 | A envia, B confere | `TP-SO-2026-2-<mat1>-<mat2>.tar.gz` no Classroom | B baixa o arquivo enviado e roda `make` nos dois alvos |
-
-**Prazo oficial: sexta 04/12/2026, até 07h59. Não há aceitação com atraso.** A meta interna é quinta 03/12, deixando uma noite de folga.
-
-## 5. Caminho crítico
-
-`M0 → M1-A/M1-B → M2 (mono) → M3 (GLOBAL) → M4 (POR_CPU) → M6 (congelamento)`
-
-Se um marco atrasar mais de 24 h, o outro integrante assume a próxima tarefa 🔴 do atrasado e registra no `STATUS.md`. **O bônus é o primeiro a ser cortado. O helgrind nunca é cortado.**
-
-## 6. Antes de começar (domingo 22/11, cada um sozinho, 30 min)
-1. Ler os arquivos 00 a 03.
-2. Montar o ambiente Linux (arquivo 06, seção 1). **No macOS não existe `pthread_barrier_t` e o valgrind não roda.** Todo teste é feito em Linux.
-3. Baixar do Classroom **`carga_analise.txt`** e **os casos públicos que faltam** (02, 04, 06 a 12, 14, 16 e 18). Na pasta local só existem 01, 03, 05, 13, 15 e 17. Quem achar primeiro faz o commit em `tests/casos/`.
+**Prazo oficial: sexta 04/12/2026, 07h59, sem atraso.**

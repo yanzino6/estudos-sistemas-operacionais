@@ -1,3 +1,5 @@
+> **ARQUIVADO em 23/11/2026.** Este arquivo foi absorvido por `04_TRILHA_A.md` e `05_TRILHA_B.md` e não é mais atualizado. É o histórico da revisão anterior; os erros R1 a R18 descritos aqui já estão corrigidos no pseudocódigo das trilhas. Pode ser apagado.
+
 # 01 · Revisão cega dos três planos
 
 **Método.** Primeiro o enunciado e os casos públicos foram lidos do zero. Depois as

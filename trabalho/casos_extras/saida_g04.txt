@@ -1,0 +1,52 @@
+[t=0ms] [FCFS] Chegada PID 13
+[t=0ms] [FCFS] Chegada PID 36
+[t=0ms] [FCFS] Chegada PID 55
+[t=0ms] [FCFS] Chegada PID 59
+[t=0ms] [FCFS] [CPU0] Executando PID 13
+[t=0ms] [FCFS] [CPU1] Executando PID 36
+[t=0ms] [FCFS] [CPU2] Executando PID 55
+[t=0ms] [FCFS] [CPU3] Executando PID 59
+[t=200ms] [FCFS] Chegada PID 29
+[t=300ms] [FCFS] [CPU0] PID 13 finalizado
+[t=300ms] [FCFS] [CPU0] Executando PID 29
+[t=500ms] [FCFS] [CPU2] PID 55 finalizado
+[t=600ms] [FCFS] [CPU0] PID 29 finalizado
+[t=700ms] [FCFS] Chegada PID 33
+[t=700ms] [FCFS] Chegada PID 38
+[t=700ms] [FCFS] [CPU0] Executando PID 33
+[t=700ms] [FCFS] [CPU2] Executando PID 38
+[t=900ms] [FCFS] Chegada PID 56
+[t=1000ms] [FCFS] Chegada PID 50
+[t=1000ms] [FCFS] [CPU1] PID 36 finalizado
+[t=1000ms] [FCFS] [CPU1] Executando PID 56
+[t=1200ms] [FCFS] Chegada PID 30
+[t=1200ms] [FCFS] [CPU3] PID 59 finalizado
+[t=1200ms] [FCFS] [CPU3] Executando PID 50
+[t=1400ms] [FCFS] [CPU2] PID 38 finalizado
+[t=1400ms] [FCFS] [CPU2] Executando PID 30
+[t=1500ms] [FCFS] [CPU0] PID 33 finalizado
+[t=1900ms] [FCFS] [CPU1] PID 56 finalizado
+[t=1900ms] [FCFS] [CPU2] PID 30 finalizado
+[t=1900ms] [FCFS] [CPU3] PID 50 finalizado
+[t=1900ms] [FCFS] Escalonador terminou execução de todos processos
+=== METRICAS ===
+PID 13 | espera=0ms | turnaround=300ms | resposta=0ms
+PID 29 | espera=100ms | turnaround=400ms | resposta=100ms
+PID 30 | espera=200ms | turnaround=700ms | resposta=200ms
+PID 33 | espera=0ms | turnaround=800ms | resposta=0ms
+PID 36 | espera=0ms | turnaround=1000ms | resposta=0ms
+PID 38 | espera=0ms | turnaround=700ms | resposta=0ms
+PID 50 | espera=200ms | turnaround=900ms | resposta=200ms
+PID 55 | espera=0ms | turnaround=500ms | resposta=0ms
+PID 56 | espera=100ms | turnaround=1000ms | resposta=100ms
+PID 59 | espera=0ms | turnaround=1200ms | resposta=0ms
+Espera media: 60.00 ms
+Turnaround medio: 750.00 ms
+Resposta media: 60.00 ms
+Trocas de contexto: 10
+Utilizacao CPU0: 73.68%
+Utilizacao CPU1: 100.00%
+Utilizacao CPU2: 89.47%
+Utilizacao CPU3: 100.00%
+Throughput: 5.26 processos/s
+Makespan: 1900 ms

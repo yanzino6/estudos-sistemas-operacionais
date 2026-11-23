@@ -1,0 +1,28 @@
+CASOS EXTRAS (NAO OFICIAIS) - gerados por ferramentas/oraculo.py em 23/11/2026
+==============================================================================
+
+Mesmo formato dos casos publicos: entrada_X.txt e saida_X.txt. Todos sao para a versao
+multiprocessador e todos sao NAO ambiguos (oraculo.py --ambiguo sai com 0), ou seja, o
+resultado nao depende da ordem em que duas CPUs tratam eventos do mesmo instante.
+
+  ex45       FCFS        GLOBAL   2 CPUs   o exemplo 4.5 do enunciado
+  g01        FCFS        GLOBAL   2 CPUs
+  g02        RR          GLOBAL   2 CPUs
+  g03        PRIORIDADE  GLOBAL   2 CPUs
+  g04        FCFS        GLOBAL   4 CPUs
+  g05        RR          GLOBAL   4 CPUs
+  g06        PRIORIDADE  GLOBAL   4 CPUs
+  p01        FCFS        POR_CPU  2 CPUs   o exemplo pequeno das trilhas (1 migracao)
+  p02        FCFS        POR_CPU  2 CPUs   2 migracoes
+  p03        RR          POR_CPU  2 CPUs   2 migracoes   (depende do ponto em aberto P1)
+  p04        PRIORIDADE  POR_CPU  2 CPUs   2 migracoes
+  p05        FCFS        POR_CPU  4 CPUs   2 migracoes
+  p06        RR          POR_CPU  4 CPUs   2 migracoes   (depende do ponto em aberto P1)
+  p07        PRIORIDADE  POR_CPU  4 CPUs   2 migracoes   (depende do ponto em aberto P1)
+
+Os casos g* e p* tem varias chegadas em t=0 e varios processos no mesmo instante.
+
+ATENCAO: estas saidas seguem as NOSSAS leituras dos pontos que o enunciado nao fecha
+(apendice A das trilhas). Se um caso oficial POR_CPU mostrar que a CPU retida NAO conta
+como carga (ponto P1), regenere p03, p06 e p07:
+    python3 ferramentas/oraculo.py casos_extras/entrada_p03.txt --retencao-nao-conta > casos_extras/saida_p03.txt

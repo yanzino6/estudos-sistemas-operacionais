@@ -1,0 +1,44 @@
+[t=0ms] [FCFS] Chegada PID 24
+[t=0ms] [FCFS] Chegada PID 43
+[t=0ms] [FCFS] Chegada PID 45
+[t=0ms] [FCFS] [CPU0] Executando PID 24
+[t=0ms] [FCFS] [CPU1] Executando PID 43
+[t=400ms] [FCFS] [CPU1] PID 43 finalizado
+[t=400ms] [FCFS] [CPU1] Migracao PID 45 CPU0 -> CPU1
+[t=400ms] [FCFS] [CPU1] Executando PID 45
+[t=600ms] [FCFS] Chegada PID 49
+[t=700ms] [FCFS] Chegada PID 3
+[t=800ms] [FCFS] Chegada PID 10
+[t=800ms] [FCFS] Chegada PID 19
+[t=900ms] [FCFS] Chegada PID 30
+[t=1100ms] [FCFS] [CPU0] PID 24 finalizado
+[t=1100ms] [FCFS] [CPU0] Executando PID 49
+[t=1200ms] [FCFS] [CPU1] PID 45 finalizado
+[t=1200ms] [FCFS] [CPU1] Executando PID 3
+[t=2100ms] [FCFS] [CPU0] PID 49 finalizado
+[t=2100ms] [FCFS] [CPU0] Executando PID 10
+[t=2300ms] [FCFS] [CPU1] PID 3 finalizado
+[t=2300ms] [FCFS] [CPU1] Executando PID 19
+[t=2700ms] [FCFS] [CPU1] PID 19 finalizado
+[t=2700ms] [FCFS] [CPU1] Migracao PID 30 CPU0 -> CPU1
+[t=2700ms] [FCFS] [CPU1] Executando PID 30
+[t=3100ms] [FCFS] [CPU1] PID 30 finalizado
+[t=3200ms] [FCFS] [CPU0] PID 10 finalizado
+[t=3200ms] [FCFS] Escalonador terminou execução de todos processos
+=== METRICAS ===
+PID 3 | espera=500ms | turnaround=1600ms | resposta=500ms
+PID 10 | espera=1300ms | turnaround=2400ms | resposta=1300ms
+PID 19 | espera=1500ms | turnaround=1900ms | resposta=1500ms
+PID 24 | espera=0ms | turnaround=1100ms | resposta=0ms
+PID 30 | espera=1800ms | turnaround=2200ms | resposta=1800ms
+PID 43 | espera=0ms | turnaround=400ms | resposta=0ms
+PID 45 | espera=400ms | turnaround=1200ms | resposta=400ms
+PID 49 | espera=500ms | turnaround=1500ms | resposta=500ms
+Espera media: 750.00 ms
+Turnaround medio: 1537.50 ms
+Resposta media: 750.00 ms
+Trocas de contexto: 8
+Utilizacao CPU0: 100.00%
+Utilizacao CPU1: 96.88%
+Throughput: 2.50 processos/s
+Makespan: 3200 ms

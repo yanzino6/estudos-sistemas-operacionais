@@ -1,0 +1,92 @@
+[t=0ms] [RR] Chegada PID 34
+[t=0ms] [RR] Chegada PID 36
+[t=0ms] [RR] [CPU0] Executando PID 34
+[t=0ms] [RR] [CPU1] Executando PID 36
+[t=200ms] [RR] [CPU1] PID 36 finalizado
+[t=200ms] [RR] [CPU0] Quantum esgotado PID 34
+[t=200ms] [RR] [CPU0] Executando PID 34
+[t=400ms] [RR] [CPU0] Quantum esgotado PID 34
+[t=400ms] [RR] [CPU0] Executando PID 34
+[t=600ms] [RR] [CPU0] Quantum esgotado PID 34
+[t=600ms] [RR] [CPU0] Executando PID 34
+[t=700ms] [RR] Chegada PID 38
+[t=700ms] [RR] Chegada PID 41
+[t=700ms] [RR] [CPU1] Executando PID 38
+[t=800ms] [RR] [CPU0] Quantum esgotado PID 34
+[t=800ms] [RR] [CPU0] Executando PID 41
+[t=900ms] [RR] [CPU1] Quantum esgotado PID 38
+[t=900ms] [RR] [CPU1] Executando PID 38
+[t=1000ms] [RR] [CPU0] Quantum esgotado PID 41
+[t=1000ms] [RR] [CPU0] Executando PID 34
+[t=1100ms] [RR] [CPU0] PID 34 finalizado
+[t=1100ms] [RR] [CPU1] Quantum esgotado PID 38
+[t=1100ms] [RR] [CPU1] Executando PID 38
+[t=1200ms] [RR] Chegada PID 11
+[t=1200ms] [RR] Chegada PID 15
+[t=1200ms] [RR] [CPU1] PID 38 finalizado
+[t=1200ms] [RR] [CPU0] Executando PID 41
+[t=1300ms] [RR] [CPU1] Executando PID 11
+[t=1400ms] [RR] Chegada PID 14
+[t=1400ms] [RR] Chegada PID 31
+[t=1400ms] [RR] [CPU0] Quantum esgotado PID 41
+[t=1400ms] [RR] [CPU0] Executando PID 15
+[t=1500ms] [RR] [CPU1] Quantum esgotado PID 11
+[t=1500ms] [RR] [CPU1] Executando PID 14
+[t=1600ms] [RR] [CPU0] Quantum esgotado PID 15
+[t=1600ms] [RR] [CPU0] Executando PID 31
+[t=1700ms] [RR] [CPU1] Quantum esgotado PID 14
+[t=1700ms] [RR] [CPU1] Executando PID 11
+[t=1800ms] [RR] [CPU0] Quantum esgotado PID 31
+[t=1800ms] [RR] [CPU0] Executando PID 41
+[t=1900ms] [RR] [CPU1] Quantum esgotado PID 11
+[t=1900ms] [RR] [CPU1] Executando PID 14
+[t=2000ms] [RR] [CPU1] PID 14 finalizado
+[t=2000ms] [RR] [CPU0] Quantum esgotado PID 41
+[t=2000ms] [RR] [CPU0] Executando PID 15
+[t=2100ms] [RR] [CPU1] Executando PID 11
+[t=2200ms] [RR] [CPU0] Quantum esgotado PID 15
+[t=2200ms] [RR] [CPU0] Executando PID 31
+[t=2300ms] [RR] [CPU1] Quantum esgotado PID 11
+[t=2300ms] [RR] [CPU1] Executando PID 11
+[t=2400ms] [RR] [CPU0] Quantum esgotado PID 31
+[t=2400ms] [RR] [CPU0] Executando PID 41
+[t=2500ms] [RR] [CPU1] Quantum esgotado PID 11
+[t=2500ms] [RR] [CPU1] Executando PID 11
+[t=2600ms] [RR] [CPU1] PID 11 finalizado
+[t=2600ms] [RR] [CPU0] Quantum esgotado PID 41
+[t=2600ms] [RR] [CPU0] Executando PID 15
+[t=2700ms] [RR] [CPU1] Migracao PID 41 CPU0 -> CPU1
+[t=2700ms] [RR] [CPU1] Executando PID 41
+[t=2800ms] [RR] [CPU1] PID 41 finalizado
+[t=2800ms] [RR] [CPU0] Quantum esgotado PID 15
+[t=2800ms] [RR] [CPU0] Executando PID 31
+[t=2900ms] [RR] [CPU1] Migracao PID 15 CPU0 -> CPU1
+[t=2900ms] [RR] [CPU1] Executando PID 15
+[t=3000ms] [RR] [CPU0] Quantum esgotado PID 31
+[t=3000ms] [RR] [CPU0] Executando PID 31
+[t=3100ms] [RR] [CPU1] Quantum esgotado PID 15
+[t=3100ms] [RR] [CPU1] Executando PID 15
+[t=3200ms] [RR] [CPU0] Quantum esgotado PID 31
+[t=3200ms] [RR] [CPU0] Executando PID 31
+[t=3300ms] [RR] [CPU1] PID 15 finalizado
+[t=3400ms] [RR] [CPU0] Quantum esgotado PID 31
+[t=3400ms] [RR] [CPU0] Executando PID 31
+[t=3600ms] [RR] [CPU0] PID 31 finalizado
+[t=3600ms] [RR] Escalonador terminou execução de todos processos
+=== METRICAS ===
+PID 11 | espera=500ms | turnaround=1400ms | resposta=100ms
+PID 14 | espera=300ms | turnaround=600ms | resposta=100ms
+PID 15 | espera=1100ms | turnaround=2100ms | resposta=200ms
+PID 31 | espera=1000ms | turnaround=2200ms | resposta=200ms
+PID 34 | espera=200ms | turnaround=1100ms | resposta=0ms
+PID 36 | espera=0ms | turnaround=200ms | resposta=0ms
+PID 38 | espera=0ms | turnaround=500ms | resposta=0ms
+PID 41 | espera=1200ms | turnaround=2100ms | resposta=100ms
+Espera media: 537.50 ms
+Turnaround medio: 1275.00 ms
+Resposta media: 87.50 ms
+Trocas de contexto: 21
+Utilizacao CPU0: 97.22%
+Utilizacao CPU1: 66.67%
+Throughput: 2.22 processos/s
+Makespan: 3600 ms

@@ -1,0 +1,42 @@
+[t=0ms] [FCFS] Chegada PID 10
+[t=0ms] [FCFS] Chegada PID 58
+[t=0ms] [FCFS] [CPU0] Executando PID 10
+[t=0ms] [FCFS] [CPU1] Executando PID 58
+[t=200ms] [FCFS] Chegada PID 17
+[t=200ms] [FCFS] Chegada PID 44
+[t=300ms] [FCFS] [CPU1] PID 58 finalizado
+[t=300ms] [FCFS] [CPU1] Executando PID 17
+[t=500ms] [FCFS] Chegada PID 51
+[t=500ms] [FCFS] [CPU0] PID 10 finalizado
+[t=500ms] [FCFS] [CPU0] Executando PID 44
+[t=600ms] [FCFS] Chegada PID 47
+[t=600ms] [FCFS] Chegada PID 50
+[t=900ms] [FCFS] [CPU1] PID 17 finalizado
+[t=900ms] [FCFS] [CPU1] Executando PID 51
+[t=1000ms] [FCFS] [CPU0] PID 44 finalizado
+[t=1000ms] [FCFS] [CPU0] Executando PID 47
+[t=1300ms] [FCFS] Chegada PID 57
+[t=1700ms] [FCFS] [CPU1] PID 51 finalizado
+[t=1700ms] [FCFS] [CPU1] Executando PID 50
+[t=2000ms] [FCFS] [CPU1] PID 50 finalizado
+[t=2000ms] [FCFS] [CPU1] Executando PID 57
+[t=2100ms] [FCFS] [CPU0] PID 47 finalizado
+[t=2600ms] [FCFS] [CPU1] PID 57 finalizado
+[t=2600ms] [FCFS] Escalonador terminou execução de todos processos
+=== METRICAS ===
+PID 10 | espera=0ms | turnaround=500ms | resposta=0ms
+PID 17 | espera=100ms | turnaround=700ms | resposta=100ms
+PID 44 | espera=300ms | turnaround=800ms | resposta=300ms
+PID 47 | espera=400ms | turnaround=1500ms | resposta=400ms
+PID 50 | espera=1100ms | turnaround=1400ms | resposta=1100ms
+PID 51 | espera=400ms | turnaround=1200ms | resposta=400ms
+PID 57 | espera=700ms | turnaround=1300ms | resposta=700ms
+PID 58 | espera=0ms | turnaround=300ms | resposta=0ms
+Espera media: 375.00 ms
+Turnaround medio: 962.50 ms
+Resposta media: 375.00 ms
+Trocas de contexto: 8
+Utilizacao CPU0: 80.77%
+Utilizacao CPU1: 100.00%
+Throughput: 3.08 processos/s
+Makespan: 2600 ms

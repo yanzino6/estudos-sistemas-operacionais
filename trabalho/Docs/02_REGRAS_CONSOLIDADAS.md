@@ -1,3 +1,5 @@
+> **ARQUIVADO em 23/11/2026.** Este arquivo foi absorvido por `04_TRILHA_A.md` e `05_TRILHA_B.md` e não é mais atualizado. As regras daqui aparecem nas trilhas como "Lembretes do enunciado", na etapa em que cada uma vira código; os pontos em aberto (agora P1 a P8) estão no apêndice A das trilhas. Pode ser apagado.
+
 # 02 · Regras consolidadas (enunciado + LEIA-ME + casos públicos)
 
 Tudo o que o programa precisa respeitar está aqui, num lugar só. Cada regra tem a

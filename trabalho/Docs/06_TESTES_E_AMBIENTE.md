@@ -1,3 +1,5 @@
+> **ARQUIVADO em 23/11/2026.** Este arquivo foi absorvido por `04_TRILHA_A.md` e `05_TRILHA_B.md` e não é mais atualizado. Ambiente, oráculo, comparador, valgrind e estresse estão agora nas trilhas (seção 2 e etapas de teste). Este arquivo supunha macOS para o Yan, o que não é o caso. Pode ser apagado.
+
 # 06 · Ambiente, oráculo, comparador, valgrind/helgrind e estresse
 
 ## 1. Ambiente Linux (obrigatório para os dois)

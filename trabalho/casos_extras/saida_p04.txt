@@ -1,0 +1,88 @@
+[t=0ms] [PRIORIDADE] Chegada PID 6
+[t=0ms] [PRIORIDADE] Chegada PID 25
+[t=0ms] [PRIORIDADE] [CPU0] Executando PID 6
+[t=0ms] [PRIORIDADE] [CPU1] Executando PID 25
+[t=200ms] [PRIORIDADE] [CPU1] PID 25 finalizado
+[t=200ms] [PRIORIDADE] [CPU0] Quantum esgotado PID 6
+[t=200ms] [PRIORIDADE] [CPU0] Executando PID 6
+[t=300ms] [PRIORIDADE] Chegada PID 19
+[t=300ms] [PRIORIDADE] [CPU1] Executando PID 19
+[t=400ms] [PRIORIDADE] Chegada PID 31
+[t=400ms] [PRIORIDADE] [CPU0] Quantum esgotado PID 6
+[t=400ms] [PRIORIDADE] [CPU0] Executando PID 31
+[t=500ms] [PRIORIDADE] [CPU1] Quantum esgotado PID 19
+[t=500ms] [PRIORIDADE] [CPU1] Executando PID 19
+[t=600ms] [PRIORIDADE] [CPU0] Quantum esgotado PID 31
+[t=600ms] [PRIORIDADE] [CPU0] Executando PID 31
+[t=700ms] [PRIORIDADE] [CPU1] Quantum esgotado PID 19
+[t=700ms] [PRIORIDADE] [CPU1] Executando PID 19
+[t=800ms] [PRIORIDADE] [CPU0] Quantum esgotado PID 31
+[t=800ms] [PRIORIDADE] [CPU0] Executando PID 31
+[t=900ms] [PRIORIDADE] [CPU1] Quantum esgotado PID 19
+[t=900ms] [PRIORIDADE] [CPU1] Executando PID 19
+[t=1000ms] [PRIORIDADE] Chegada PID 17
+[t=1000ms] [PRIORIDADE] [CPU0] Quantum esgotado PID 31
+[t=1000ms] [PRIORIDADE] [CPU0] Executando PID 31
+[t=1100ms] [PRIORIDADE] [CPU1] Quantum esgotado PID 19
+[t=1100ms] [PRIORIDADE] [CPU1] Executando PID 19
+[t=1200ms] [PRIORIDADE] [CPU0] Quantum esgotado PID 31
+[t=1200ms] [PRIORIDADE] [CPU0] Executando PID 31
+[t=1300ms] [PRIORIDADE] Chegada PID 29
+[t=1300ms] [PRIORIDADE] Chegada PID 43
+[t=1300ms] [PRIORIDADE] Chegada PID 59
+[t=1300ms] [PRIORIDADE] [CPU1] Quantum esgotado PID 19
+[t=1300ms] [PRIORIDADE] [CPU1] Executando PID 43
+[t=1400ms] [PRIORIDADE] [CPU0] Quantum esgotado PID 31
+[t=1400ms] [PRIORIDADE] [CPU0] Executando PID 29
+[t=1500ms] [PRIORIDADE] [CPU1] Quantum esgotado PID 43
+[t=1500ms] [PRIORIDADE] [CPU1] Executando PID 19
+[t=1600ms] [PRIORIDADE] [CPU1] PID 19 finalizado
+[t=1600ms] [PRIORIDADE] [CPU0] Quantum esgotado PID 29
+[t=1600ms] [PRIORIDADE] [CPU0] Executando PID 29
+[t=1700ms] [PRIORIDADE] [CPU1] Executando PID 43
+[t=1800ms] [PRIORIDADE] [CPU0] Quantum esgotado PID 29
+[t=1800ms] [PRIORIDADE] [CPU0] Executando PID 29
+[t=1900ms] [PRIORIDADE] [CPU1] Quantum esgotado PID 43
+[t=1900ms] [PRIORIDADE] [CPU1] Executando PID 43
+[t=2000ms] [PRIORIDADE] [CPU1] PID 43 finalizado
+[t=2000ms] [PRIORIDADE] [CPU0] Quantum esgotado PID 29
+[t=2000ms] [PRIORIDADE] [CPU0] Executando PID 29
+[t=2100ms] [PRIORIDADE] [CPU1] Executando PID 17
+[t=2200ms] [PRIORIDADE] [CPU0] Quantum esgotado PID 29
+[t=2200ms] [PRIORIDADE] [CPU0] Executando PID 29
+[t=2300ms] [PRIORIDADE] [CPU1] Quantum esgotado PID 17
+[t=2300ms] [PRIORIDADE] [CPU1] Executando PID 17
+[t=2400ms] [PRIORIDADE] [CPU0] Quantum esgotado PID 29
+[t=2400ms] [PRIORIDADE] [CPU0] Executando PID 29
+[t=2500ms] [PRIORIDADE] [CPU0] PID 29 finalizado
+[t=2500ms] [PRIORIDADE] [CPU1] PID 17 finalizado
+[t=2500ms] [PRIORIDADE] [CPU1] Migracao PID 31 CPU0 -> CPU1
+[t=2500ms] [PRIORIDADE] [CPU1] Executando PID 31
+[t=2600ms] [PRIORIDADE] [CPU0] Executando PID 59
+[t=2700ms] [PRIORIDADE] [CPU1] PID 31 finalizado
+[t=2700ms] [PRIORIDADE] [CPU1] Migracao PID 6 CPU0 -> CPU1
+[t=2700ms] [PRIORIDADE] [CPU1] Executando PID 6
+[t=2800ms] [PRIORIDADE] [CPU0] Quantum esgotado PID 59
+[t=2800ms] [PRIORIDADE] [CPU0] Executando PID 59
+[t=2900ms] [PRIORIDADE] [CPU1] Quantum esgotado PID 6
+[t=2900ms] [PRIORIDADE] [CPU1] Executando PID 6
+[t=3000ms] [PRIORIDADE] [CPU0] PID 59 finalizado
+[t=3000ms] [PRIORIDADE] [CPU1] PID 6 finalizado
+[t=3100ms] [PRIORIDADE] Escalonador terminou execução de todos processos
+=== METRICAS ===
+PID 6 | espera=2300ms | turnaround=3000ms | resposta=0ms
+PID 17 | espera=1100ms | turnaround=1500ms | resposta=1100ms
+PID 19 | espera=200ms | turnaround=1300ms | resposta=0ms
+PID 25 | espera=0ms | turnaround=200ms | resposta=0ms
+PID 29 | espera=100ms | turnaround=1200ms | resposta=100ms
+PID 31 | espera=1100ms | turnaround=2300ms | resposta=0ms
+PID 43 | espera=200ms | turnaround=700ms | resposta=0ms
+PID 59 | espera=1300ms | turnaround=1700ms | resposta=1300ms
+Espera media: 787.50 ms
+Turnaround medio: 1487.50 ms
+Resposta media: 312.50 ms
+Trocas de contexto: 12
+Utilizacao CPU0: 96.67%
+Utilizacao CPU1: 90.00%
+Throughput: 2.67 processos/s
+Makespan: 3000 ms

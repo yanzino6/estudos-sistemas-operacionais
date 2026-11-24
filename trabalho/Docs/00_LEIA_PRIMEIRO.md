@@ -1,4 +1,4 @@
-# TP SO 2026/2 · Mini-kernel · Leia primeiro (revisão de 23/11)
+# TP SO 2026/2 · Mini-kernel · Leia primeiro (revisão de 23/11, atualizado em 24/11)
 
 ## O que cada um lê
 
@@ -16,19 +16,32 @@ enunciado e o `LEIA-ME` dos casos, e relembram cada regra no ponto em que ela vi
 
 | Pasta | Conteúdo |
 |---|---|
-| `Docs/` | este arquivo, as duas trilhas, o PDF do enunciado e cinco arquivos antigos, arquivados |
+| `Docs/` | este arquivo, as duas trilhas e o PDF do enunciado |
 | `contrato/` | os 12 headers (`.h`). No marco M0, A copia todos para a raiz do repositório, sem alterar. O Makefile inicial está escrito na etapa A0 da Trilha A |
 | `ferramentas/` | `oraculo.py` (simulador de referência) e `contar_migracoes.py` (medidas do bônus). Não vão na entrega |
 | `casos_publicos_v1/` | os 6 casos oficiais (01, 03, 05 mono; 13, 15, 17 multi GLOBAL) |
 | `casos_extras/` | 14 casos gerados pelo oráculo (GLOBAL e POR_CPU, 2 e 4 CPUs), todos não ambíguos. Não são oficiais |
 
-## Arquivos arquivados
+## Atualização de 24/11
 
-`01_REVISAO_CEGA.md`, `02_REGRAS_CONSOLIDADAS.md`, `03_ARQUITETURA_E_CONTRATOS.md`,
-`06_TESTES_E_AMBIENTE.md` e `07_README_ANALISE_BONUS_ENTREGA.md` foram absorvidos pelas
-trilhas e **não são mais atualizados**. Não implemente a partir deles: o `03`, em
-especial, ainda traz o laço de escalonador com a corrida de partida (item 1 abaixo).
-Podem ser apagados.
+**A CPU retida conta como carga (ponto P1): confirmado.** No POR_CPU, uma CPU que terminou
+o processo antes do fim do quantum e ainda está em retenção vale 1 na soma da carga usada
+para colocar quem chega. Era o comportamento que as trilhas já descreviam, então nenhum
+resultado nem caso de teste mudou.
+
+Com a regra fechada, o mecanismo que permitia a outra leitura saiu do desenho:
+
+| Onde | O que saiu |
+|---|---|
+| `cpus.h` | a macro `CARGA_CONTA_RETENCAO`, o campo `retida` de `CPU` e a função `cpus_inicio_retencao` |
+| `cpus.c` (B) | `carga(k)` agora é só `filas[k].tamanho + (executando ≠ NULO ? 1 : 0)`; `cpus_devolver` não mexe mais em `retida` |
+| `escalonador.c` (A) | na retenção, o laço só faz `dormir_ate(t_lib)`; saiu a linha `cpus_travar(); cpus_inicio_retencao(k); cpus_destravar()` |
+| `oraculo.py` | a opção `--retencao-nao-conta` |
+
+Funciona sem marcação nenhuma porque `executando` só volta a NULO em `cpus_devolver`, que
+o laço chama no fim da retenção. **Se o repositório já tem o `cpus.h` antigo ou stubs,
+apliquem as três primeiras linhas da tabela** (é mudança de contrato: PR com o rótulo
+`contrato`). Os arquivos antigos (`01`, `02`, `03`, `06`, `07`) já foram apagados.
 
 ## O que mudou nesta revisão
 
@@ -53,7 +66,8 @@ código da entrega é de vocês). Resultados:
 - os valores esperados dos testes unitários descritos nas trilhas (`test_pcb`, `test_barreira`, `test_politica`, `test_log`, `test_cpus`, `test_metricas`) foram obtidos nesse protótipo.
 
 O que **não** dá para conferir daqui: os casos ocultos e os casos oficiais POR_CPU, que não
-vieram no pacote público. Os pontos P1, P2, P7 e P8 são leituras nossas do enunciado.
+vieram no pacote público. Os pontos P2, P7 e P8 são leituras nossas do enunciado (P1 foi
+confirmado em 24/11).
 
 ## Calendário
 

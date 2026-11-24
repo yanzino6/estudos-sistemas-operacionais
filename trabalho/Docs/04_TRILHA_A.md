@@ -130,7 +130,7 @@ Disso saem quatro regras: toda espera é `dormir_ate(instante lógico)`, nunca "
 | `pid, process_len, priority, num_threads, start_time` | nada: imutáveis depois da leitura |
 | `remaining_time, state, cpu_id, first_dispatch, finish_time, orcamento, fatias_no_despacho, t_despacho, ultima_cpu` | `p->mutex` (`ultima_cpu` é lido pela política sob a trava da fila, mas só é escrito enquanto o processo não está em fila nenhuma) |
 | `ant, prox, seq` | mutex da fila em que o PCB está |
-| `CPU.ociosa, entregue, t_entrega, executando, retida`, `cpus_executando`, `generator_done`, `encerrar` | `cpus_travar` (GLOBAL: o mutex da fila global; POR_CPU: todos) |
+| `CPU.ociosa, entregue, t_entrega, executando`, `cpus_executando`, `generator_done`, `encerrar` | `cpus_travar` (GLOBAL: o mutex da fila global; POR_CPU: todos) |
 | `CPU.ultimo_pid, ocupado_ms, trocas` | só a própria escalonadora escreve; a `main` lê depois do `join` |
 | `proxima_chegada` | `mutex_chegadas` |
 
@@ -157,7 +157,6 @@ python3 ferramentas/oraculo.py entrada.txt            > esperado.txt   # multi (
 python3 ferramentas/oraculo.py entrada.txt --mono     > esperado.txt   # como make monoprocessador
 python3 ferramentas/oraculo.py entrada.txt --ambiguo  > esperado.txt   # sai com código 2 se a entrada for ambígua
 python3 ferramentas/oraculo.py entrada.txt --afinidade                 # bônus ligado (sem efeito com 1 CPU)
-python3 ferramentas/oraculo.py entrada.txt --retencao-nao-conta        # alternativa do ponto em aberto P1
 ```
 - **Ambígua** é a entrada cujo resultado muda conforme a ordem em que duas CPUs tratam eventos do mesmo instante (pontos P4 e P7 do apêndice A). O programa real pode, legitimamente, dar outra saída. **Só compare com o oráculo entradas não ambíguas** (`--ambiguo` saindo com 0). Os casos oficiais não são ambíguos.
 - O **mono é sempre determinístico**: qualquer entrada serve de teste contra `oraculo.py --mono`.
@@ -174,7 +173,7 @@ python3 ferramentas/oraculo.py entrada.txt --retencao-nao-conta        # alterna
 | `g04`, `g05`, `g06` | GLOBAL, 4 CPUs: FCFS, RR, PRIORIDADE | idem, com mais CPUs que processos em parte do tempo |
 | `p01` | FCFS, POR_CPU, 2 CPUs | o exemplo pequeno desta trilha (1 migração) |
 | `p02`, `p03`, `p04` | POR_CPU, 2 CPUs: FCFS, RR, PRIORIDADE | colocação por carga e 2 migrações cada |
-| `p05`, `p06`, `p07` | POR_CPU, 4 CPUs: FCFS, RR, PRIORIDADE | idem (`p03`, `p06` e `p07` dependem do ponto em aberto P1) |
+| `p05`, `p06`, `p07` | POR_CPU, 4 CPUs: FCFS, RR, PRIORIDADE | idem (`p03`, `p06` e `p07` têm chegada durante uma retenção: exercitam a regra P1) |
 
 ---
 
@@ -188,7 +187,7 @@ B só consegue começar depois deste marco. Não escreva lógica nenhuma aqui.
 4. `main.c` mínimo: define `Config g_cfg;` e `const Politica *g_pol;` e tem um `main` que devolve 0.
 5. `.gitignore` com `trabSO`, `*.o`, `log_execucao_minikernel.txt` e `tests/bin/`. `STATUS.md` com as seções "A" e "B".
 6. `tests/casos/`: os 6 casos de `casos_publicos_v1/` e os 14 de `casos_extras/`. `ferramentas/`: `oraculo.py` e `contar_migracoes.py`.
-7. Baixe do Classroom o **`carga_analise.txt`** (você precisa dele na etapa A12) e veja se há outro pacote de casos públicos além do v1. O LEIA-ME fala em 18 casos, a pasta tem 6, e o enunciado avisa que as saídas multi são só parcialmente divulgadas. Se aparecer caso oficial POR_CPU, avise B: ele resolve os pontos P1, P2 e P8 (apêndice A).
+7. Baixe do Classroom o **`carga_analise.txt`** (você precisa dele na etapa A12) e veja se há outro pacote de casos públicos além do v1. O LEIA-ME fala em 18 casos, a pasta tem 6, e o enunciado avisa que as saídas multi são só parcialmente divulgadas. Se aparecer caso oficial POR_CPU, avise B: ele resolve os pontos P2 e P8 (apêndice A).
 
 O Makefile do M0:
 ```make
@@ -735,9 +734,6 @@ A geradora e o seu laço só conversam com este módulo. B entrega a versão tes
 #define CPUS_H
 #include <pthread.h>
 #include "pcb.h"
-#ifndef CARGA_CONTA_RETENCAO
-#define CARGA_CONTA_RETENCAO 1      /* ponto em aberto P1: CPU retida conta como carga na colocacao */
-#endif
 typedef struct {
     int indice;
     pthread_t tid;
@@ -746,8 +742,7 @@ typedef struct {
     int ociosa;                 /* 1 = sem trabalho, aceita entrega. NASCE 1 em cpus_iniciar */
     PCB *entregue;              /* processo escolhido PARA ela por quem a acordou (entrega direta) */
     int t_entrega;              /* instante logico dessa entrega = instante do despacho */
-    PCB *executando;            /* processo despachado ou entregue, inclusive durante a retencao */
-    int retida;                 /* 1 durante a retencao ociosa (RR/PRIORIDADE) */
+    PCB *executando;            /* processo despachado ou entregue; continua != NULL durante a retencao */
     /* --- so a propria thread escalonadora escreve; main le depois do join --- */
     int ultimo_pid;             /* -1 no inicio */
     int ocupado_ms;             /* soma de fatias x 100 */
@@ -764,8 +759,7 @@ void cpus_destravar(void);
 PCB *cpus_tirar_proximo(int k, int t);  /* politica na fila da CPU k; no POR_CPU, com fila vazia, migra
                                            (registra "Migracao" em t). Se devolver p: executando=p e
                                            cpus_executando++ */
-void cpus_inicio_retencao(int k);       /* retida = 1 */
-void cpus_devolver(int k, PCB *p);      /* fim do despacho: executando=NULL, retida=0, cpus_executando--;
+void cpus_devolver(int k, PCB *p);      /* fim do despacho: executando=NULL, cpus_executando--;
                                            se p != NULL, reinsere p no fim da fila da CPU k */
 void cpus_entregar_ociosas(int t);      /* para cada CPU ociosa, em ordem crescente de indice: escolhe por ela
                                            (cpus_tirar_proximo), guarda em entregue/t_entrega e da signal */
@@ -786,8 +780,7 @@ O contrato em uma frase por função, do ponto de vista de quem chama:
 |---|---|---|
 | `cpus_travar` / `cpus_destravar` | — | exclusão sobre todas as filas e sobre o estado das CPUs |
 | `cpus_tirar_proximo(k, t)` | travado | devolve o próximo da CPU k segundo a política (com migração no POR_CPU) e já marca a CPU como ocupada; NULL se não há nada |
-| `cpus_inicio_retencao(k)` | travado | marca a CPU como retida (só afeta a carga, ponto P1) |
-| `cpus_devolver(k, p)` | travado | a CPU deixa de estar ocupada; se `p ≠ NULL`, ele volta ao fim da fila dela. Não acorda ninguém |
+| `cpus_devolver(k, p)` | travado | a CPU deixa de estar ocupada (até aqui, inclusive durante a retenção, ela conta como ocupada e como carga); se `p ≠ NULL`, ele volta ao fim da fila dela. Não acorda ninguém |
 | `cpus_entregar_ociosas(t)` | travado | toda CPU ociosa que puder receber algo recebe, em ordem de índice, com instante `t` |
 | `cpus_esperar_trabalho(k, &t)` | travado | dorme até receber um processo (devolve-o, com `t` = instante da entrega) ou até o término (NULL); volta travado |
 | `cpus_verificar_termino(t)` | travado | se não sobrou nada, declara o término em `t` (uma vez) e acorda todas; devolve 1 se encerrou |
@@ -813,7 +806,8 @@ cpus_travar():     para q de 0 até nfilas−1: travar filas[q].mutex           
 cpus_destravar():  para q de nfilas−1 até 0: destravar filas[q].mutex
 
 carga(k):          (só POR_CPU)
-    filas[k].tamanho + (g_cpus[k].executando ≠ NULO E (CARGA_CONTA_RETENCAO OU NÃO g_cpus[k].retida) ? 1 : 0)
+    filas[k].tamanho + (g_cpus[k].executando ≠ NULO ? 1 : 0)
+    (a CPU em retenção CONTA 1: executando só volta a NULO em cpus_devolver, no fim da retenção. Regra P1)
 
 cpus_tirar_proximo(k, t):
     p ← g_pol.escolher(fila_da_cpu(k), k)
@@ -825,10 +819,8 @@ cpus_tirar_proximo(k, t):
     se p ≠ NULO:  g_cpus[k].executando ← p;  cpus_executando += 1
     devolver p
 
-cpus_inicio_retencao(k):  g_cpus[k].retida ← 1
-
 cpus_devolver(k, p):
-    g_cpus[k].executando ← NULO;  g_cpus[k].retida ← 0;  cpus_executando −= 1
+    g_cpus[k].executando ← NULO;  cpus_executando −= 1
     se p ≠ NULO: fila_inserir_fim(fila_da_cpu(k), p)                    (não acorda ninguém aqui)
 
 cpus_entregar_ociosas(t):                                               ⚠️ entrega direta
@@ -1028,8 +1020,7 @@ thread_escalonador(cpu):
         t_lib ← t_fim
         se res = FINISHED e g_pol.usa_quantum e t_fim < t + g_cfg.quantum:
             t_lib ← t + g_cfg.quantum                   (retenção: CPU presa e ociosa até o fim do quantum)
-            cpus_travar();  cpus_inicio_retencao(k);  cpus_destravar()
-            dormir_ate(t_lib)                           (sem nenhuma trava)
+            dormir_ate(t_lib)                           (sem nenhuma trava; a CPU segue com executando ≠ NULO)
         esperar_chegadas_ate(t_lib)                     ⚠️ SEMPRE, qualquer que seja res
         se res = READY:
             log_registrar(t_lib, k, EV_OUTRO, "Quantum esgotado PID %d", p.pid)
@@ -1050,7 +1041,7 @@ thread_escalonador(cpu):
 - **Reinserir e escolher na mesma seção crítica.** Entre `cpus_devolver` e `cpus_tirar_proximo` a trava não é solta, e `cpus_entregar_ociosas` só roda depois da escolha. Nenhuma CPU ociosa "rouba" o processo recém-preemptado [E §2.6].
 - **Desempate 3.** As ociosas recebem trabalho em ordem crescente de índice, escolhido por quem as acorda. Como toda CPU nasce ociosa, isso vale desde t=0. (Se cada escalonadora começasse tirando da fila por conta própria, a CPU1 poderia chegar à trava antes da CPU0 e levar o primeiro processo.)
 - **PRIORIDADE.** O atual volta ao fim da fila **antes** da escolha e concorre com os outros. Reescolhido, saem `Quantum esgotado` e `Executando` com o mesmo PID, e `despachar` não conta troca.
-- **Retenção.** Durante a retenção a CPU continua com `executando ≠ NULO`: ninguém entrega nada para ela e ninguém declara o término. A utilização ignora a retenção porque só soma fatias.
+- **Retenção.** O laço não avisa ninguém de que entrou em retenção: ele só dorme até `t_lib` antes de chamar `cpus_devolver`. Nesse intervalo a CPU continua com `executando ≠ NULO`, então ninguém entrega nada para ela, ninguém declara o término e, no POR_CPU, ela continua contando 1 na carga (regra P1). A utilização ignora a retenção porque só soma fatias.
 - **Término.** Quem solta o último processo verifica o término em `t_lib`, que é o fim da retenção quando ela existe. Por isso `Escalonador terminou` pode sair depois do makespan.
 - **FCFS.** Orçamento ilimitado: o processo só sai de RUNNING ao terminar, e `usa_quantum = 0` desliga a retenção.
 - **Travas.** `despachar` trava só o processo (processo → log). As filas são soltas antes dele e retomadas depois. `dormir_ate` e `esperar_chegadas_ate` rodam sem nenhuma trava de fila ou de processo.
@@ -1393,18 +1384,18 @@ O que a discussão do README precisa cobrir, com os números reais:
 6. **Conclusão:** a afinidade troca justiça entre iguais e tempo de resposta por localidade. Por isso fica desligada por padrão.
 
 ### README de B e o pacote
-- **Decisões de projeto** (B escreve, você revisa): como compilar; módulos; estruturas e o porquê de cada campo extra; sincronização (ordem de travamento, pares condição/mutex, duas barreiras, lost wakeup, por que o POR_CPU trava todas as filas); tabela "regra da seção 2 → onde está no código"; modelo de tempo; pontos em aberto P1 a P8; testes; autoria.
+- **Decisões de projeto** (B escreve, você revisa): como compilar; módulos; estruturas e o porquê de cada campo extra; sincronização (ordem de travamento, pares condição/mutex, duas barreiras, lost wakeup, por que o POR_CPU trava todas as filas); tabela "regra da seção 2 → onde está no código"; modelo de tempo; decisões P1 a P8 (P1 confirmado em 24/11, os outros são leituras nossas); testes; autoria.
 - **`ferramentas/empacotar.sh <mat1> <mat2>`:** `make clean`; gera `TP-SO-2026-2-<mat1>-<mat2>.tar.gz` com `Makefile`, `*.c`, `*.h`, `README.md`, `ANALISE_AFINIDADE.md` e `tests/` **na raiz do pacote**; extrai numa pasta temporária; compila os dois alvos com `CFLAGS_EXTRA=-Werror` (só nesse teste); roda um caso de cada; imprime "pacote ok". Ficam **fora**: `STATUS.md`, `ferramentas/`, logs e binários.
 
 ---
 
 ## Apêndice A · Pontos em aberto e o padrão adotado
 
-Pontos que o enunciado não fecha. Cada um tem um **padrão adotado**; siga o padrão e registre no README (seção de decisões).
+Pontos que o enunciado não fecha. Cada um tem um **padrão adotado**; siga o padrão e registre no README (seção de decisões). **P1 foi confirmado em 24/11 e deixou de ser dúvida**; os demais continuam sendo leituras nossas.
 
 | # | Pergunta | Padrão adotado | Por quê / como confirmar |
 |---|---|---|---|
-| P1 | POR_CPU: uma CPU **retida** (terminou antes do quantum) conta como carga na colocação? | **conta** (`CARGA_CONTA_RETENCAO 1` em `cpus.h`) | a CPU ainda não foi liberada. Se aparecer caso oficial POR_CPU com RR/PRIORIDADE, rode o oráculo com e sem `--retencao-nao-conta`; se o outro bater, troque a macro e regenere `p03`, `p06`, `p07` |
+| P1 | POR_CPU: uma CPU **retida** (terminou antes do quantum) conta como carga na colocação? | **conta. Confirmado em 24/11** | durante a retenção a CPU ainda não foi liberada, então vale 1 na soma da carga. No código não há nada especial: `executando` só volta a NULO em `cpus_devolver`, no fim da retenção, e `carga(k)` soma 1 enquanto ele não é NULO. Os casos `p03`, `p06` e `p07` exercitam a regra |
 | P2 | POR_CPU: quem esgota o quantum volta para qual fila? | a da **própria** CPU | "reinserido no fim da fila" [E §2.5]; migração só existe com fila local vazia |
 | P3 | POR_CPU: chegada em t e uma CPU finaliza em t. Essa CPU ainda conta carga? | **conta** | chegadas vêm antes das finalizações no mesmo instante [L]. No código: `esperar_chegadas_ate` vem antes de `cpus_devolver` |
 | P4 | Duas CPUs liberadas no mesmo instante disputam a mesma fila | qualquer ordem | o LEIA-ME garante que os casos oficiais não dependem disso |

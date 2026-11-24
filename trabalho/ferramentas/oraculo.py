@@ -10,7 +10,6 @@ Uso:
   python3 oraculo.py entrada.txt --mono           como "make monoprocessador" (CPUS=1, FILA ignorado)
   python3 oraculo.py entrada.txt --ambiguo        idem, mas sai com codigo 2 se a entrada for ambigua
   python3 oraculo.py entrada.txt --afinidade      bonus ligado (sem efeito com 1 CPU)
-  python3 oraculo.py entrada.txt --retencao-nao-conta   ponto em aberto P1: CPU retida nao conta na carga
 
 Modelo (o mesmo do programa em C). Em cada instante t (multiplo de 100):
   1. chegadas de t, em ordem de PID, entram na fila (POR_CPU: CPU de menor carga);
@@ -42,14 +41,13 @@ def ler_entrada(caminho):
 
 
 class Sim:
-    def __init__(self, ent, mono=False, afinidade=False, retencao_conta=True,
+    def __init__(self, ent, mono=False, afinidade=False,
                  ordem="crescente", ociosa_recebe_na_chegada=True):
         self.pol = ent["politica"]
         self.q = ent["quantum"]
         self.ncpu = 1 if mono else ent["cpus"]
         self.por_cpu = (not mono) and ent["fila"] == "POR_CPU" and self.ncpu >= 1
         self.afinidade = afinidade and self.ncpu > 1
-        self.retencao_conta = retencao_conta
         self.ordem = ordem
         self.ociosa_recebe_na_chegada = ociosa_recebe_na_chegada
         self.procs = sorted((dict(p) for p in ent["procs"]), key=lambda p: (p["chegada"], p["pid"]))
@@ -80,8 +78,7 @@ class Sim:
 
     def carga(self, k):
         c = self.cpus[k]
-        ocupa = c["exec"] is not None and (self.retencao_conta or not c["retida"])
-        return len(self.filas[k]) + (1 if ocupa else 0)
+        return len(self.filas[k]) + (1 if c["exec"] is not None else 0)   # CPU retida conta (regra P1)
 
     # ---------- politica ----------
     def escolher(self, fila, cpu):
@@ -234,8 +231,7 @@ def main(argv):
         return 1
     flags = set(argv[2:])
     ent = ler_entrada(argv[1])
-    base = dict(mono="--mono" in flags, afinidade="--afinidade" in flags,
-                retencao_conta="--retencao-nao-conta" not in flags)
+    base = dict(mono="--mono" in flags, afinidade="--afinidade" in flags)
     saida = Sim(ent, **base).rodar().texto()
     sys.stdout.write(saida)
     if "--ambiguo" in flags:

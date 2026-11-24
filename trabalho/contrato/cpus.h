@@ -3,9 +3,6 @@
 #define CPUS_H
 #include <pthread.h>
 #include "pcb.h"
-#ifndef CARGA_CONTA_RETENCAO
-#define CARGA_CONTA_RETENCAO 1      /* ponto em aberto P1: CPU retida conta como carga na colocacao */
-#endif
 typedef struct {
     int indice;
     pthread_t tid;
@@ -14,8 +11,7 @@ typedef struct {
     int ociosa;                 /* 1 = sem trabalho, aceita entrega. NASCE 1 em cpus_iniciar */
     PCB *entregue;              /* processo escolhido PARA ela por quem a acordou (entrega direta) */
     int t_entrega;              /* instante logico dessa entrega = instante do despacho */
-    PCB *executando;            /* processo despachado ou entregue, inclusive durante a retencao */
-    int retida;                 /* 1 durante a retencao ociosa (RR/PRIORIDADE) */
+    PCB *executando;            /* processo despachado ou entregue; continua != NULL durante a retencao */
     /* --- so a propria thread escalonadora escreve; main le depois do join --- */
     int ultimo_pid;             /* -1 no inicio */
     int ocupado_ms;             /* soma de fatias x 100 */
@@ -32,8 +28,7 @@ void cpus_destravar(void);
 PCB *cpus_tirar_proximo(int k, int t);  /* politica na fila da CPU k; no POR_CPU, com fila vazia, migra
                                            (registra "Migracao" em t). Se devolver p: executando=p e
                                            cpus_executando++ */
-void cpus_inicio_retencao(int k);       /* retida = 1 */
-void cpus_devolver(int k, PCB *p);      /* fim do despacho: executando=NULL, retida=0, cpus_executando--;
+void cpus_devolver(int k, PCB *p);      /* fim do despacho: executando=NULL, cpus_executando--;
                                            se p != NULL, reinsere p no fim da fila da CPU k */
 void cpus_entregar_ociosas(int t);      /* para cada CPU ociosa, em ordem crescente de indice: escolhe por ela
                                            (cpus_tirar_proximo), guarda em entregue/t_entrega e da signal */

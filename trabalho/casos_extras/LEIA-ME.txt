@@ -14,15 +14,17 @@ resultado nao depende da ordem em que duas CPUs tratam eventos do mesmo instante
   g06        PRIORIDADE  GLOBAL   4 CPUs
   p01        FCFS        POR_CPU  2 CPUs   o exemplo pequeno das trilhas (1 migracao)
   p02        FCFS        POR_CPU  2 CPUs   2 migracoes
-  p03        RR          POR_CPU  2 CPUs   2 migracoes   (depende do ponto em aberto P1)
+  p03        RR          POR_CPU  2 CPUs   2 migracoes   (exercita a regra P1)
   p04        PRIORIDADE  POR_CPU  2 CPUs   2 migracoes
   p05        FCFS        POR_CPU  4 CPUs   2 migracoes
-  p06        RR          POR_CPU  4 CPUs   2 migracoes   (depende do ponto em aberto P1)
-  p07        PRIORIDADE  POR_CPU  4 CPUs   2 migracoes   (depende do ponto em aberto P1)
+  p06        RR          POR_CPU  4 CPUs   2 migracoes   (exercita a regra P1)
+  p07        PRIORIDADE  POR_CPU  4 CPUs   2 migracoes   (exercita a regra P1)
 
 Os casos g* e p* tem varias chegadas em t=0 e varios processos no mesmo instante.
 
-ATENCAO: estas saidas seguem as NOSSAS leituras dos pontos que o enunciado nao fecha
-(apendice A das trilhas). Se um caso oficial POR_CPU mostrar que a CPU retida NAO conta
-como carga (ponto P1), regenere p03, p06 e p07:
-    python3 ferramentas/oraculo.py casos_extras/entrada_p03.txt --retencao-nao-conta > casos_extras/saida_p03.txt
+REGRA P1 (confirmada em 24/11): no POR_CPU, a CPU em retencao ociosa CONTA como carga na
+colocacao de quem chega. Todas as saidas daqui ja seguem essa regra; p03, p06 e p07 tem
+chegada durante uma retencao e so passam se ela estiver implementada.
+
+ATENCAO: as saidas tambem seguem as NOSSAS leituras dos pontos que continuam em aberto
+(P2 e P8, no apendice A das trilhas).

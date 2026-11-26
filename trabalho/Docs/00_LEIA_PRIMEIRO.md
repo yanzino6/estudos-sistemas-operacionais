@@ -1,4 +1,4 @@
-# TP SO 2026/2 · Mini-kernel · Leia primeiro (revisão de 23/11, atualizado em 24/11)
+# TP SO 2026/2 · Mini-kernel · Leia primeiro (revisão de 23/11, atualizado em 24/11 e 25/11)
 
 ## O que cada um lê
 
@@ -21,6 +21,27 @@ enunciado e o `LEIA-ME` dos casos, e relembram cada regra no ponto em que ela vi
 | `ferramentas/` | `oraculo.py` (simulador de referência) e `contar_migracoes.py` (medidas do bônus). Não vão na entrega |
 | `casos_publicos_v1/` | os 6 casos oficiais (01, 03, 05 mono; 13, 15, 17 multi GLOBAL) |
 | `casos_extras/` | 14 casos gerados pelo oráculo (GLOBAL e POR_CPU, 2 e 4 CPUs), todos não ambíguos. Não são oficiais |
+
+## Atualização de 25/11
+
+**A barreira passou a usar `pthread_barrier_t`**, como o enunciado sugere [E §2.4]. A
+interface não mudou (`Barreira`, `barreira_iniciar`, `barreira_esperar`, `barreira_destruir`),
+então `pcb.c`, `pcb.h` e o protocolo da fatia continuam iguais. O que mudou:
+
+| Onde | O quê |
+|---|---|
+| `barreira.h` | `Barreira` agora tem um campo só, `pthread_barrier_t b`. Saíram `mutex`, `cond`, `total`, `chegaram` e `geracao` |
+| `barreira.c` (A) | `iniciar` → `pthread_barrier_init(&b->b, NULL, total)`; `esperar` devolve 1 quando `pthread_barrier_wait` devolve `PTHREAD_BARRIER_SERIAL_THREAD`; `destruir` → `pthread_barrier_destroy` |
+| a líder da fatia | é a thread que recebe `PTHREAD_BARRIER_SERIAL_THREAD`: exatamente uma por rodada. O POSIX não diz qual (na glibc é a última a chegar), e o protocolo não depende disso, porque todas já descontaram a sua parte antes de qualquer uma sair da barreira |
+| travas | sai "o mutex da barreira é folha" e o par `barreira.cond → barreira.mutex`: a barreira não expõe trava |
+| README (B) | "barreira própria em vez de `pthread_barrier_t`" sai da lista de diferenças em relação ao enunciado |
+| compilação | nada de `-std=c11`/`-std=c99`: o modo ISO estrito esconde `pthread_barrier_t`. Se quiserem fixar o padrão, `-std=gnu11` |
+
+As duas trilhas (etapa A2, Parada 2 de B e os trechos comuns) já descrevem a versão nova.
+Conferido: `test_barreira` (4 threads × 1000 voltas) soma exatamente 1000, `total = 1`
+devolve 1 na hora, memcheck e helgrind com 0 erros. O protótipo completo **não** foi rodado
+de novo com a troca: rodem os casos públicos e o helgrind depois de mesclar. **É mudança de
+contrato** (`barreira.h`): PR com o rótulo `contrato`.
 
 ## Atualização de 24/11
 

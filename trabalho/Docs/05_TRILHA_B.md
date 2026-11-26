@@ -67,7 +67,7 @@ Todos os fontes ficam **na raiz** do repositório (o professor roda `tar -xzvf` 
 | `tempo.c/.h` | A | T0, `agora_ms`, `dormir_ate` |
 | `config.h` | A | `Config` e os enums de política e de modo de fila |
 | `entrada.c/.h` | A | leitura do arquivo e ordenação por (chegada, PID) |
-| `barreira.c/.h` | A | barreira reutilizável com líder |
+| `barreira.c/.h` | A | barreira reutilizável com líder (sobre `pthread_barrier_t`) |
 | `pcb.c/.h` | A | PCB, TCB e a thread trabalhadora (protocolo da fatia) |
 | `politica.c/.h` | A (bônus: B) | FCFS, RR e PRIORIDADE atrás da interface `Politica` |
 | `geradora.c/.h` | A | thread geradora e `esperar_chegadas_ate` |
@@ -87,7 +87,7 @@ Quem chama quem: `main → entrada, tempo, politica, log, cpus, geradora, escalo
 1. **Leitura** (`entrada_ler`): o arquivo vira um vetor de PCBs ordenado por (chegada, PID). Essa ordenação já resolve o desempate 1 (mesmo instante → PID crescente).
 2. **Chegada** (geradora): dorme até `start_time`, cria as threads de **todos** os processos daquele instante (elas nascem bloqueadas em `p->cv`, porque o estado é READY) e chama `cpus_inserir_lote`. Lá dentro, com as filas travadas: cada processo entra na fila (no POR_CPU, na da CPU de menor carga), a `Chegada` vai para o log e as CPUs ociosas **recebem** trabalho.
 3. **Despacho** (escalonadora da CPU k): ela tem um processo `p` na mão, ou porque alguém entregou, ou porque ela mesma tirou da fila pela política. `despachar` põe `p` em RUNNING, dá o orçamento de fatias (`quantum/100`, ou ilimitado no FCFS), registra `Executando` e faz broadcast em `p->cv`.
-4. **Execução** (trabalhadoras de `p`): a cada fatia, todas dormem até o mesmo prazo, cada uma desconta a sua parte de `remaining_time` e todas se encontram numa barreira. A última a chegar (a líder) decide: zerou → FINISHED e `finalizado` no log; orçamento acabou → READY; senão, mais uma fatia.
+4. **Execução** (trabalhadoras de `p`): a cada fatia, todas dormem até o mesmo prazo, cada uma desconta a sua parte de `remaining_time` e todas se encontram numa barreira. Uma delas, a líder (a única que a barreira marca), decide: zerou → FINISHED e `finalizado` no log; orçamento acabou → READY; senão, mais uma fatia.
 5. **Fim do despacho** (escalonadora): acorda quando o estado deixa de ser RUNNING. Se o processo terminou antes do fim do quantum, a CPU fica **retida** até lá. Depois espera as chegadas daquele instante, registra `Quantum esgotado` se for o caso, e, numa única seção crítica, devolve a CPU, reinsere o preemptado e escolhe o próximo.
 6. **Término**: quando a geradora acabou, as filas estão vazias e nenhuma CPU está executando nem retida, quem percebe registra `Escalonador terminou...` e acorda as outras. A `main` faz os `join`, grava log e métricas e libera tudo.
 
@@ -115,7 +115,7 @@ Disso saem quatro regras: toda espera é `dormir_ate(instante lógico)`, nunca "
 
 ### 1.5 Travas: a ordem global e quem protege o quê
 
-**Ordem global (a frase vai para o README):** `filas (em ordem crescente de índice) → log` e `processo → log`. **Fila e processo nunca são travados ao mesmo tempo.** `mutex_chegadas` e o mutex da barreira são folhas: sempre travados sozinhos. Com uma ordem fixa não existe ciclo de espera e, portanto, não existe deadlock.
+**Ordem global (a frase vai para o README):** `filas (em ordem crescente de índice) → log` e `processo → log`. **Fila e processo nunca são travados ao mesmo tempo.** `mutex_chegadas` é folha: sempre travado sozinho. A barreira (`pthread_barrier_t`) não expõe mutex: `barreira_esperar` é chamada sem nenhuma trava. Com uma ordem fixa não existe ciclo de espera e, portanto, não existe deadlock.
 
 | Quem | Travas, nesta ordem | Observação |
 |---|---|---|
@@ -134,7 +134,7 @@ Disso saem quatro regras: toda espera é `dormir_ate(instante lógico)`, nunca "
 | `CPU.ultimo_pid, ocupado_ms, trocas` | só a própria escalonadora escreve; a `main` lê depois do `join` |
 | `proxima_chegada` | `mutex_chegadas` |
 
-Pares condição/mutex (cada condição tem um único mutex parceiro): `p->cv` e `p->cv_escalonador` → `p->mutex` · `cpu.cond` → mutex da fila daquela CPU (no GLOBAL, o da fila global) · `cv_chegadas` → `mutex_chegadas` · `barreira.cond` → `barreira.mutex`.
+Pares condição/mutex (cada condição tem um único mutex parceiro): `p->cv` e `p->cv_escalonador` → `p->mutex` · `cpu.cond` → mutex da fila daquela CPU (no GLOBAL, o da fila global) · `cv_chegadas` → `mutex_chegadas`. A barreira não entra nesta lista: a sincronização dela fica dentro da `pthread_barrier_t`.
 
 **Três regras que valem para todo o código:** todo `pthread_cond_wait` fica dentro de um `while (condição)` · nenhum `usleep` com trava de fila ou de processo segurada · quem muda uma condição muda sob o mutex parceiro e acorda em seguida.
 
@@ -153,7 +153,7 @@ O programa é avaliado no Ubuntu do LabGrad, e todo teste tem de rodar em Linux.
 - **WSL2** (Windows) ou uma **VM Ubuntu**.
 - **LabGrad** por SSH (é onde vale o teste final).
 
-No macOS o valgrind não roda e não existe `pthread_barrier_t`: não teste lá. O ambiente está pronto quando `gcc --version`, `valgrind --version` e `python3 --version` respondem.
+No macOS o valgrind não roda e não existe `pthread_barrier_t` (que a `barreira.c` usa): não teste lá. O ambiente está pronto quando `gcc --version`, `valgrind --version` e `python3 --version` respondem.
 
 As duas ferramentas abaixo já estão prontas na pasta `ferramentas/` e **não vão na entrega**.
 
@@ -481,7 +481,7 @@ Uma fatia vista de perto (processo de 1000 ms, 3 threads, despachado em t=0 com 
 t=0    escalonador: state=RUNNING, orcamento=3, fatias=0, t_despacho=0; broadcast(cv)
        as 3 threads acordam, calculam prazo = 0 + (0+1)×100 = 100 e dormem até lá
 t=100  cada uma desconta a sua parte (34, 33, 33): remaining 1000 → 900
-       1ª barreira: a última a chegar é a líder → fatias=1, orcamento=2; não zerou nem esgotou
+       1ª barreira: a que recebe SERIAL_THREAD é a líder → fatias=1, orcamento=2; não zerou nem esgotou
        2ª barreira: as três passam juntas, voltam ao topo, veem RUNNING → prazo = 200
 t=200  idem → fatias=2, orcamento=1, remaining=800
 t=300  líder: fatias=3, orcamento=0 → state=READY; signal(cv_escalonador)
@@ -1176,10 +1176,10 @@ Estrutura, com o que cada item precisa conter:
 1. **Como compilar e executar:** `make monoprocessador`, `make multiprocessador`, `./trabSO entrada.txt`, `make multiprocessador AFINIDADE=1`.
 2. **Módulos:** a tabela da seção 1.2, com uma frase por arquivo. A política fica isolada em `politica.c`: na 2ª etapa, política nova é mais uma instância de `Politica`.
 3. **Estruturas:** PCB e TCB do enunciado, mais cada campo extra e o seu porquê; `CPU` e `Fila`.
-4. **Sincronização:** a ordem global de travamento e por que impede deadlock; os pares condição/mutex; o protocolo da fatia com duas barreiras e a líder; por que não há lost wakeup; por que o POR_CPU trava todas as filas.
+4. **Sincronização:** a ordem global de travamento e por que impede deadlock; os pares condição/mutex; o protocolo da fatia com duas barreiras (`pthread_barrier_t`, como o enunciado sugere) e a líder (a thread que recebe `PTHREAD_BARRIER_SERIAL_THREAD`); por que não há lost wakeup; por que o POR_CPU trava todas as filas.
 5. **Como cada regra da seção 2 foi implementada** (tabela regra → onde está no código → como): desempate 1 (vetor ordenado e lote); desempate 2 e "chegadas antes de qualquer escolha" (`esperar_chegadas_ate`); desempate 3 (entrega direta, CPUs nascem ociosas); desempate 4 (varredura com `<` estrito); fronteiras de fatia; contabilização `100/n + resto`; retenção ociosa; reinserir e escolher na mesma seção crítica; colocação, migração e "ociosas tentam de novo"; término.
 6. **Modelo de tempo:** instante lógico × tempo medido; prazos absolutos; o log imprime o medido e ordena pelo lógico; as métricas usam o lógico.
-7. **Diferenças em relação à letra do enunciado**, com justificativa: barreira própria em vez de `pthread_barrier_t`; `dormir_ate(prazo)` em vez de `usleep(FATIA*1000)`; a líder da fatia em vez de "a thread que detectar primeiro"; `generator_done` como variável interna de `cpus.c`.
+7. **Diferenças em relação à letra do enunciado**, com justificativa: `dormir_ate(prazo)` em vez de `usleep(FATIA*1000)`; a líder da fatia em vez de "a thread que detectar primeiro"; `generator_done` como variável interna de `cpus.c`.
 8. **Decisões em pontos não especificados:** P1 a P8 (apêndice A; P1 foi confirmado em 24/11, os outros são leituras nossas) e a tolerância de 150 para métricas com valor esperado 0 no comparador.
 9. **Testes:** como rodar `tests/run_all.sh`, o que o comparador verifica, os resultados de valgrind e helgrind, a rotina de estresse.
 10. **Bônus: afinidade** (resumo e ponteiro para `ANALISE_AFINIDADE.md`) e **Autoria** (quem fez cada módulo).
@@ -1233,37 +1233,30 @@ Você revisa esses PRs e pode ter de explicar qualquer um deles.
 
 ### `barreira.c`
 ```c
-/* barreira.h (dono: A) - barreira reutilizavel com lider, feita com mutex + cond. */
+/* barreira.h (dono: A) - barreira reutilizavel com lider, sobre pthread_barrier_t. */
 #ifndef BARREIRA_H
 #define BARREIRA_H
 #include <pthread.h>
 typedef struct {
-    pthread_mutex_t mutex;
-    pthread_cond_t  cond;
-    int total;                  /* participantes */
-    int chegaram;               /* quantos ja chegaram nesta geracao */
-    unsigned geracao;           /* muda a cada abertura; evita wakeup espurio e permite reuso */
+    pthread_barrier_t b;        /* barreira POSIX, reutilizavel; count = participantes */
 } Barreira;
-void barreira_iniciar(Barreira *b, int total);
-int  barreira_esperar(Barreira *b);   /* devolve 1 para a ULTIMA thread a chegar (a lider) e 0 para as demais */
-void barreira_destruir(Barreira *b);
+void barreira_iniciar(Barreira *b, int total);   /* total >= 1 (com 0 o init falha) */
+int  barreira_esperar(Barreira *b);   /* devolve 1 para UMA thread por rodada (a lider) e 0 para as demais */
+void barreira_destruir(Barreira *b);  /* so quando nenhuma thread esta esperando nela */
 #endif
 ```
 ```
-barreira_iniciar(b, total): iniciar mutex e cond;  b.total ← total;  b.chegaram ← 0;  b.geracao ← 0
+barreira_iniciar(b, total): pthread_barrier_init(b.b, NULL, total)         (total ≥ 1)
 barreira_esperar(b):
-    travar b.mutex
-    g ← b.geracao;  b.chegaram += 1
-    se b.chegaram = b.total:                                (a última a chegar é a líder)
-        b.chegaram ← 0;  b.geracao += 1;  broadcast(b.cond);  destravar;  devolver 1
-    enquanto g = b.geracao: esperar(b.cond, b.mutex)        (predicado em while)
-    destravar;  devolver 0
-barreira_destruir(b): destruir mutex e cond
+    r ← pthread_barrier_wait(b.b)            (bloqueia até as total threads chegarem e solta todas juntas)
+    devolver 1 se r = PTHREAD_BARRIER_SERIAL_THREAD, senão 0       (exatamente uma por rodada: a líder)
+barreira_destruir(b): pthread_barrier_destroy(b.b)
 ```
-- **`geracao`** é o predicado da espera: muda a cada abertura. Assim um wakeup espúrio não solta ninguém, e a barreira pode ser reusada logo em seguida (a 2ª barreira da fatia vem colada na 1ª).
-- **Devolve quem é a líder** (1 para a última thread a chegar). É ela que toma as decisões da fatia.
-- **Com `total = 1`** a única thread é sempre a líder e nunca espera.
-- O enunciado só *sugere* `pthread_barrier_t`. A nossa tem 20 linhas, usa exatamente mutex e variável de condição (o assunto do trabalho) e é portável. Se um dia quiserem trocar, basta `barreira.c`: devolver 1 quando `pthread_barrier_wait` devolver `PTHREAD_BARRIER_SERIAL_THREAD`.
+- **Segue a sugestão do enunciado** [E §2.4] (decisão de 25/11; antes a barreira era própria, com mutex, cond e um contador de geração). A `pthread_barrier_t` já é reutilizável, então a 2ª barreira da fatia pode vir colada na 1ª, e não tem predicado nem contador nosso para errar: um wakeup espúrio não solta ninguém.
+- **A líder é a thread que recebe `PTHREAD_BARRIER_SERIAL_THREAD`.** O POSIX garante exatamente uma por rodada, mas não diz qual (na glibc é a última a chegar). Para o protocolo da fatia tanto faz: quando qualquer thread sai da barreira, todas já descontaram a sua parte de `remaining_time` (sob `p->mutex`), e `pthread_barrier_wait` sincroniza a memória. A líder vê o valor final, seja ela quem for.
+- **Com `total = 1`** a única thread recebe sempre o valor especial e nunca espera.
+- **O invólucro `Barreira` fica.** As três funções escondem o tipo POSIX: `pcb.c`, `pcb.h` e o teste não mudam com a troca.
+- ⚠️ Nada de `-std=c11`/`-std=c99` no Makefile nem nos testes: escondem `pthread_barrier_t`. Se precisar fixar, `-std=gnu11`.
 
 ### `entrada.c` e `config.h`
 ```c
@@ -1394,6 +1387,7 @@ Pontos que o enunciado não fecha. Cada um tem um **padrão adotado**; siga o pa
 | `Migracao` que não deveria existir | ociosas acordadas para disputar a fila, em vez de entrega direta |
 | não termina (trava no fim) | `generator_done` nunca ligado (`ultimo`), `cpus_verificar_termino` não chamado quando a fila esvazia, ou falta o broadcast nas `cond` |
 | trava com processo de 1 thread | a barreira com `total = 1` tem de devolver 1 na hora |
+| `unknown type name 'pthread_barrier_t'` ao compilar | compilado com `-std=c11`/`-std=c99`; tire o `-std` ou use `-std=gnu11` |
 | trava só no POR_CPU | filas travadas fora de ordem, ou `cpus_esperar_trabalho` retravou tudo sem soltar antes o próprio mutex |
 | tempos derivando alguns ms a cada fatia | dormiu "100 ms a partir de agora" em vez de até o prazo absoluto |
 | espera de 1 s ou mais que não acontece | `usleep` com 1 000 000 ou mais: use `dormir_ate` |
@@ -1403,7 +1397,7 @@ Pontos que o enunciado não fecha. Cada um tem um **padrão adotado**; siga o pa
 
 O professor pode fazer entrevista, e a nota depende dela [E §8]. Cada um precisa saber responder a tudo isto, e não só à própria metade:
 
-1. **Por que duas barreiras por fatia?** A 1ª junta todas as threads no fim da fatia e elege a líder. A 2ª segura todas até a líder decidir; sem ela, uma thread voltaria ao topo, veria RUNNING e começaria uma fatia a mais.
+1. **Por que duas barreiras por fatia?** A 1ª junta todas as threads no fim da fatia e elege a líder (a única que recebe `PTHREAD_BARRIER_SERIAL_THREAD`). A 2ª segura todas até a líder decidir; sem ela, uma thread voltaria ao topo, veria RUNNING e começaria uma fatia a mais.
 2. **Como a preempção só acontece em fronteira de fatia?** O escalonador não interrompe ninguém: dá um orçamento de fatias, e a líder põe READY quando ele zera.
 3. **Qual é a ordem de travamento?** `filas (índice crescente) → log` e `processo → log`; fila e processo nunca juntos. Sem ciclo, sem deadlock.
 4. **Como "quem chegou entra antes do preemptado" funciona com threads reais?** A escalonadora chama `esperar_chegadas_ate(t)` antes de reinserir e escolher; a geradora só libera essa espera depois de pôr o lote inteiro de t na fila.
